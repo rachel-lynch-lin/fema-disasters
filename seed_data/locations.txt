@@ -1,0 +1,75 @@
+/* County Name | Place Holder for all zipcodes in the county(Nice to have but for now not needed) */
+
+/* Reservation Name | Zipcode in reservation? */
+
+Alameda County | 12345
+Alpine County | 12345
+Amador County | 12345
+Branciforte County | 12345
+Butte County | 12345
+Calaveras County | 12345
+Coloma County | 12345
+Colusa County | 12345
+Contra Costa County | 12345
+Coso County | 12345
+Del Norte County | 12345
+El Dorado County | 12345
+Fremont County | 12345
+Fresno County | 12345
+Glenn County | 12345
+Humbolt County | 12345
+Imperial County | 12345
+Inyo County | 12345
+Kern County | 12345
+Kings County | 12345
+Klamath County | 12345
+Lake County | 12345
+Lassen County | 12345
+Los Angeles County | 12345
+Madera County | 12345
+Marin County | 12345
+Mariposa County | 12345
+Mendocino County | 12345
+Modoc County | 12345
+Mono County | 12345
+Monterey County | 12345
+Mount Diablo County | 12345
+Napa County | 12345
+Nevada County | 12345
+Orange County | 12345
+Oro County | 12345
+Pautah County | 12345
+Placer County | 12345
+Plumas County | 12345
+Redding County | 12345
+Riverside County | 12345
+Sacramento County | 12345
+San Benito County | 12345
+San Bernardino County | 12345
+San Diego County | 12345
+San Francisco County | 12345
+San Joaquin County | 12345
+San Luis Obispo County | 12345
+San Mateo County | 12345
+Santa Barbara County | 12345
+Santa Clara County | 12345
+Santa Cruz County | 12345
+Shasta County | 12345
+Sierra County | 12345
+Siskiyou County | 12345
+Solano County | 12345
+Sonoma County | 12345
+Stanislaus County | 12345
+Sutter County | 12345
+Tehama County | 12345
+Trinity County | 12345
+Tulare County | 12345
+Tuolumne County | 12345
+Ventura County | 12345
+Yolo County | 12345
+Yuba County | 12345
+
+Soboba Indian Reservation | 00000
+Karuk Reservation | 00000
+Hoopa Reservation | 00000
+Resighini Rancheria (Indian Reservation) | 00000
