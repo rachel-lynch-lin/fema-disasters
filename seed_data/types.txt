@@ -1,5 +1,3 @@
-/* disaster_type | disaster_name */
-
 coastal_storm | Coastal Storm
 dam_levee_break | Dam/Levee Break
 drought | Drought
