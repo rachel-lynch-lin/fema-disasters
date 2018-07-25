@@ -16,15 +16,17 @@ class Event(db.Model):
 
     event_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
+    fema_id = db.Column(db.ForeignKey('disasters.fema_id'))
+
     name = db.Column(db.String, nullable=True)
 
     start_date = db.Column(db.DateTime, nullable=False)
 
     end_date = db.Column(db.DateTime, nullable=True)
 
-    type_id = db.Column(db.String, db.ForeignKey('types.type_id'))
+    type_id = db.Column(db.ForeignKey('types.type_id'))
 
-    county_id = db.Column(db.Integer, db.ForeignKey('locations.county_id'))
+    county_id = db.Column(db.ForeignKey('locations.county_id'))
 
     def __repr__(self):
         """Display info about the disaster event"""
@@ -34,6 +36,22 @@ class Event(db.Model):
                    Name: {self.name}
                    Disaster Event: {self.type_name}
                    Occured On: {self.start_date}"""
+
+
+class Type(db.Model):
+    """Types of disasters that have occured in California"""
+
+    __tablename__ = "types"
+
+    type_id = db.Column(db.String(25), primary_key=True)  # Take from types
+
+    type_name = db.Column(db.String(25))  # Take from type_name
+
+    def __repr__(self):
+        """Display type of disaster"""
+
+        return f"""Type ID: {self.type_id}
+                   Type Name: {self.type_name}"""
 
 
 class Location(db.Model):
@@ -60,9 +78,11 @@ class Location(db.Model):
 class Fema(db.Model):
     """Links ID provided by FEMA to event and if money was awarded"""
 
-    __tablename__ = "declarations"
+    __tablename__ = "disasters"
 
     fema_id = db.Column(db.String, primary_key=True)
+
+    event_id = db.Column(db.ForeignKey('events.event_id'))
 
     pa_grant_total = db.Column(db.Float(scale=2))
 
@@ -73,23 +93,7 @@ class Fema(db.Model):
                    Public Assistance Total Grant: ${self.pa_grant_total}."""
 
 
-class Type(db.Model):
-    """Types of disasters that have occured in California"""
-
-    __tablename__ = "types"
-
-    type_id = db.Column(db.String(25), primary_key=True)  # Take from types
-
-    type_name = db.Column(db.String(25))  # Take from type_name
-
-    def __repr__(self):
-        """Display type of disaster"""
-
-        return f"""Type ID: {self.type_id}
-                   Type Name: {self.type_name}"""
-
-
-class PropertyDamages(db.Model):
+class PropertyDamage(db.Model):
     """For each disaster event this checks if property damaged occured"""
 
     __tablename__ = "damages"
@@ -98,7 +102,7 @@ class PropertyDamages(db.Model):
 
     event_id = db.Column(db.ForeignKey('events.event_id'))
 
-    fema_id = db.Column(db.ForeignKey('declarations.fema_id'))
+    fema_id = db.Column(db.ForeignKey('disasters.fema_id'))
 
     damaged_property = db.Column(db.Boolean)
 
