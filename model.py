@@ -22,7 +22,8 @@ class Event(db.Model):
 
     start_date = db.Column(db.DateTime, nullable=False)
 
-    end_date = db.Column(db.DateTime, nullable=True)
+    # This part does not exist yet and null cannot work with a timestamp
+    # end_date = db.Column(db.DateTime, nullable=True)
 
     type_id = db.Column(db.ForeignKey('types.type_id'))
 
@@ -61,7 +62,11 @@ class Location(db.Model):
 
     county_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    counties = db.Column(db.String)
+    state = db.Column(db.String)
+
+    county = db.Column(db.String)
+
+    cities = db.Column(db.String)
 
     zipcodes = db.Column(db.Integer)
 
@@ -69,10 +74,10 @@ class Location(db.Model):
         """Display type of disaster"""
 
         return f"""County ID: {self.county_id}
+                   State: {self.states}
                    County Name:{self.counties}
+                   City: {self.cities}
                    Zipcodes: {self.zipcodes}"""
-    # Create a dictionary for locations. key(county): value(zipcodes)
-    # Will allow for greater user interactivity later.
 
 
 class Fema(db.Model):
@@ -84,7 +89,7 @@ class Fema(db.Model):
 
     event_id = db.Column(db.ForeignKey('events.event_id'))
 
-    pa_grant_total = db.Column(db.Float(scale=2))
+    pa_grant_total = db.Column(db.Float)
 
     def __repr__(self):
         """Display type of disaster"""

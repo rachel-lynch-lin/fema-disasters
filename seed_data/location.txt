@@ -56,8 +56,7 @@ California	|	Tuolumne	|	Sonora	|	12345
 California	|	Ventura	|	Camarillo	|	12345
 California	|	Yolo	|	Davis	|	12345
 California	|	Yuba	|	Marysville	|	12345
-
-California	|	Soboba Indian Reservation | 00000
-California	|	Karuk Reservation | 00000
-California	|	Hoopa Reservation | 00000
-California	|	Resighini Rancheria (Indian Reservation) | 00000
+California	|	Soboba Indian Reservation | | 00000
+California	|	Karuk Reservation | | 00000
+California	|	Hoopa Reservation | | 00000
+California	|	Resighini Rancheria (Indian Reservation) | | 00000
