@@ -1,0 +1,295 @@
+fema_id		state		county		damaged_property
+DR-15	|	California	|		|	
+DR-47	|	California	|		|	
+DR-65	|	California	|		|	
+DR-82	|	California	|		|	
+DR-119	|	California	|		|	
+DR-122	|	California	|		|	
+DR-138	|	California	|		|	
+DR-145	|	California	|		|	
+DR-161	|	California	|		|	
+DR-169	|	California	|		|	
+DR-183	|	California	|		|	
+DR-211	|	California	|		|	
+DR-212	|	California	|		|	
+DR-223	|	California	|		|	
+DR-253	|	California	|		|	
+DR-270	|	California	|		|	
+DR-283	|	California	|		|	
+DR-295	|	California	|		|	
+DR-299	|	California	|		|	
+DR-316	|	California	|		|	
+DR-329	|	California	|		|	
+DR-342	|	California	|		|	
+DR-364	|	California	|		|	
+DR-412	|	California	|		|	
+DR-432	|	California	|		|	
+DR-521	|	California	|		|	
+EM-3023	|	California	|		|	
+FSA-2028	|	California	|		|	
+DR-547	|	California	|		|	
+DR-566	|	California	|		|	
+EM-3067	|	California	|		|	
+DR-594	|	California	|		|	
+DR-609	|	California	|		|	
+EM-3078	|	California	|		|	
+DR-615	|	California	|		|	
+DR-633	|	California	|		|	
+DR-635	|	California	|		|	
+DR-651	|	California	|		|	
+DR-657	|	California	|		|	
+DR-669	|	California	|		|	
+DR-677	|	California	|		|	
+DR-682	|	California	|		|	
+DR-687	|	California	|		|	
+DR-690	|	California	|		|	
+FSA-2055	|	California	|		|	
+FSA-2054	|	California	|		|	
+DR-739	|	California	|		|	
+DR-758	|	California	|		|	
+FSA-2065	|	California	|		|	
+DR-799	|	California	|		|	
+DR-812	|	California	|		|	
+FSA-2071	|	California	|		|	
+DR-815	|	California	|		|	
+DR-845	|	California	|		|	
+DR-872	|	California	|		|	
+DR-894	|	California	|		|	
+DR-919	|	California	|		|	
+DR-935	|	California	|		|	
+DR-942	|	California	|		|	
+DR-943	|	California	|		|	
+DR-947	|	California	|		|	
+DR-958	|	California	|		|	
+DR-979	|	California	|		|	
+DR-1005	|	California	|		|	
+DR-1008	|	California	|		|	
+DR-1038	|	California	|		|	
+DR-1044	|	California	|		|	
+DR-1046	|	California	|		|	
+EM-3120	|	California	|		|	
+DR-1155	|	California	|		|	
+DR-1203	|	California	|		|	
+DR-1267	|	California	|		|	
+EM-3140	|	California	|		|	
+DR-1342	|	California	|		|	
+FSA-2396	|	California	|		|	
+FSA-2405	|	California	|		|	
+FSA-2417	|	California	|		|	
+FSA-2425	|	California	|		|	
+FSA-2433	|	California	|		|	
+FSA-2450	|	California	|		|	
+FSA-2456	|	California	|		|	
+FSA-2461	|	California	|		|	
+FSA-2462	|	California	|		|	
+FSA-2463	|	California	|		|	
+FSA-2464	|	California	|		|	
+FSA-2465	|	California	|		|	
+FM-2466	|	California	|		|	
+FM-2473	|	California	|		|	
+FM-2474	|	California	|		|	
+FM-2475	|	California	|		|	
+FM-2487	|	California	|		|	
+FM-2491	|	California	|		|	
+FM-2497	|	California	|		|	
+FM-2500	|	California	|		|	
+FM-2501	|	California	|		|	
+FM-2502	|	California	|		|	
+FM-2503	|	California	|		|	
+FM-2504	|	California	|		|	
+FM-2505	|	California	|		|	
+FM-2506	|	California	|		|	
+FM-2507	|	California	|		|	
+DR-1498	|	California	|		|	
+FM-2508	|	California	|		|	
+DR-1505	|	California	|		|	
+FM-2515	|	California	|		|	
+FM-2516	|	California	|		|	
+FM-2517	|	California	|		|	
+FM-2519	|	California	|		|	
+DR-1529	|	California	|		|	
+FM-2532	|	California	|		|	
+FM-2528	|	California	|		|	
+FM-2529	|	California	|		|	
+FM-2530	|	California	|		|	
+FM-2533	|	California	|		|	
+FM-2534	|	California	|		|	
+FM-2535	|	California	|		|	
+FM-2540	|	California	|		|	
+FM-2541	|	California	|		|	
+FM-2544	|	California	|		|	
+FM-2545	|	California	|		|	
+FM-2547	|	California	|		|	
+FM-2548	|	California	|		|	
+FM-2552	|	California	|		|	
+FM-2553	|	California	|		|	
+FM-2554	|	California	|		|	
+FM-2555	|	California	|		|	
+DR-1577	|	California	|		|	
+DR-1585	|	California	|		|	
+FM-2571	|	California	|		|	
+FM-2580	|	California	|		|	
+FM-2582	|	California	|		|	
+EM-3248	|	California	|		|	
+FM-2583	|	California	|		|	
+FM-2584	|	California	|		|	
+FM-2585	|	California	|		|	
+FM-2586	|	California	|		|	
+DR-1628	|	California	|		|	
+FM-2630	|	California	|		|	
+DR-1646	|	California	|		|	
+FM-2653	|	California	|		|	
+FM-2656	|	California	|		|	
+FM-2662	|	California	|		|	
+FM-2676	|	California	|		|	
+FM-2677	|	California	|		|	
+FM-2678	|	California	|		|	
+FM-2681	|	California	|		|	
+FM-2683	|	California	|		|	
+DR-1689	|	California	|		|	
+FM-2691	|	California	|		|	
+FM-2694	|	California	|		|	
+FM-2700	|	California	|		|	
+FM-2702	|	California	|		|	
+FM-2706	|	California	|		|	
+FM-2708	|	California	|		|	
+FM-2728	|	California	|		|	
+FM-2729	|	California	|		|	
+FM-2735	|	California	|		|	
+FM-2732	|	California	|		|	
+FM-2733	|	California	|		|	
+FM-2734	|	California	|		|	
+FM-2736	|	California	|		|	
+FM-2737	|	California	|		|	
+FM-2738	|	California	|		|	
+FM-2739	|	California	|		|	
+EM-3279	|	California	|		|	
+DR-1731	|	California	|		|	
+FM-2763	|	California	|		|	
+FM-2766	|	California	|		|	
+FM-2770	|	California	|		|	
+FM-2771	|	California	|		|	
+FM-2772	|	California	|		|	
+FM-2775	|	California	|		|	
+FM-2776	|	California	|		|	
+EM-3287	|	California	|		|	
+FM-2780	|	California	|		|	
+FM-2781	|	California	|		|	
+FM-2782	|	California	|		|	
+FM-2786	|	California	|		|	
+FM-2788	|	California	|		|	
+FM-2789	|	California	|		|	
+FM-2790	|	California	|		|	
+FM-2791	|	California	|		|	
+FM-2792	|	California	|		|	
+DR-1810	|	California	|		|	
+FM-2817	|	California	|		|	
+FM-2824	|	California	|		|	
+FM-2825	|	California	|		|	
+FM-2830	|	California	|		|	
+FM-2828	|	California	|		|	
+FM-2832	|	California	|		|	
+FM-2833	|	California	|		|	
+FM-2836	|	California	|		|	
+FM-2839	|	California	|		|	
+FM-2841	|	California	|		|	
+DR-1884	|	California	|		|	
+DR-1911	|	California	|		|	
+FM-2849	|	California	|		|	
+FM-2850	|	California	|		|	
+FM-2851	|	California	|		|	
+FM-2852	|	California	|		|	
+FM-2856	|	California	|		|	
+FM-2858	|	California	|		|	
+DR-1952	|	California	|		|	
+DR-1968	|	California	|		|	
+FM-2955	|	California	|		|	
+FM-2961	|	California	|		|	
+FM-2971	|	California	|		|	
+FM-2970	|	California	|		|	
+FM-5004	|	California	|		|	
+FM-5007	|	California	|		|	
+FM-5021	|	California	|		|	
+FM-5023	|	California	|		|	
+FM-5024	|	California	|		|	
+FM-5025	|	California	|		|	
+FM-5040	|	California	|		|	
+FM-5041	|	California	|		|	
+FM-5049	|	California	|		|	
+FM-5050	|	California	|		|	
+DR-4158	|	California	|		|	
+FM-5051	|	California	|		|	
+FM-5054	|	California	|		|	
+FM-5055	|	California	|		|	
+FM-5057	|	California	|		|	
+FM-5067	|	California	|		|	
+FM-5068	|	California	|		|	
+FM-5069	|	California	|		|	
+FM-5070	|	California	|		|	
+FM-5074	|	California	|		|	
+FM-5075	|	California	|		|	
+FM-5076	|	California	|		|	
+FM-5077	|	California	|		|	
+DR-4193	|	California	|		|	
+FM-5078	|	California	|		|	
+FM-5079	|	California	|		|	
+FM-5081	|	California	|		|	
+FM-5082	|	California	|		|	
+FM-5089	|	California	|		|	
+FM-5091	|	California	|		|	
+FM-5093	|	California	|		|	
+FM-5111	|	California	|		|	
+FM-5112	|	California	|		|	
+DR-4240	|	California	|		|	
+FM-5124	|	California	|		|	
+FM-5128	|	California	|		|	
+FM-5129	|	California	|		|	
+FM-5131	|	California	|	Kern County	|	TRUE
+FM-5132	|	California	|		|	FALSE
+FM-5135	|	California	|	Los Angeles County	|	TRUE
+FM-5137	|	California	|	Monterey County	|	TRUE
+FM-5140	|	California	|		|	FALSE
+FM-5144	|	California	|		|	FALSE
+FM-5145	|	California	|	Lake County	|	TRUE
+FM-5146	|	California	|	San Luis Obispo County	|	TRUE
+FM-5147	|	California	|	San Bernardino County	|	TRUE
+FM-5150	|	California	|		|	FALSE
+EM-3381	|	California	|	Butte, Sutter, Yuba	|	TRUE
+DR-4301	|	California	|	Alameda, Amador, Butte, Calaveras, Contra Costa, El Dorado, Humboldt, Inyo, Lake, Lassen, Marin, Mendocino, Merced, Mono, Monterey, Napa, Nevada, Placer, Plumas, Sacramento, San Benito, San Luis Obispo, Santa Clara, Santa Cruz, Shasta, Sierra, Siskiyou, Solano, Sonoma, Sutter, Trinity, Tuolumne, Yolo, Yuba	|	TRUE
+DR-4305	|	California	|	Alameda, Calaveras, Contra Costa, El Dorado, Inyo, Kern, Los Angeles, Mendocino, Modoc, Mono, Napa, Orange, Riverside, Sacramento, San Diego, San Luis Obispo, San Mateo, Santa Barbara, Santa Cruz, Trinity, Tuolumne, Yolo	|	TRUE
+DR-4308	|	California	|	Alameda, Alpine, Amador, Butte, Calaveras, Colusa, Contra Costa, Del Norte, El Dorado, Glenn, Humboldt, Kings, Lake, Lassen, Marin, Mariposa, Merced, Modoc, Mono, Monterey, Napa, Nevada, Plumas, Sacramento, San Benito, San Joaquin, San Luis Obispo, San Mateo, Santa Barbara, Santa Clara, Santa Cruz, Shasta, Sierra, Siskiyou, Solano, Sonoma, Stanislaus, Sutter, Tehama, Trinity, Tule River Indian Reservation, Tuolumne, Yolo, Yuba	|	TRUE
+FM-5189	|	California	|	Butte	|	TRUE
+FM-5192	|	California	|	Mariposa	|	TRUE
+FM-5199	|	California	|	Trinity	|	TRUE
+FM-5201	|	California	|	Los Angeles	|	TRUE
+FM-5202	|	California	|	Madera, Mariposa, and Tulare	|	TRUE
+FM-5204	|	California	|	Madera, Mariposa, and Tulare	|	TRUE
+FM-5205	|	California	|	Madera, Mariposa, and Tulare	|	TRUE
+FM-5213	|	California	|		|	FALSE
+FM-5214	|	California	|	Napa, Sonoma, and Yuba	|	TRUE
+FM-5215	|	California	|	Napa, Sonoma, and Yuba	|	TRUE
+FM-5216	|	California	|	Butte, Lake, Mendocino, Napa, Nevada, Orange, Sonoma, Yuba	|	TRUE
+FM-5217	|	California	|	Butte, Lake, Mendocino, Napa, Nevada, Orange, Sonoma, Yuba	|	TRUE
+FM-5218	|	California	|	Butte, Lake, Mendocino, Napa, Nevada, Orange, Sonoma, Yuba	|	TRUE
+FM-5219	|	California	|		|	FALSE
+FM-5220	|	California	|		|	FALSE
+FM-5221	|	California	|	Butte, Lake, Mendocino, Napa, Nevada, Orange, Sonoma, Yuba	|	TRUE
+FM-5222	|	California	|		|	FALSE
+FM-5223	|	California	|	Butte, Lake, Mendocino, Napa, Nevada, Orange, Sonoma, Yuba	|	TRUE
+DR-4344	|	California	|	Butte, Lake, Mendocino, Napa, Nevada, Orange, Sonoma, Yuba	|	TRUE
+FM-5224	|	California	|	Santa Barbara, Ventura	|	TRUE
+FM-5225	|	California	|	Los Angeles	|	TRUE
+FM-5226	|	California	|	Los Angeles	|	TRUE
+FM-5227	|	California	|		|	FALSE
+FM-5228	|	California	|	San Diego	|	TRUE
+EM-3396	|	California	|	Los Angeles, Riverside, San Diego, Santa Barbara, Ventura	|	TRUE
+DR-4353	|	California	|	Santa Barbara, Ventura	|	TRUE
+FM-5244	|	California	|	Lake	|	TRUE
+FM-5245	|	California	|		|	FALSE
+FM-5250	|	California	|	Siskiyou	|	TRUE
+FM-5251	|	California	|	San Diego	|	TRUE
+FM-5252	|	California	|	Santa Barbara	|	TRUE
+DR-4302	|	Hoopa Valley Tribe	|		|	
+DR-4142	|	Karuk Tribe	|		|	
+DR-4312	|	Resighini Rancheria	|		|	
+DR-4206	|	Soboba Band of Luiseño Indians	|		|	

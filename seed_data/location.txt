@@ -1,63 +1,63 @@
-Alameda	|	67890, 23456, 78901
-Alpine	|	12345
-Amador	|	12345
-Butte	|	12345
-Calaveras	|	12345
-Colusa	|	12345
-Contra Costa	|	12345
-Del Norte	|	12345
-El Dorado	|	12345
-Fresno	|	12345
-Glenn	|	12345
-Humboldt	|	12345
-Imperial	|	12345
-Inyo	|	12345
-Kern	|	12345
-Kings	|	12345
-Lake	|	12345
-Lassen	|	12345
-Los Angeles	|	12345
-Madera	|	12345
-Marin	|	12345
-Mariposa	|	12345
-Mendocino	|	12345
-Merced	|	12345
-Modoc	|	12345
-Mono	|	12345
-Monterey	|	12345
-Napa	|	12345
-Nevada	|	12345
-Orange	|	12345
-Placer	|	12345
-Plumas	|	12345
-Riverside	|	12345
-Sacramento	|	12345
-San Benito	|	12345
-San Bernardino	|	12345
-San Diego	|	12345
-San Francisco	|	12345
-San Joaquin	|	12345
-San Luis Obispo	|	12345
-San Mateo	|	12345
-Santa Barbara	|	12345
-Santa Clara	|	12345
-Santa Cruz	|	12345
-Shasta	|	12345
-Sierra	|	12345
-Siskiyou	|	12345
-Solano	|	12345
-Sonoma	|	12345
-Stanislaus	|	12345
-Sutter	|	12345
-Tehama	|	12345
-Trinity	|	12345
-Tulare	|	12345
-Tuolumne	|	12345
-Ventura	|	12345
-Yolo	|	12345
-Yuba	|	12345
+California	|	Alameda	|	Alameda, Albany	|	12345
+California	|	Alpine	|		|	12345
+California	|	Amador	|	Amador, Ione	|	12345
+California	|	Butte	|	Biggs	|	12345
+California	|	Calaveras	|	Angels Camp	|	12345
+California	|	Colusa	|	Colusa, Williams	|	12345
+California	|	Contra Costa	|	Antioch, Brentwood	|	12345
+California	|	Del Norte	|	Crescent City	|	12345
+California	|	El Dorado	|	Placerville, South Lake Tahoe	|	12345
+California	|	Fresno	|	Clovis, Coalinga	|	12345
+California	|	Glenn	|	Orland, Willows	|	12345
+California	|	Humboldt	|	Arcata, Blue Lake	|	12345
+California	|	Imperial	|	Brawley, Calexico	|	12345
+California	|	Inyo	|	Bishop	|	12345
+California	|	Kern	|	Arvin, Bakersfield	|	12345
+California	|	Kings	|	Avenal, Corcoran	|	12345
+California	|	Lake	|	Clearlake, Lakeport	|	12345
+California	|	Lassen	|	Susanville	|	12345
+California	|	Los Angeles	|	Agoura Hills, Alhambra	|	12345
+California	|	Madera	|	Chowchilla, Madera	|	12345
+California	|	Marin	|	Belvedere, Corte Madera	|	12345
+California	|	Mariposa	|		|	12345
+California	|	Mendocino	|	Fort Bragg, Point Arena	|	12345
+California	|	Merced	|	Atwater, Dos Palos	|	12345
+California	|	Modoc	|	Alturas	|	12345
+California	|	Mono	|	Mammoth Lakes	|	12345
+California	|	Monterey	|	Carmel-By-The-Sea, Del Rey Oaks	|	12345
+California	|	Napa	|	American Canyon, Calistoga	|	12345
+California	|	Nevada	|	Grass Valley, Nevada City	|	12345
+California	|	Orange	|	Aliso Viejo, Anaheim	|	12345
+California	|	Placer	|	Auburn, Colfax	|	12345
+California	|	Plumas	|	Portola	|	12345
+California	|	Riverside	|	Banning, Beaumont	|	12345
+California	|	Sacramento	|	Citrus Heights	|	12345
+California	|	San Benito	|	Hollister	|	12345
+California	|	San Bernardino	|	Adelanto	|	12345
+California	|	San Diego	|	Carlsbad	|	12345
+California	|	San Francisco	|	San Francisco	|	12345
+California	|	San Joaquin	|	Escalon	|	12345
+California	|	San Luis Obispo	|	Arroyo Grande	|	12345
+California	|	San Mateo	|	Atherton	|	12345
+California	|	Santa Barbara	|	Buellton	|	12345
+California	|	Santa Clara	|	Campbell	|	12345
+California	|	Santa Cruz	|	Capitola	|	12345
+California	|	Shasta	|	Anderson	|	12345
+California	|	Sierra	|	Loyalton	|	12345
+California	|	Siskiyou	|	Dorris	|	12345
+California	|	Solano	|	Benicia	|	12345
+California	|	Sonoma	|	Cloverdale	|	12345
+California	|	Stanislaus	|	Ceres	|	12345
+California	|	Sutter	|	Live Oak	|	12345
+California	|	Tehama	|	Corning	|	12345
+California	|	Trinity	|		|	12345
+California	|	Tulare	|	Dinuba	|	12345
+California	|	Tuolumne	|	Sonora	|	12345
+California	|	Ventura	|	Camarillo	|	12345
+California	|	Yolo	|	Davis	|	12345
+California	|	Yuba	|	Marysville	|	12345
 
-Soboba Indian Reservation | 00000
-Karuk Reservation | 00000
-Hoopa Reservation | 00000
-Resighini Rancheria (Indian Reservation) | 00000
+California	|	Soboba Indian Reservation | 00000
+California	|	Karuk Reservation | 00000
+California	|	Hoopa Reservation | 00000
+California	|	Resighini Rancheria (Indian Reservation) | 00000
