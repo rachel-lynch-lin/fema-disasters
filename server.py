@@ -1,10 +1,10 @@
 from jinja2 import StrictUndefined
 
-from flask import (Flask, render_template, redirect, request, flash, session)
-
+from flask import Flask, render_template, redirect, request, flash, session
+from flask import jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import Event, Location, Type, connect_to_db, connect_to_db
+from model import Event, Location, Type, connect_to_db, db
 
 from os import environ
 
