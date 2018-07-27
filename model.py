@@ -81,6 +81,30 @@ class Location(db.Model):
                    County Name:{self.county}>"""
 
 
+class User(db.Model):
+    """Keep user info to save user info and searches"""
+
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+    username = db.Column(db.String, nullable=False)
+
+    email = db.Column(db.String, unique=True, nullable=False)
+
+    password = db.Column(db.String, nullable=False)
+
+    occupation = db.Column(db.String)
+
+    def __repr__(self):
+        """Display information about the user"""
+
+        return f"""<User ID: {self.id}
+                   Username: {self.username}
+                   Email: {self.email}
+                   Password: {self.password}
+                   Occupation: {self.occupation}>"""
+
 ###############################################################################
 
 def connect_to_db(app):
@@ -93,8 +117,7 @@ def connect_to_db(app):
 
 
 if __name__ == "__main__":
-    from flask import Flask
-    app = Flask(__name__)
+    from server import app
     connect_to_db(app)
     print("Connected to DB.")
     db.create_all()

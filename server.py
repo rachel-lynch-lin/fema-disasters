@@ -4,7 +4,7 @@ from flask import Flask, render_template, redirect, request, flash, session
 from flask import jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import Event, Location, Type, connect_to_db, db
+from model import Event, Location, Type, User, connect_to_db, db
 
 from os import environ
 
@@ -99,7 +99,7 @@ def register_user():
     return redirect('/login')
 
 
-@app.route('login')
+@app.route('/login')
 def show_login_form():
     """Show login form"""
 
@@ -237,7 +237,7 @@ def us_map():
     return render_template('us-map.html')
 
 
-@app.route('geolocate')
+@app.route('/geolocate')
 def geolocate():
     """Zoom in on the location queried by the user with markers"""
 

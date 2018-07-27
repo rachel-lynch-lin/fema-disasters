@@ -9,7 +9,7 @@ from datetime import datetime
 
 
 def load_events():
-    """Load events from event.txt into the database"""
+    """Load events from event.txt file into the database"""
 
     print("Events")
 
@@ -45,7 +45,7 @@ def load_events():
 
 
 def load_types():
-    """"""
+    """Load types from the type.txt file into the database"""
 
     print("Types")
 
@@ -64,7 +64,7 @@ def load_types():
 
 
 def load_locations():
-    """"""
+    """Load locations form the location.txt file into the database"""
 
     print("Locations")
 

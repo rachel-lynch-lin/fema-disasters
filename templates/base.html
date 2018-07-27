@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %} Put the title here! {% endblock %}</title>
+</head>
+
+<body>
+
+	<div id="nav bar">
+		<a href="/">Homepage</a>
+		<a href="/events">Disaster Declarations</a>
+		<a href="/types.json">Disaster Types</a>
+		<a href="/about">About</a>
+		<a href="/contact">Contact</a>
+		<a href="/us-map">US Map</a>
+		<a href="/geolocate">Geolocate</a>
+		<a href="/users">Users</a>
+		
+		{% set user_id = session.get("user_id") %}
+
+		{% if user_id %}
+			<a href="/users/{{user_id}}">{{user_id}} Info Page</a> 
+			<a href="/logout">Logout</a>
+
+		{% else %}
+			<a href="/registration">Registration</a>
+			<a href="/login">Login</a>
+			
+		{% endif %}
+
+		<hr> <hr>
+	</div>
+
+	<ul>
+		{% for message in get_flashed_messages() %}
+		<li>{{message}}</li>
+		{% endfor %}
+	</ul>
+
+  {% block content %} Put your content here! {% endblock %}
+  
+</body>
+</html>
