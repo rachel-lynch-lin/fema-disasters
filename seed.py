@@ -1,7 +1,7 @@
 """File to seed the tables created in model.py from the files in seed_data/"""
 
 from sqlalchemy import func
-from model import Event, Type, Location, Fema, PropertyDamage
+from model import Event, Type, Location
 from model import connect_to_db, db
 
 from datetime import datetime
@@ -19,13 +19,26 @@ def load_events():
     # Read event.txt, organize data, and insert data
     for row in open("seed_data/event.txt"):
         row = row.rstrip()
-        fema_id, name, start_date, end_date = row.split("|")
 
-        event = Event(name=name,
-                      start_date=start_date)  # end_date=end_date)
+        row = row.split("|")
+        # Add list comprehension here in a later version of this file
+        for index, value in enumerate(row):
+            if value == "":
+                row[index] = None
+
+        # row = [None for value in row if value == ""]
+
+        fema_id, name, start_date, end_date, damaged_property, pa_grant_total = row
+
+        events = Event(fema_id=fema_id,
+                       name=name,
+                       start_date=start_date,
+                       end_date=end_date,
+                       damaged_property=damaged_property,
+                       pa_grant_total=pa_grant_total)
 
         # Add event to the session to be stored
-        db.session.add(event)
+        db.session.add(events)
 
     # Commit changes
     db.session.commit()
@@ -40,9 +53,9 @@ def load_types():
 
     for row in open("seed_data/type.txt"):
         row = row.rstrip()
-        type_id, type_name = row.split("|")
+        id, type_name = row.split("|")
 
-        types = Type(type_id=type_id,
+        types = Type(id=id,
                      type_name=type_name)
 
         db.session.add(types)
@@ -60,52 +73,12 @@ def load_locations():
     for row in open("seed_data/location.txt"):
         row = row.rstrip()
         print(row)
-        states, counties, cities, zipcodes = row.split("|")
+        state, county = row.split("|")
 
-        location = Location(states=states,
-                            counties=counties,
-                            cities=cities,
-                            zipcodes=zipcodes)
+        locations = Location(state=state,
+                             county=county)
 
-        db.session.add(location)
-
-    db.session.commit()
-
-
-def load_fema():
-    """"""
-
-    print("FEMA")
-
-    Fema.query.delete()
-
-    for row in open("seed_data/fema.txt"):
-        row = row.rstrip()
-        fema_id, pa_grant_total = row.split("|")
-
-        fema = Fema(fema_id=fema_id,
-                    pa_grant_total=pa_grant_total)
-
-        db.session.add(fema)
-
-    db.session.commit()
-
-
-def load_property_damages():
-    """"""
-
-    print("Property Damages")
-
-    PropertyDamage.query.delete()
-
-    for row in open("seed_data/property-damage.txt"):
-        row = row.rstrip()
-        fema_id, states, counties, damaged_property = row.split("|")
-
-        damaged_property = PropertyDamage(fema_id=fema_id,
-                                          damaged_property=damaged_property)
-
-        db.session.add(damaged_property)
+        db.session.add(locations)
 
     db.session.commit()
 
@@ -120,5 +93,3 @@ if __name__ == "__main__":
     load_events()
     load_types()
     load_locations()
-    load_fema()
-    load_property_damages()

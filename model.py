@@ -14,29 +14,36 @@ class Event(db.Model):
 
     __tablename__ = "events"
 
-    event_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    fema_id = db.Column(db.ForeignKey('disasters.fema_id'))
+    fema_id = db.Column(db.String, nullable=False)
 
     name = db.Column(db.String, nullable=True)
 
     start_date = db.Column(db.DateTime, nullable=False)
 
-    # This part does not exist yet and null cannot work with a timestamp
-    # end_date = db.Column(db.DateTime, nullable=True)
+    end_date = db.Column(db.String, nullable=True)  # Change to Datetime later
 
-    type_id = db.Column(db.ForeignKey('types.type_id'))
+    damaged_property = db.Column(db.String, default="Unknown")
 
-    county_id = db.Column(db.ForeignKey('locations.county_id'))
+    pa_grant_total = db.Column(db.Float)
+
+    type_id = db.Column(db.ForeignKey('types.id'))
+
+    county_id = db.Column(db.ForeignKey('locations.id'))
 
     def __repr__(self):
         """Display info about the disaster event"""
 
-        return f"""Event ID: {self.event_id}
-                   Location: {self.locations}
+        return f"""<Event ID: {self.id}
+                   FEMA ID: {self.fema_id}
+                   Location: {self.county_id}
                    Name: {self.name}
-                   Disaster Event: {self.type_name}
-                   Occured On: {self.start_date}"""
+                   Disaster Event: {self.type_id}
+                   Occured On: {self.start_date}
+                   Ended On: {self.end_date}
+                   Damaged Property: {self.damaged_property}
+                   Public Assistance Total Grant: ${self.pa_grant_total}>"""
 
 
 class Type(db.Model):
@@ -44,15 +51,15 @@ class Type(db.Model):
 
     __tablename__ = "types"
 
-    type_id = db.Column(db.String(25), primary_key=True)  # Take from types
+    id = db.Column(db.String(25), primary_key=True)  # Take from types
 
     type_name = db.Column(db.String(25))  # Take from type_name
 
     def __repr__(self):
         """Display type of disaster"""
 
-        return f"""Type ID: {self.type_id}
-                   Type Name: {self.type_name}"""
+        return f"""<Type ID: {self.id}
+                   Type Name: {self.type_name}>"""
 
 
 class Location(db.Model):
@@ -60,64 +67,18 @@ class Location(db.Model):
 
     __tablename__ = "locations"
 
-    county_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
     state = db.Column(db.String)
 
     county = db.Column(db.String)
 
-    cities = db.Column(db.String)
-
-    zipcodes = db.Column(db.Integer)
-
     def __repr__(self):
         """Display type of disaster"""
 
-        return f"""County ID: {self.county_id}
-                   State: {self.states}
-                   County Name:{self.counties}
-                   City: {self.cities}
-                   Zipcodes: {self.zipcodes}"""
-
-
-class Fema(db.Model):
-    """Links ID provided by FEMA to event and if money was awarded"""
-
-    __tablename__ = "disasters"
-
-    fema_id = db.Column(db.String, primary_key=True)
-
-    event_id = db.Column(db.ForeignKey('events.event_id'))
-
-    pa_grant_total = db.Column(db.Float)
-
-    def __repr__(self):
-        """Display type of disaster"""
-
-        return f"""FEMA ID:{self.fema_id}
-                   Public Assistance Total Grant: ${self.pa_grant_total}."""
-
-
-class PropertyDamage(db.Model):
-    """For each disaster event this checks if property damaged occured"""
-
-    __tablename__ = "damages"
-
-    damage_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-
-    event_id = db.Column(db.ForeignKey('events.event_id'))
-
-    fema_id = db.Column(db.ForeignKey('disasters.fema_id'))
-
-    damaged_property = db.Column(db.Boolean)
-
-    def __repr__(self):
-        """Display type of disaster"""
-
-        return f"""Damage ID: {self.damage_id}
-                   Event ID: {self.event_id}
-                   FEMA ID: {self.fema_id}
-                   Damaged Property: {self.damaged_property}"""
+        return f"""<County ID: {self.id}
+                   State: {self.state}
+                   County Name:{self.county}>"""
 
 
 ###############################################################################

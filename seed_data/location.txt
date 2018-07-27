@@ -1,62 +1,62 @@
-California	|	Alameda	|	Alameda, Albany	|	12345
-California	|	Alpine	|		|	12345
-California	|	Amador	|	Amador, Ione	|	12345
-California	|	Butte	|	Biggs	|	12345
-California	|	Calaveras	|	Angels Camp	|	12345
-California	|	Colusa	|	Colusa, Williams	|	12345
-California	|	Contra Costa	|	Antioch, Brentwood	|	12345
-California	|	Del Norte	|	Crescent City	|	12345
-California	|	El Dorado	|	Placerville, South Lake Tahoe	|	12345
-California	|	Fresno	|	Clovis, Coalinga	|	12345
-California	|	Glenn	|	Orland, Willows	|	12345
-California	|	Humboldt	|	Arcata, Blue Lake	|	12345
-California	|	Imperial	|	Brawley, Calexico	|	12345
-California	|	Inyo	|	Bishop	|	12345
-California	|	Kern	|	Arvin, Bakersfield	|	12345
-California	|	Kings	|	Avenal, Corcoran	|	12345
-California	|	Lake	|	Clearlake, Lakeport	|	12345
-California	|	Lassen	|	Susanville	|	12345
-California	|	Los Angeles	|	Agoura Hills, Alhambra	|	12345
-California	|	Madera	|	Chowchilla, Madera	|	12345
-California	|	Marin	|	Belvedere, Corte Madera	|	12345
-California	|	Mariposa	|		|	12345
-California	|	Mendocino	|	Fort Bragg, Point Arena	|	12345
-California	|	Merced	|	Atwater, Dos Palos	|	12345
-California	|	Modoc	|	Alturas	|	12345
-California	|	Mono	|	Mammoth Lakes	|	12345
-California	|	Monterey	|	Carmel-By-The-Sea, Del Rey Oaks	|	12345
-California	|	Napa	|	American Canyon, Calistoga	|	12345
-California	|	Nevada	|	Grass Valley, Nevada City	|	12345
-California	|	Orange	|	Aliso Viejo, Anaheim	|	12345
-California	|	Placer	|	Auburn, Colfax	|	12345
-California	|	Plumas	|	Portola	|	12345
-California	|	Riverside	|	Banning, Beaumont	|	12345
-California	|	Sacramento	|	Citrus Heights	|	12345
-California	|	San Benito	|	Hollister	|	12345
-California	|	San Bernardino	|	Adelanto	|	12345
-California	|	San Diego	|	Carlsbad	|	12345
-California	|	San Francisco	|	San Francisco	|	12345
-California	|	San Joaquin	|	Escalon	|	12345
-California	|	San Luis Obispo	|	Arroyo Grande	|	12345
-California	|	San Mateo	|	Atherton	|	12345
-California	|	Santa Barbara	|	Buellton	|	12345
-California	|	Santa Clara	|	Campbell	|	12345
-California	|	Santa Cruz	|	Capitola	|	12345
-California	|	Shasta	|	Anderson	|	12345
-California	|	Sierra	|	Loyalton	|	12345
-California	|	Siskiyou	|	Dorris	|	12345
-California	|	Solano	|	Benicia	|	12345
-California	|	Sonoma	|	Cloverdale	|	12345
-California	|	Stanislaus	|	Ceres	|	12345
-California	|	Sutter	|	Live Oak	|	12345
-California	|	Tehama	|	Corning	|	12345
-California	|	Trinity	|		|	12345
-California	|	Tulare	|	Dinuba	|	12345
-California	|	Tuolumne	|	Sonora	|	12345
-California	|	Ventura	|	Camarillo	|	12345
-California	|	Yolo	|	Davis	|	12345
-California	|	Yuba	|	Marysville	|	12345
-California	|	Soboba Indian Reservation | | 00000
-California	|	Karuk Reservation | | 00000
-California	|	Hoopa Reservation | | 00000
-California	|	Resighini Rancheria (Indian Reservation) | | 00000
+California|Alameda
+California|Alpine
+California|Amador
+California|Butte
+California|Calaveras
+California|Colusa
+California|Contra Costa
+California|Del Norte
+California|El Dorado
+California|Fresno
+California|Glenn
+California|Humboldt
+California|Imperial
+California|Inyo
+California|Kern
+California|Kings
+California|Lake
+California|Lassen
+California|Los Angeles
+California|Madera
+California|Marin
+California|Mariposa
+California|Mendocino
+California|Merced
+California|Modoc
+California|Mono
+California|Monterey
+California|Napa
+California|Nevada
+California|Orange
+California|Placer
+California|Plumas
+California|Riverside
+California|Sacramento
+California|San Benito
+California|San Bernardino
+California|San Diego
+California|San Francisco
+California|San Joaquin
+California|San Luis Obispo
+California|San Mateo
+California|Santa Barbara
+California|Santa Clara
+California|Santa Cruz
+California|Shasta
+California|Sierra
+California|Siskiyou
+California|Solano
+California|Sonoma
+California|Stanislaus
+California|Sutter
+California|Tehama
+California|Trinity
+California|Tulare
+California|Tuolumne
+California|Ventura
+California|Yolo
+California|Yuba
+California|Soboba Indian Reservation
+California|Karuk Reservation
+California|Hoopa Reservation
+California|Resighini Rancheria (Indian Reservation)
