@@ -11,6 +11,7 @@ from os import environ
 app = Flask(__name__)
 
 app.secret_key = "SERVER_APP_SECRET_KEY"
+google_api_key = "GOOGLE_API_KEY"
 
 app.jinja_env.undefined = StrictUndefined
 
@@ -21,21 +22,21 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage"""
 
-    return render_template('homepage.html')
+    return render_template('homepage.html', google_api_key=google_api_key)
 
 
 @app.route('/users')
-def user_list():
+def show_users():
     """Show a list of all users"""
 
     users = User.query
 
-    return render_template('user-list.html',
+    return render_template('users-list.html',
                            users=users)
 
 
-@app.route('/users/<user_id>')
-def show_user_page():
+@app.route('/users/<int:user_id>')
+def show_user_page(user_id):
     """Show user info page with saved queries"""
 
     user = User.query.get(user_id)
@@ -44,21 +45,33 @@ def show_user_page():
         flash('User does not exist')
         return redirect('/login')
 
-    user_saved_searches = db.session.query(Event.id,
-                                           Event.fema_id,
-                                           Location.state,
-                                           Location.county,
-                                           Type.name
-                                           ).join(
-                                               Location,
-                                               Type
-                                           ).filter_by(
-                                               user_id=user_id
-                                           ).all()
+    # user_saved_searches = db.session.query(Event.id,
+    #                                        Event.fema_id,
+    #                                        Event.type,
+    #                                        Event.county_id,
+    #                                        Location.state,
+    #                                        Location.county,
+    #                                        Type.name
+    #                                        ).join(
+    #                                            Location,
+    #                                            Type
+    #                                        ).filter_by(
+    #                                            user_id=user_id
+    #                                        ).all()
+
+    # or
+    # user_saved_searches = db.session.query(UserSearch.id,
+    #                                        UserSearch.users_id,
+    #                                        UserSearch.events_id
+    #                                        ).join(
+    #                                             Event
+    #                                        ).filter_by(
+    #                                             users_id=users_id
+    #                                        ).all()
 
     return render_template('user-info.html',
                            user=user,
-                           user_saved_searches=user_saved_searches)
+                           )
 
 
 @app.route('/registration')
@@ -71,19 +84,19 @@ def show_registration_form():
 @app.route('/registration', methods=['POST'])
 def register_user():
     """Register a new user after checking db to make sure it does not exist"""
-
+    print(request.form)
     username = request.form.get('username')
     email = request.form.get('email')
     password = request.form.get('password')
     occupation = request.form.get('occupation')
-    username = User.query.filter_by(username=username).first()
-    email = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(username=username).first()
+    user_email = User.query.filter_by(email=email).first()
 
-    if username:
+    if user:
         flash('Username is taken')
         return redirect('/registration')
 
-    if email:
+    if user_email:
         flash('Email is already in use')
         return redirect('/registration')
 
@@ -94,7 +107,7 @@ def register_user():
     db.session.add(new_user)
     db.session.commit()
 
-    flash("New User Registeration Complete")
+    flash("New User Registration Complete")
 
     return redirect('/login')
 
@@ -116,7 +129,7 @@ def process_login():
     user = User.query.filter_by(username=username).first()
 
     if not user or user.password != password:
-        flask('Invalid password')
+        flash('Invalid password')
         return redirect('/login')
 
     session['user_id'] = user.user_id
@@ -146,7 +159,7 @@ def events_list():
                            events=events)
 
 
-@app.route('/events/<int:user_event>')
+@app.route('/events/<int:fema_id>')
 def show_user_events_info():
     """Show information about the event"""
 
@@ -167,7 +180,7 @@ def types_list():
     types = {
         types.id: {
             "Type ID": types.id,
-            "Type Name": types.name
+            "Type Name": types.type_name
         }
         for types in Type.query}
 
@@ -202,7 +215,7 @@ def show_ulocation_by_state():
                            user_state=user_state)
 
 
-@app.route('/locations/<user_county>')
+@app.route('/locations')
 def show_ulocation_by_county():
     """Show user queried location by county selected via zipcode/city"""
 
@@ -230,18 +243,18 @@ def show_contact_page():
     return render_template('contact.html')
 
 
-@app.route('/us_map')
+@app.route('/us-map')
 def us_map():
     """Show a map of the entire United States without markers"""
 
-    return render_template('us-map.html')
+    return render_template('us-map.html', google_api_key=google_api_key)
 
 
 @app.route('/geolocate')
 def geolocate():
     """Zoom in on the location queried by the user with markers"""
 
-    return render_template('geolocate.html')
+    return render_template('geolocate.html', google_api_key=google_api_key)
 
 
 ###############################################################################

@@ -63,7 +63,7 @@ class Type(db.Model):
 
 
 class Location(db.Model):
-    """The location that the disaster took place in California"""
+    """The location that the disaster took place"""
 
     __tablename__ = "locations"
 
@@ -81,8 +81,27 @@ class Location(db.Model):
                    County Name:{self.county}>"""
 
 
+class LocationEvent(db.Model):
+    """Joining the event and location"""
+
+    __tablename__ = "location_events"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+    events_id = db.Column(db.ForeignKey('events.id'))
+
+    locations_id = db.Column(db.ForeignKey('locations.id'))
+
+    def __repr__(self):
+        """Display type of disaster"""
+
+        return f"""<Location-Event ID: {self.id}
+                   Event ID: {self.events_id}
+                   Location ID:{self.locations_id}>"""
+
+
 class User(db.Model):
-    """Keep user info to save user info and searches"""
+    """Keep user info to save user info"""
 
     __tablename__ = "users"
 
@@ -104,6 +123,26 @@ class User(db.Model):
                    Email: {self.email}
                    Password: {self.password}
                    Occupation: {self.occupation}>"""
+
+
+class UserSearch(db.Model):
+    """Joining the event and location"""
+
+    __tablename__ = "user_searches"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+    users_id = db.Column(db.ForeignKey('users.id'))
+
+    events_id = db.Column(db.ForeignKey('events.id'))
+
+    def __repr__(self):
+        """Display type of disaster"""
+
+        return f"""<User-Searches ID: {self.id}
+                   User ID: {self.users_id}
+                   Event ID:{self.events_id}>"""
+
 
 ###############################################################################
 

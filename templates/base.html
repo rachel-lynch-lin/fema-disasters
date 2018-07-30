@@ -2,19 +2,16 @@
 <html>
 <head>
 	<title>{% block title %} Put the title here! {% endblock %}</title>
+	
+
 </head>
 
 <body>
 
-	<div id="nav bar">
+	<div id="nav-bar">
 		<a href="/">Homepage</a>
-		<a href="/events">Disaster Declarations</a>
-		<a href="/types.json">Disaster Types</a>
 		<a href="/about">About</a>
 		<a href="/contact">Contact</a>
-		<a href="/us-map">US Map</a>
-		<a href="/geolocate">Geolocate</a>
-		<a href="/users">Users</a>
 		
 		{% set user_id = session.get("user_id") %}
 
@@ -38,6 +35,6 @@
 	</ul>
 
   {% block content %} Put your content here! {% endblock %}
-  
+
 </body>
 </html>

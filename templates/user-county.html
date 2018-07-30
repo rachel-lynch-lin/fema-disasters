@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %} User Location {% endblock %}
+
+{% block content %} 
+<script src="/static/js/user-location-search.js"></script>
+service = new google.maps.places.PlacesService(map);
+service.textSearch(request, callback);
+{% endblock %}
