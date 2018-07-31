@@ -16,7 +16,7 @@
 		{% set user_id = session.get("user_id") %}
 
 		{% if user_id %}
-			<a href="/users/{{user_id}}">{{user_id}} Info Page</a> 
+			<a href="/users/{{user_id}}">User Page</a> 
 			<a href="/logout">Logout</a>
 
 		{% else %}

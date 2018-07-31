@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
+
 {% block title %} User Info {% endblock %}
+
 {% block content %}
 
-<h2> {{user.username}}'s Info </h2>
-<p>Email: {{user.email}}</p>
-<p>Password: {{user.password}}</p>
-<p>Occupation: {{user.occupation}}</p>
+	<h2> {{user.username}}'s Info </h2>
+	<hr>
+		<p>Email: {{user.email}}</p>
+		<p>Password: {{user.password}}</p>
+		<p>Occupation: {{user.occupation}}</p>
+	<hr>
 
-
+{% if user_saved_searches %}
+	<ul>
+	{% for users_id, events_id  in user_searches %}
+		<li>{{users_id}}: {{events_id}}</li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No searches saved. </p>
+{% endif %}
 
 {% endblock %}

@@ -4,14 +4,16 @@ from flask import Flask, render_template, redirect, request, flash, session
 from flask import jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import Event, Location, Type, User, connect_to_db, db
+from model import Event, Location, Type, User, UserSearch, LocationEvent
 
-from os import environ
+from model import connect_to_db, db
+
+import os
 
 app = Flask(__name__)
 
 app.secret_key = "SERVER_APP_SECRET_KEY"
-google_api_key = "GOOGLE_API_KEY"
+google_api_key = os.environ["GOOGLE_API_KEY"]
 
 app.jinja_env.undefined = StrictUndefined
 
@@ -45,33 +47,18 @@ def show_user_page(user_id):
         flash('User does not exist')
         return redirect('/login')
 
-    # user_saved_searches = db.session.query(Event.id,
-    #                                        Event.fema_id,
-    #                                        Event.type,
-    #                                        Event.county_id,
-    #                                        Location.state,
-    #                                        Location.county,
-    #                                        Type.name
-    #                                        ).join(
-    #                                            Location,
-    #                                            Type
-    #                                        ).filter_by(
-    #                                            user_id=user_id
-    #                                        ).all()
-
-    # or
-    # user_saved_searches = db.session.query(UserSearch.id,
-    #                                        UserSearch.users_id,
-    #                                        UserSearch.events_id
-    #                                        ).join(
-    #                                             Event
-    #                                        ).filter_by(
-    #                                             users_id=users_id
-    #                                        ).all()
+    user_saved_searches = db.session.query(UserSearch.id,
+                                           UserSearch.users_id,
+                                           UserSearch.events_id
+                                           ).join(
+                                                Event
+                                           ).filter_by(
+                                                user_id=user_id
+                                           ).all()
 
     return render_template('user-info.html',
                            user=user,
-                           )
+                           user_saved_searches=user_saved_searches)
 
 
 @app.route('/registration')
@@ -132,11 +119,11 @@ def process_login():
         flash('Invalid password')
         return redirect('/login')
 
-    session['user_id'] = user.user_id
+    session['user_id'] = user.id
 
     flash("Logged In")
 
-    return redirect(f'/users/{user.user_id}')
+    return redirect(f'/users/{user.id}')
 
 
 @app.route('/logout')
@@ -156,12 +143,12 @@ def events_list():
     events = Event.query.order_by('start_date').all()
 
     return render_template('event-list.html',
-                           events=events)
+                           events_list=events)
 
 
 @app.route('/events/<int:fema_id>')
-def show_user_events_info():
-    """Show information about the event"""
+def show_user_events_info(fema_id):
+    """Find an event"""
 
     event = Event.query.get(fema_id)
 
@@ -188,7 +175,7 @@ def types_list():
 
 
 @app.route('/type/<user_type>')
-def show_user_type():
+def show_user_type(user_type):
     """Display all events with that type"""
 
     user_type = Type.query.get(id)
@@ -202,31 +189,31 @@ def show_user_type():
 
 
 @app.route('/locations/<user_state>')
-def show_ulocation_by_state():
+def show_ulocation_by_state(user_state):
     """Show user queried location by state selected"""
 
-    user_state = Location.query.get(state)
+    state = Location.query.get(user_state)
 
-    if not user_state:
+    if not state:
         flash('This is not a state in the United States.')
         return redirect('/')
 
     return render_template('user-state.html',
-                           user_state=user_state)
+                           state=state)
 
 
-@app.route('/locations')
-def show_ulocation_by_county():
+@app.route('/locations/<user_county>')
+def show_ulocation_by_county(user_county):
     """Show user queried location by county selected via zipcode/city"""
 
-    user_county = Location.query.get(county)
+    county = Location.query.get(user_county)
 
-    if not user_county:
+    if not county:
         flash('This is not a county is not in this datebase')
         return redirect('/')
 
     return render_template('user-county.html',
-                           user_county=user_county)
+                           county=county)
 
 
 @app.route('/about')

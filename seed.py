@@ -28,8 +28,7 @@ def load_events():
 
         # row = [None for value in row if value == ""]
 
-        fema_id, name, start_date, end_date,
-        damaged_property, pa_grant_total = row
+        fema_id, name, start_date, end_date, damaged_property, pa_grant_total = row
 
         events = Event(fema_id=fema_id,
                        name=name,

@@ -20,7 +20,7 @@ class Event(db.Model):
 
     name = db.Column(db.String, nullable=True)
 
-    start_date = db.Column(db.DateTime, nullable=False)
+    start_date = db.Column(db.Date, nullable=False)
 
     end_date = db.Column(db.String, nullable=True)  # Change to Datetime later
 
@@ -31,6 +31,8 @@ class Event(db.Model):
     type_id = db.Column(db.ForeignKey('types.id'))
 
     county_id = db.Column(db.ForeignKey('locations.id'))
+
+    user_id = db.Column(db.ForeignKey('users.id'))
 
     def __repr__(self):
         """Display info about the disaster event"""
@@ -88,6 +90,8 @@ class LocationEvent(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
+    users_id = db.Column(db.ForeignKey('users.id'))
+
     events_id = db.Column(db.ForeignKey('events.id'))
 
     locations_id = db.Column(db.ForeignKey('locations.id'))
@@ -96,6 +100,7 @@ class LocationEvent(db.Model):
         """Display type of disaster"""
 
         return f"""<Location-Event ID: {self.id}
+                   User ID: {self.users_id}
                    Event ID: {self.events_id}
                    Location ID:{self.locations_id}>"""
 

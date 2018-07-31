@@ -3,11 +3,19 @@
 {% block title %} Disaster Declarations {% endblock %}
 
 {% block content %} 
-<h2>Disaster Declaration List Page</h2>
+	
+		At the top they should be able to search an event by an id and 
+		have it render a new page with an updated url like so: <br>
+	<h2>Disaster Declaration List Page</h2>
+	
+	<ul>
+		{% for event in events_list %}
+		  <li>
+		  	<a href="/events/{{ event.id }}">
+		  		{{ event.name }} ({{ event.fema_id }}) 
+		  	</a>
+		  </li>
+		{% endfor %}
+	</ul>
 
-User should see a list of all events <br>
-<hr>
-At the top they should be able to search an event by an id and 
-have it render a new page with an updated url like so: <br>
-'/events/int:user_event'
 {% endblock %}
