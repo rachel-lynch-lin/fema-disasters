@@ -163,34 +163,30 @@ def show_user_events_info(fema_id):
                            event=event)
 
 
+@app.route('/search')
+def show_search-options():
+    """Show user the filter options available to look up an event"""
+
+    return render_template('user-search.html')
+    # Try to add this one with the google places search
+    # Try to add more search options with google places
+
+
 @app.route('/search/<selection>')
 def show_search_results(selection):
-    """Show user queried location by state selected"""
+    """Show user query filtered by options selected"""
 
-    state = Location.query.get(selection)
+    user_choice = Event.query.get(selection)
+    # Need a join to combine all the tables somehow in a giant query
+    # Maybe use join tables
 
-    if not state:
-        flash('This is not a state in the United States.')
-        return redirect('/')
+    if not user_choice:
+        flash('There are no events of this type that are in this datebase.')
+        return redirect('/search')
 
-    return render_template('user-state.html',
+    return render_template('user-search.html',
                            state=state)
 
-
-# @app.route('/locations/<user_county>')
-# def show_ulocation_by_county(user_county):
-#     """Show user queried location by county selected via zipcode/city"""
-
-#     county = Location.query.get(user_county)
-
-#     if not county:
-#         flash('This is not a county is not in this datebase')
-#         return redirect('/')
-
-#     return render_template('user-county.html',
-#                            county=county)
-
-# Try to add this one with the google places search
 
 @app.route('/about')
 def show_about_page():
