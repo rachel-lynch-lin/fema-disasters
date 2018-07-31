@@ -8,7 +8,7 @@ from model import Event, Location, Type, User, UserSearch, LocationEvent
 from model import connect_to_db, db
 
 from bs4 import BeautifulSoup
-import requests
+# import request
 from urllib.request import Request, urlopen
 
 import os
@@ -164,7 +164,7 @@ def show_user_events_info(fema_id):
 
 
 @app.route('/search')
-def show_search-options():
+def show_search_options():
     """Show user the filter options available to look up an event"""
 
     return render_template('user-search.html')
