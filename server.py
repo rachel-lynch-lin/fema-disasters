@@ -5,14 +5,17 @@ from flask import jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import Event, Location, Type, User, UserSearch, LocationEvent
-
 from model import connect_to_db, db
+
+from bs4 import BeautifulSoup
+import requests
+from urllib.request import Request, urlopen
 
 import os
 
 app = Flask(__name__)
 
-app.secret_key = "SERVER_APP_SECRET_KEY"
+app.secret_key = os.environ["SERVER_APP_SECRET_KEY"]
 google_api_key = os.environ["GOOGLE_API_KEY"]
 
 app.jinja_env.undefined = StrictUndefined
@@ -160,39 +163,11 @@ def show_user_events_info(fema_id):
                            event=event)
 
 
-@app.route('/types.json')
-def types_list():
-    """Display a list of disaster types"""
-
-    types = {
-        types.id: {
-            "Type ID": types.id,
-            "Type Name": types.type_name
-        }
-        for types in Type.query}
-
-    return jsonify(types)
-
-
-@app.route('/type/<user_type>')
-def show_user_type(user_type):
-    """Display all events with that type"""
-
-    user_type = Type.query.get(id)
-
-    if not user_type:
-        flash('This type does not exist in this datebase.')
-        return redirect('/')
-
-    return render_template('type-info.html',
-                           user_type=user_type)
-
-
-@app.route('/locations/<user_state>')
-def show_ulocation_by_state(user_state):
+@app.route('/search/<selection>')
+def show_search_results(selection):
     """Show user queried location by state selected"""
 
-    state = Location.query.get(user_state)
+    state = Location.query.get(selection)
 
     if not state:
         flash('This is not a state in the United States.')
@@ -202,19 +177,20 @@ def show_ulocation_by_state(user_state):
                            state=state)
 
 
-@app.route('/locations/<user_county>')
-def show_ulocation_by_county(user_county):
-    """Show user queried location by county selected via zipcode/city"""
+# @app.route('/locations/<user_county>')
+# def show_ulocation_by_county(user_county):
+#     """Show user queried location by county selected via zipcode/city"""
 
-    county = Location.query.get(user_county)
+#     county = Location.query.get(user_county)
 
-    if not county:
-        flash('This is not a county is not in this datebase')
-        return redirect('/')
+#     if not county:
+#         flash('This is not a county is not in this datebase')
+#         return redirect('/')
 
-    return render_template('user-county.html',
-                           county=county)
+#     return render_template('user-county.html',
+#                            county=county)
 
+# Try to add this one with the google places search
 
 @app.route('/about')
 def show_about_page():
