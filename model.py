@@ -18,19 +18,19 @@ class Event(db.Model):
 
     fema_id = db.Column(db.String, nullable=False)
 
-    name = db.Column(db.String, nullable=True)
+    name = db.Column(db.String)
 
-    start_date = db.Column(db.Date, nullable=False)
+    date_range = db.Column(db.Date)
 
-    end_date = db.Column(db.String, nullable=True)  # Change to Datetime later
+    declared_on = db.Column(db.Date, nullable=False)
+
+    year_declared = db.Column(db.String)
+
+    month_declared = db.Column(db.String)
 
     damaged_property = db.Column(db.String, default="Unknown")
 
-    pa_grant_total = db.Column(db.Float)
-
-    type_id = db.Column(db.ForeignKey('types.id'))
-
-    county_id = db.Column(db.ForeignKey('locations.id'))
+    pa_grant_total = db.Column(db.Float)  # May need to make it a string
 
     user_id = db.Column(db.ForeignKey('users.id'))
 
@@ -42,8 +42,10 @@ class Event(db.Model):
                    Location: {self.county_id}
                    Name: {self.name}
                    Disaster Event: {self.type_id}
-                   Occured On: {self.start_date}
-                   Ended On: {self.end_date}
+                   Occured On: {self.date_range}
+                   Declared On: {self.declared_on}
+                   Year Declared: {self.year_declared}
+                   Month Declared: {self.month_declared}
                    Damaged Property: {self.damaged_property}
                    Public Assistance Total Grant: ${self.pa_grant_total}>"""
 
@@ -71,6 +73,8 @@ class Location(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
+    state_id = db.Column(db.Str)
+
     state = db.Column(db.String)
 
     county = db.Column(db.String)
@@ -79,6 +83,7 @@ class Location(db.Model):
         """Display type of disaster"""
 
         return f"""<County ID: {self.id}
+                   State ID: {self.state_id}
                    State: {self.state}
                    County Name:{self.county}>"""
 

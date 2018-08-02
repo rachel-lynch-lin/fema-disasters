@@ -143,7 +143,7 @@ def process_logout():
 def events_list():
     """Show events list ordered by date"""
 
-    events = Event.query.order_by('start_date').all()
+    events = Event.query.order_by('declared_on').all()
 
     return render_template('event-list.html',
                            events_list=events)

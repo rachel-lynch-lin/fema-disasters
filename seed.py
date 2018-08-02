@@ -5,7 +5,7 @@ from model import Event, Type, Location
 from model import connect_to_db, db
 
 from datetime import datetime
-# from server import app
+from server import app
 
 
 def load_events():
@@ -18,9 +18,10 @@ def load_events():
 
     # Read event.txt, organize data, and insert data
     for row in open("seed_data/event.txt"):
-        row = row.rstrip()
+        # row = row.rstrip()
 
         row = row.split("|")
+        row = row.rstrip()
         # Add list comprehension here in a later version of this file
         for index, value in enumerate(row):
             if value == "":
@@ -28,12 +29,13 @@ def load_events():
 
         # row = [None for value in row if value == ""]
 
-        fema_id, name, start_date, end_date, damaged_property, pa_grant_total = row
+        fema_id, name, date_range, declared_on, year_declared, month_declared, damaged_property, pa_grant_total = row
 
         events = Event(fema_id=fema_id,
                        name=name,
-                       start_date=start_date,
-                       end_date=end_date,
+                       date_range=date_range,
+                       declared_on=declared_on,
+
                        damaged_property=damaged_property,
                        pa_grant_total=pa_grant_total)
 
@@ -53,10 +55,9 @@ def load_types():
 
     for row in open("seed_data/type.txt"):
         row = row.rstrip()
-        id, type_name = row.split("|")
+        fema_id, type_name = row.split("|")
 
-        types = Type(id=id,
-                     type_name=type_name)
+        types = Type(type_name=type_name)
 
         db.session.add(types)
 
@@ -73,9 +74,10 @@ def load_locations():
     for row in open("seed_data/location.txt"):
         row = row.rstrip()
         print(row)
-        state, county = row.split("|")
+        state_id, state, county = row.split("|")
 
-        locations = Location(state=state,
+        locations = Location(state_id=state_id,
+                             state=state,
                              county=county)
 
         db.session.add(locations)
@@ -84,8 +86,7 @@ def load_locations():
 
 
 if __name__ == "__main__":
-    from flask import Flask
-    app = Flask(__name__)
+    from server import app
     connect_to_db(app)
     print("Connected to DB.")
     db.create_all()
