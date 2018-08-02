@@ -18,10 +18,8 @@ def load_events():
 
     # Read event.txt, organize data, and insert data
     for row in open("seed_data/event.txt"):
-        # row = row.rstrip()
-
-        row = row.split("|")
         row = row.rstrip()
+        row = row.split("|")
         # Add list comprehension here in a later version of this file
         for index, value in enumerate(row):
             if value == "":
@@ -29,13 +27,15 @@ def load_events():
 
         # row = [None for value in row if value == ""]
 
-        fema_id, name, date_range, declared_on, year_declared, month_declared, damaged_property, pa_grant_total = row
+        fema_id, state, name, date_range, declared_on, year_declared, month_declared, damaged_property, pa_grant_total = row
 
         events = Event(fema_id=fema_id,
+                       state=state,
                        name=name,
                        date_range=date_range,
                        declared_on=declared_on,
-
+                       year_declared=year_declared,
+                       month_declared=month_declared,
                        damaged_property=damaged_property,
                        pa_grant_total=pa_grant_total)
 

@@ -18,11 +18,13 @@ class Event(db.Model):
 
     fema_id = db.Column(db.String, nullable=False)
 
+    state = db.Column(db.String)
+
     name = db.Column(db.String)
 
-    date_range = db.Column(db.Date)
+    date_range = db.Column(db.String, default="Unknown")
 
-    declared_on = db.Column(db.Date, nullable=False)
+    declared_on = db.Column(db.String, nullable=False)
 
     year_declared = db.Column(db.String)
 
@@ -30,7 +32,7 @@ class Event(db.Model):
 
     damaged_property = db.Column(db.String, default="Unknown")
 
-    pa_grant_total = db.Column(db.Float)  # May need to make it a string
+    pa_grant_total = db.Column(db.String, default="Award amount not listed.")
 
     user_id = db.Column(db.ForeignKey('users.id'))
 
@@ -39,9 +41,8 @@ class Event(db.Model):
 
         return f"""<Event ID: {self.id}
                    FEMA ID: {self.fema_id}
-                   Location: {self.county_id}
+                   Location: {self.state}
                    Name: {self.name}
-                   Disaster Event: {self.type_id}
                    Occured On: {self.date_range}
                    Declared On: {self.declared_on}
                    Year Declared: {self.year_declared}
@@ -55,9 +56,9 @@ class Type(db.Model):
 
     __tablename__ = "types"
 
-    id = db.Column(db.String(25), primary_key=True)  # Take from types
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    type_name = db.Column(db.String(25))  # Take from type_name
+    type_name = db.Column(db.String)  # Take from type_name
 
     def __repr__(self):
         """Display type of disaster"""
@@ -73,7 +74,7 @@ class Location(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    state_id = db.Column(db.Str)
+    state_id = db.Column(db.String)
 
     state = db.Column(db.String)
 
