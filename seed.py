@@ -29,6 +29,12 @@ def load_events():
 
         fema_id, state, name, date_range, declared_on, year_declared, month_declared, damaged_property, pa_grant_total = row
 
+        name = name.lower()
+
+        name = f"{state} {name}".title()
+
+        declared_on = declared_on[:-14]
+
         events = Event(fema_id=fema_id,
                        state=state,
                        name=name,
@@ -72,9 +78,8 @@ def load_locations():
     Location.query.delete()
 
     for row in open("seed_data/location.txt"):
-        row = row.rstrip()
-        print(row)
-        state_id, state, county = row.split("|")
+        row = row.rstrip().split("|")
+        state_id, state, county = row
 
         locations = Location(state_id=state_id,
                              state=state,

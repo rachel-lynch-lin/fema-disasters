@@ -149,11 +149,11 @@ def events_list():
                            events_list=events)
 
 
-@app.route('/events/<int:fema_id>')
+@app.route('/events/<fema_id>')
 def show_user_events_info(fema_id):
     """Find an event"""
 
-    event = Event.query.get(fema_id)
+    event = Event.query.filter_by(fema_id=fema_id).all()
 
     if not event:
         flash('This event does not exist or this datebase is incomplete.')
@@ -168,7 +168,7 @@ def show_search_options():
     """Show user the filter options available to look up an event"""
 
     return render_template('user-search.html')
-    # Try to add this one with the google places search
+    # Try to add a search with the google places search
     # Try to add more search options with google places
 
 

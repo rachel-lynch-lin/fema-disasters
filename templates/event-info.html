@@ -2,15 +2,13 @@
 
 {% block title %} Event {% endblock %}
 
-{% block content %} 
-
-	<h2> {{event.fema_id}} </h2>
-
-	<p> Name: {{event.name}} </p>
-	<p> Date Range: {{event.date_range}} </p>
-	<p> Declared On: {{event.declared_on}} </p>
-	<p> Damaged Property: {{event.damaged_property}} </p>
-	<p> Public Assistance Grant Total: $ {{event.pa_grant_total}} </p><br>
-	<p> Need some way to show where the event happened too. </p>
-
+{% block content %}
+     <h2> FEMA ID:{{event[0].fema_id}} </h2>
+     <h3> Name: {{event[0].name}}</h3>
+     <h3> Declared On: {{event[0].declared_on}}</h3>
+    {% for disaster in event %}
+    	<ul>
+    	<p>Print the counties affected in this event as a list</p>
+        </ul>
+    {% endfor %}
 {% endblock %}
