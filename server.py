@@ -4,7 +4,7 @@ from flask import Flask, render_template, redirect, request, flash, session
 from flask import jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import Event, Location, Type, User, UserSearch, LocationEvent
+from model import Event, Type, User, UserSearch
 from model import connect_to_db, db
 
 from bs4 import BeautifulSoup
@@ -30,7 +30,7 @@ def index():
     return render_template('homepage.html', google_api_key=google_api_key)
 
 
-@app.route('/users')
+@app.route('/users')  # Need to remove eventually 
 def show_users():
     """Show a list of all users"""
 
@@ -149,24 +149,29 @@ def events_list():
                            events_list=events)
 
 
-@app.route('/events/<int:fema_id>')
+@app.route('/events/<fema_id>')
 def show_user_events_info(fema_id):
     """Find an event"""
 
-    event = Event.query.get(fema_id)
+    event = Event.query.filter_by(fema_id=fema_id)
+    counties = Event.query.filter_by(fema_id=fema_id
+                                     ).order_by(Event.county).all()
 
     if not event:
         flash('This event does not exist or this datebase is incomplete.')
         return redirect('/')
 
     return render_template('event-info.html',
-                           event=event)
+                           counties=counties,
+                           event=event,
+                           fema_id=fema_id)
 
 
 @app.route('/search')
 def show_search_options():
     """Show user the filter options available to look up an event"""
 
+    user_search = Event.query.filter_by(state_id=state_id).all()
     return render_template('user-search.html')
     # Try to add this one with the google places search
     # Try to add more search options with google places
@@ -184,8 +189,7 @@ def show_search_results(selection):
         flash('There are no events of this type that are in this datebase.')
         return redirect('/search')
 
-    return render_template('user-search.html',
-                           state=state)
+    return render_template('user-search.html')
 
 
 @app.route('/about')
@@ -214,6 +218,14 @@ def geolocate():
     """Zoom in on the location queried by the user with markers"""
 
     return render_template('geolocate.html', google_api_key=google_api_key)
+
+
+@app.route('/places_locate')
+def places_locate():
+    """Find a location with a query using Google Places API"""
+
+    return render_template('location-search.html',
+                           google_api_key=google_api_key)
 
 
 ###############################################################################

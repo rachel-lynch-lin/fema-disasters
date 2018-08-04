@@ -18,13 +18,17 @@ class Event(db.Model):
 
     fema_id = db.Column(db.String, nullable=False)
 
+    state_id = db.Column(db.String)
+
     state = db.Column(db.String)
+
+    county = db.Column(db.String)
 
     name = db.Column(db.String)
 
     date_range = db.Column(db.String, default="Unknown")
 
-    declared_on = db.Column(db.String, nullable=False)
+    declared_on = db.Column(db.DateTime, nullable=False)
 
     year_declared = db.Column(db.String)
 
@@ -36,12 +40,15 @@ class Event(db.Model):
 
     user_id = db.Column(db.ForeignKey('users.id'))
 
+    type_id = db.Column(db.ForeignKey('types.id'))
+
     def __repr__(self):
         """Display info about the disaster event"""
 
         return f"""<Event ID: {self.id}
                    FEMA ID: {self.fema_id}
-                   Location: {self.state}
+                   Location: {self.state_id} {self.state}
+                   County Name:{self.county}
                    Name: {self.name}
                    Occured On: {self.date_range}
                    Declared On: {self.declared_on}
@@ -65,50 +72,6 @@ class Type(db.Model):
 
         return f"""<Type ID: {self.id}
                    Type Name: {self.type_name}>"""
-
-
-class Location(db.Model):
-    """The location that the disaster took place"""
-
-    __tablename__ = "locations"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-
-    state_id = db.Column(db.String)
-
-    state = db.Column(db.String)
-
-    county = db.Column(db.String)
-
-    def __repr__(self):
-        """Display type of disaster"""
-
-        return f"""<County ID: {self.id}
-                   State ID: {self.state_id}
-                   State: {self.state}
-                   County Name:{self.county}>"""
-
-
-class LocationEvent(db.Model):
-    """Joining the event and location"""
-
-    __tablename__ = "location_events"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-
-    users_id = db.Column(db.ForeignKey('users.id'))
-
-    events_id = db.Column(db.ForeignKey('events.id'))
-
-    locations_id = db.Column(db.ForeignKey('locations.id'))
-
-    def __repr__(self):
-        """Display type of disaster"""
-
-        return f"""<Location-Event ID: {self.id}
-                   User ID: {self.users_id}
-                   Event ID: {self.events_id}
-                   Location ID:{self.locations_id}>"""
 
 
 class User(db.Model):

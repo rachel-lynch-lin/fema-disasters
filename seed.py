@@ -1,7 +1,7 @@
 """File to seed the tables created in model.py from the files in seed_data/"""
 
 from sqlalchemy import func
-from model import Event, Type, Location
+from model import Event, Type
 from model import connect_to_db, db
 
 from datetime import datetime
@@ -18,8 +18,7 @@ def load_events():
 
     # Read event.txt, organize data, and insert data
     for row in open("seed_data/event.txt"):
-        row = row.rstrip()
-        row = row.split("|")
+        row = row.rstrip().replace("\t", "").split("|")
         # Add list comprehension here in a later version of this file
         for index, value in enumerate(row):
             if value == "":
@@ -27,10 +26,15 @@ def load_events():
 
         # row = [None for value in row if value == ""]
 
-        fema_id, state, name, date_range, declared_on, year_declared, month_declared, damaged_property, pa_grant_total = row
+        fema_id, state_id, state, county, name, date_range, declared_on, year_declared, month_declared, damaged_property, pa_grant_total = row
+        
+        name = name.lower()
+        name = f"{state} {name}".title()
 
         events = Event(fema_id=fema_id,
+                       state_id=state_id,
                        state=state,
+                       county=county,
                        name=name,
                        date_range=date_range,
                        declared_on=declared_on,
@@ -54,33 +58,13 @@ def load_types():
     Type.query.delete()
 
     for row in open("seed_data/type.txt"):
-        row = row.rstrip()
-        fema_id, type_name = row.split("|")
+        row = row.rstrip().replace("\t", "").split("|")
+        fema_id, type_name = row
 
-        types = Type(type_name=type_name)
+        types = Type(fema_id=fema_id,
+                     type_name=type_name)
 
         db.session.add(types)
-
-    db.session.commit()
-
-
-def load_locations():
-    """Load locations form the location.txt file into the database"""
-
-    print("Locations")
-
-    Location.query.delete()
-
-    for row in open("seed_data/location.txt"):
-        row = row.rstrip()
-        print(row)
-        state_id, state, county = row.split("|")
-
-        locations = Location(state_id=state_id,
-                             state=state,
-                             county=county)
-
-        db.session.add(locations)
 
     db.session.commit()
 
@@ -93,4 +77,3 @@ if __name__ == "__main__":
     # Import different types of data
     load_events()
     load_types()
-    load_locations()
