@@ -4,7 +4,7 @@ from flask import Flask, render_template, redirect, request, flash, session
 from flask import jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import Event, Type, User, UserSearch
+from model import Event, Grant, User, UserSearch
 from model import connect_to_db, db
 
 from bs4 import BeautifulSoup
@@ -30,7 +30,7 @@ def index():
     return render_template('homepage.html', google_api_key=google_api_key)
 
 
-@app.route('/users')  # Need to remove eventually 
+@app.route('/users')  # Need to remove eventually
 def show_users():
     """Show a list of all users"""
 
@@ -74,6 +74,7 @@ def show_registration_form():
 @app.route('/registration', methods=['POST'])
 def register_user():
     """Register a new user after checking db to make sure it does not exist"""
+
     print(request.form)
     username = request.form.get('username')
     email = request.form.get('email')
@@ -171,7 +172,6 @@ def show_user_events_info(fema_id):
 def show_search_options():
     """Show user the filter options available to look up an event"""
 
-    user_search = Event.query.filter_by(state_id=state_id).all()
     return render_template('user-search.html')
     # Try to add this one with the google places search
     # Try to add more search options with google places

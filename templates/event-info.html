@@ -5,11 +5,12 @@
 {% block content %} 
 
 	
-	<h2>{{event.name}}{{fema_id}}</h2>
+	<h2>{{fema_id}}</h2>
+	<ul>
 	{% for i in event %}
 
-		<ul>
 			<li>{{i.county}}</li>
-		</ul>
+	
 	{% endfor %}
+	</ul>
 {% endblock %}
