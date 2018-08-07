@@ -2,6 +2,7 @@
 
 {% block title %} Event {% endblock %}
 
+<<<<<<< HEAD
 {% block content %}
      <h2> FEMA ID:{{event[0].fema_id}} </h2>
      <h3> Name: {{event[0].name}}</h3>
@@ -11,4 +12,17 @@
     	<p>Print the counties affected in this event as a list</p>
         </ul>
     {% endfor %}
+=======
+{% block content %} 
+
+	
+	<h2>{{fema_id}}</h2>
+	<ul>
+	{% for i in event %}
+
+			<li>{{i.county}}</li>
+	
+	{% endfor %}
+	</ul>
+>>>>>>> 0714e6ef584c6adfa635210d75c78d3c33e15bd5
 {% endblock %}

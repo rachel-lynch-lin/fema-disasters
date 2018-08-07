@@ -4,7 +4,7 @@ from flask import Flask, render_template, redirect, request, flash, session
 from flask import jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import Event, Location, Type, User, UserSearch, LocationEvent
+from model import Event, Grant, User, UserSearch
 from model import connect_to_db, db
 
 from bs4 import BeautifulSoup
@@ -30,7 +30,7 @@ def index():
     return render_template('homepage.html', google_api_key=google_api_key)
 
 
-@app.route('/users')
+@app.route('/users')  # Need to remove eventually
 def show_users():
     """Show a list of all users"""
 
@@ -74,6 +74,7 @@ def show_registration_form():
 @app.route('/registration', methods=['POST'])
 def register_user():
     """Register a new user after checking db to make sure it does not exist"""
+
     print(request.form)
     username = request.form.get('username')
     email = request.form.get('email')
@@ -143,7 +144,8 @@ def process_logout():
 def events_list():
     """Show events list ordered by date"""
 
-    events = Event.query.order_by('declared_on').all()
+    events = Event.query.order_by('fema_id').all()
+    print(events)
 
     return render_template('event-list.html',
                            events_list=events)
@@ -153,14 +155,22 @@ def events_list():
 def show_user_events_info(fema_id):
     """Find an event"""
 
+<<<<<<< HEAD
     event = Event.query.filter_by(fema_id=fema_id).all()
+=======
+    event = Event.query.filter_by(fema_id=fema_id)
+    counties = Event.query.filter_by(fema_id=fema_id
+                                     ).order_by(Event.county).all()
+>>>>>>> 0714e6ef584c6adfa635210d75c78d3c33e15bd5
 
     if not event:
         flash('This event does not exist or this datebase is incomplete.')
         return redirect('/')
 
     return render_template('event-info.html',
-                           event=event)
+                           counties=counties,
+                           event=event,
+                           fema_id=fema_id)
 
 
 @app.route('/search')
@@ -184,8 +194,7 @@ def show_search_results(selection):
         flash('There are no events of this type that are in this datebase.')
         return redirect('/search')
 
-    return render_template('user-search.html',
-                           state=state)
+    return render_template('user-search.html')
 
 
 @app.route('/about')
@@ -214,6 +223,14 @@ def geolocate():
     """Zoom in on the location queried by the user with markers"""
 
     return render_template('geolocate.html', google_api_key=google_api_key)
+
+
+@app.route('/places_locate')
+def places_locate():
+    """Find a location with a query using Google Places API"""
+
+    return render_template('location-search.html',
+                           google_api_key=google_api_key)
 
 
 ###############################################################################

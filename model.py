@@ -10,105 +10,75 @@ db = SQLAlchemy()
 
 
 class Event(db.Model):
-    """The disaster events that occured in California"""
+    """The disaster declarations that are in FEMA's database"""
 
     __tablename__ = "events"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    fema_id = db.Column(db.String, nullable=False)
+    declaration_id = db.Column(db.String, nullable=False)
 
-    state = db.Column(db.String)
-
-    name = db.Column(db.String)
-
-    date_range = db.Column(db.String, default="Unknown")
-
-    declared_on = db.Column(db.String, nullable=False)
-
-    year_declared = db.Column(db.String)
-
-    month_declared = db.Column(db.String)
-
-    damaged_property = db.Column(db.String, default="Unknown")
-
-    pa_grant_total = db.Column(db.String, default="Award amount not listed.")
-
-    user_id = db.Column(db.ForeignKey('users.id'))
-
-    def __repr__(self):
-        """Display info about the disaster event"""
-
-        return f"""<Event ID: {self.id}
-                   FEMA ID: {self.fema_id}
-                   Location: {self.state}
-                   Name: {self.name}
-                   Occured On: {self.date_range}
-                   Declared On: {self.declared_on}
-                   Year Declared: {self.year_declared}
-                   Month Declared: {self.month_declared}
-                   Damaged Property: {self.damaged_property}
-                   Public Assistance Total Grant: ${self.pa_grant_total}>"""
-
-
-class Type(db.Model):
-    """Types of disasters that have occured in California"""
-
-    __tablename__ = "types"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-
-    type_name = db.Column(db.String)  # Take from type_name
-
-    def __repr__(self):
-        """Display type of disaster"""
-
-        return f"""<Type ID: {self.id}
-                   Type Name: {self.type_name}>"""
-
-
-class Location(db.Model):
-    """The location that the disaster took place"""
-
-    __tablename__ = "locations"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    fema_id = db.Column(db.Integer)
 
     state_id = db.Column(db.String)
 
     state = db.Column(db.String)
 
+    name = db.Column(db.String)
+
     county = db.Column(db.String)
 
-    def __repr__(self):
-        """Display type of disaster"""
+    start_date = db.Column(db.DateTime)
 
-        return f"""<County ID: {self.id}
+    end_date = db.Column(db.DateTime)
+
+    declared_on = db.Column(db.DateTime)
+
+    close_out_date = db.Column(db.DateTime)
+
+    disaster_type = db.Column(db.String)
+
+    grants = db.relationship('Grant', backref='event')
+
+    damaged_property = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        """Display info about the disaster event"""
+
+        return f"""<Event ID: {self.id}
+                   Declaration ID: {self.declaration_id}
+                   FEMA ID: {self.fema_id}
                    State ID: {self.state_id}
                    State: {self.state}
-                   County Name:{self.county}>"""
+                   Name: {self.name}
+                   County:{self.county}
+                   Occured On: {self.start_date} - {self.end_date}
+                   Declared On: {self.declared_on}
+                   Disaster Closed Out On: {self.close_out_date}
+                   Disaster Type: {self.disaster_type}>"""
 
 
-class LocationEvent(db.Model):
-    """Joining the event and location"""
+class Grant(db.Model):
+    """Money that was awarded for disasters"""
 
-    __tablename__ = "location_events"
+    __tablename__ = "grants"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    users_id = db.Column(db.ForeignKey('users.id'))
+    total = db.Column(db.Float)
 
-    events_id = db.Column(db.ForeignKey('events.id'))
+    grant_type = db.Column(db.String)
 
-    locations_id = db.Column(db.ForeignKey('locations.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable=False)
+
 
     def __repr__(self):
-        """Display type of disaster"""
+        """Display information about funding that was granted"""
 
-        return f"""<Location-Event ID: {self.id}
-                   User ID: {self.users_id}
-                   Event ID: {self.events_id}
-                   Location ID:{self.locations_id}>"""
+        return f"""<Grant Total ID: {self.id}
+                   Total: {self.total}
+                   Grant Type: {self.grant_type}
+                   Event ID: {self.event_id}"""
 
 
 class User(db.Model):
@@ -148,7 +118,7 @@ class UserSearch(db.Model):
     events_id = db.Column(db.ForeignKey('events.id'))
 
     def __repr__(self):
-        """Display type of disaster"""
+        """Display information about the user's saved searches"""
 
         return f"""<User-Searches ID: {self.id}
                    User ID: {self.users_id}
