@@ -4,10 +4,20 @@
 
 {% block content %} 
 	
-		At the top they should be able to search an event by an id and 
-		have it render a new page with an updated url like so: <br>
-	<h2>Disaster Declaration List Page</h2>
-	
+	<div class="side-nav-bar">
+		<header>
+			<h4>Side Nav Bar Heading</h4>
+		</header>
+	</div>
+
+	<div class="header">
+		<header>
+			<h2>Disaster Declaration List Page</h2>
+			<p>There are <b>{{disaster}}</b> disaster declarations in this database.</p>
+		</header>
+	</div>
+
+	<div class="main-content">
 	<ul>
 		{% for event in events_list %}
 		  <li>
@@ -17,5 +27,6 @@
 		  </li>
 		{% endfor %}
 	</ul>
+	</div>
 
 {% endblock %}

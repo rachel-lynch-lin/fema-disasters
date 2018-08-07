@@ -22,19 +22,17 @@ class Event(db.Model):
 
     state_id = db.Column(db.String)
 
-    state = db.Column(db.String)
-
     name = db.Column(db.String)
 
     county = db.Column(db.String)
 
-    start_date = db.Column(db.DateTime)
+    start_date = db.Column(db.Date)
 
-    end_date = db.Column(db.DateTime)
+    end_date = db.Column(db.Date)
 
-    declared_on = db.Column(db.DateTime)
+    declared_on = db.Column(db.Date)
 
-    close_out_date = db.Column(db.DateTime)
+    close_out_date = db.Column(db.Date)
 
     disaster_type = db.Column(db.String)
 
@@ -49,7 +47,6 @@ class Event(db.Model):
                    Declaration ID: {self.declaration_id}
                    FEMA ID: {self.fema_id}
                    State ID: {self.state_id}
-                   State: {self.state}
                    Name: {self.name}
                    County:{self.county}
                    Occured On: {self.start_date} - {self.end_date}

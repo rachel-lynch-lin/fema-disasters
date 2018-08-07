@@ -143,12 +143,27 @@ def process_logout():
 @app.route('/events')
 def events_list():
     """Show events list ordered by date"""
-
-    events = Event.query.order_by('fema_id').all()
-    print(events)
+    disasters = set()
+    # print(disasters)
+    # disaster = len(disasters)
+    # disaster_count = disaster.len()
+    for row in open("seed_data/event.txt"):
+        row = row.rstrip().replace("\t", "").split("|")
+        incident = row[1]
+        disasters.add(incident)
+    print(disasters)    
+    disaster = len(disasters)
+    def page_limit(page=0, page_size=100):
+        events = Event.query.order_by('fema_id')
+        if page_size:
+            events = events.limit(page_size)
+        if page: 
+            events = events.offset(page*page_size)
+        return events
 
     return render_template('event-list.html',
-                           events_list=events)
+                           events_list=page_limit(),
+                           disaster=disaster)
 
 
 @app.route('/events/<fema_id>')

@@ -34,7 +34,6 @@ def load_events():
         events = Event(declaration_id=declaration_id,
                        fema_id=fema_id,
                        state_id=state_id,
-                       state=state,
                        name=name,
                        county=county,
                        start_date=start_date,
@@ -73,7 +72,7 @@ def load_grants():
 
             for index, value in enumerate(row):
                 if index > 0 and index < 8 and value != "":
-                    event.grants.append(Grant(total=value, grant_type=type_names[index]))
+                    event.grants.append(Grant(total=value, grant=type_names[index]))
 
     db.session.commit()
 
