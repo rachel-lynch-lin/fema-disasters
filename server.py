@@ -156,7 +156,13 @@ def show_user_events_info(fema_id):
     """Find an event"""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     event = Event.query.filter_by(fema_id=fema_id).all()
+=======
+    event = Event.query.filter_by(fema_id=fema_id)
+    counties = Event.query.filter_by(fema_id=fema_id
+                                     ).order_by(Event.county).all()
+>>>>>>> 0714e6ef584c6adfa635210d75c78d3c33e15bd5
 =======
     event = Event.query.filter_by(fema_id=fema_id)
     counties = Event.query.filter_by(fema_id=fema_id

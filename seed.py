@@ -27,6 +27,7 @@ def load_events():
         # row = [None for value in row if value == ""]
 
         declaration_id, fema_id, state_id, state, name, county, start_date, end_date, declared_on, close_out_date,  disaster_type = row
+<<<<<<< HEAD
 
 <<<<<<< HEAD
         name = name.lower()
@@ -37,12 +38,18 @@ def load_events():
 
         events = Event(fema_id=fema_id,
 =======
+=======
+
+>>>>>>> 0714e6ef584c6adfa635210d75c78d3c33e15bd5
         name = name.lower().title()
         name = f"{state_id} {name}"
 
         events = Event(declaration_id=declaration_id,
                        fema_id=fema_id,
                        state_id=state_id,
+<<<<<<< HEAD
+>>>>>>> 0714e6ef584c6adfa635210d75c78d3c33e15bd5
+=======
 >>>>>>> 0714e6ef584c6adfa635210d75c78d3c33e15bd5
                        state=state,
                        name=name,
@@ -66,9 +73,13 @@ def load_grants():
     print("Grants")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     for row in open("seed_data/location.txt"):
         row = row.rstrip().split("|")
         state_id, state, county = row
+=======
+    Grant.query.delete()
+>>>>>>> 0714e6ef584c6adfa635210d75c78d3c33e15bd5
 =======
     Grant.query.delete()
 >>>>>>> 0714e6ef584c6adfa635210d75c78d3c33e15bd5
