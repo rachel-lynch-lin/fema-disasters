@@ -67,40 +67,18 @@ class Grant(db.Model):
 
     total = db.Column(db.Float)
 
-    grant_type = db.Column(db.String)
+    grant = db.Column(db.String)
 
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable=False)
-
-    # fema_id = db.Column(db.Integer)
-
-    # pa_grant_total = db.Column(db.Float, default=None)  # Change to float later
-
-    # cat_ab_total = db.Column(db.Float, default=None)
-
-    # cat_cg_total = db.Column(db.Float, default=None)
-
-    # ihp_total = db.Column(db.Float, default=None)  # Change to float later
-
-    # ia_apps_approved = db.Column(db.Integer)
-
-    # ha_total = db.Column(db.Float, default=None)
-
-    # ona_total = db.Column(db.Float, default=None)
 
     def __repr__(self):
         """Display information about funding that was granted"""
 
         return f"""<Grant Total ID: {self.id}
-                   FEMA ID: {self.fema_id}"""
-                   # Public Assistance Total Grant: ${self.pa_grant_total}
-                   # EM WK(Cats A-B) $'s Obligated: ${self.cat_ab_total}
-                   # PM WK(Cats C-G) $'s Obligated: ${self.cat_cg_total}
-                   # Total IHP $'s Approved: ${self.ihp_total}
-                   # Total IA Applications Approved: {self.ia_apps_approved}
-                   # Total HA $'s Approved: ${self.ha_total}
-                   # Total ONA $'s Approved: ${self.ona_total}
-                   # Damaged Property: {self.damaged_property}>
-
+                   Total: {self.total}
+                   Grant Type: {self.grant}
+                   Event ID: {self.event_id}>"""
+                   
 
 class User(db.Model):
     """Keep user info to save user info"""
