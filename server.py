@@ -10,7 +10,7 @@ from model import connect_to_db, db
 from bs4 import BeautifulSoup
 # import request
 from urllib.request import Request, urlopen
-
+from sqlalchemy import distinct
 import os
 
 app = Flask(__name__)
@@ -144,8 +144,6 @@ def process_logout():
 def events_list():
     """Show events list ordered by date"""
     
-    
-    
     disasters = set()
     for row in open("seed_data/event.txt"):
         row = row.rstrip().replace("\t", "").split("|")
@@ -155,14 +153,14 @@ def events_list():
     
     page_size = 50
     pages = int(disaster / page_size)
-    
-    
-    # import pdb; pdb.set_trace()    
     page = request.args.get("page")  # returns args['page'] if exists, default to None
-    event = Event.query.order_by('fema_id').limit(page_size).offset(int(page)*page_size).all()
+    if page is None:
+        page = 0
+
+    events = Event.query.order_by('fema_id').limit(page_size).offset(int(page)*page_size).distinct('fema_id').all()
+    
     return render_template('event-list.html',
-                           
-                           event=event,
+                           events=events,
                            disaster=disaster,
                            pages=pages)
 
@@ -174,7 +172,7 @@ def show_user_events_info(fema_id):
     event = Event.query.filter_by(fema_id=fema_id).first()
     counties = Event.query.filter_by(fema_id=fema_id
                                      ).order_by(Event.county).all()
-
+    # import pdb; pdb.set_trace()   
     if not event:
         flash('This event does not exist or this datebase is incomplete.')
         return redirect('/')

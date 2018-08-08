@@ -19,12 +19,14 @@
 
 	<div class="main-content">
 	<ul>
-		{% for id in event %}
-		  <li>
-		  	<a href="/events/{{ id }}">
-		  		 ({{ id }}) 
-		  	</a>
-		  </li>
+		{% for event in events %}
+		  
+			  <li>
+			  	<a href="/events/{{ event.fema_id }}">
+			  		 {{ event.name }} ({{ event.fema_id }})
+			  	</a>
+			  </li>
+		 
 		{% endfor %}
 	</ul>
 	Pages:
