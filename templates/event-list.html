@@ -19,14 +19,20 @@
 
 	<div class="main-content">
 	<ul>
-		{% for event in events_list %}
+		{% for id in event %}
 		  <li>
-		  	<a href="/events/{{ event.id }}">
-		  		{{ event.name }} ({{ event.fema_id }}) 
+		  	<a href="/events/{{ id }}">
+		  		 ({{ id }}) 
 		  	</a>
 		  </li>
 		{% endfor %}
 	</ul>
+	Pages:
+		{% for page in range(pages) %}
+			<a href="/events?page={{page}}">
+				{{page}}
+			</a>
+		{% endfor %}
 	</div>
 
 {% endblock %}

@@ -143,34 +143,35 @@ def process_logout():
 @app.route('/events')
 def events_list():
     """Show events list ordered by date"""
+    
+    
+    
     disasters = set()
-    # print(disasters)
-    # disaster = len(disasters)
-    # disaster_count = disaster.len()
     for row in open("seed_data/event.txt"):
         row = row.rstrip().replace("\t", "").split("|")
         incident = row[1]
-        disasters.add(incident)
-    print(disasters)    
+        disasters.add(incident)    
     disaster = len(disasters)
-    def page_limit(page=0, page_size=100):
-        events = Event.query.order_by('fema_id')
-        if page_size:
-            events = events.limit(page_size)
-        if page: 
-            events = events.offset(page*page_size)
-        return events
-
+    
+    page_size = 50
+    pages = int(disaster / page_size)
+    
+    
+    # import pdb; pdb.set_trace()    
+    page = request.args.get("page")  # returns args['page'] if exists, default to None
+    event = Event.query.order_by('fema_id').limit(page_size).offset(int(page)*page_size).all()
     return render_template('event-list.html',
-                           events_list=page_limit(),
-                           disaster=disaster)
+                           
+                           event=event,
+                           disaster=disaster,
+                           pages=pages)
 
 
 @app.route('/events/<fema_id>')
 def show_user_events_info(fema_id):
     """Find an event"""
 
-    event = Event.query.filter_by(fema_id=fema_id)
+    event = Event.query.filter_by(fema_id=fema_id).first()
     counties = Event.query.filter_by(fema_id=fema_id
                                      ).order_by(Event.county).all()
 
