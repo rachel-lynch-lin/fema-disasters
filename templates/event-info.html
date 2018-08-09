@@ -3,14 +3,44 @@
 {% block title %} Event {% endblock %}
 
 {% block content %} 
+  <div class="header">
+    <header>
+      <h2>{{event.name}} {{fema_id}}</h2>
+    </header>
+  </div>
 
-	<h2>{{event.name}} {{fema_id}}</h2>
+  <div class="main-content">
+    <ul>
+      <li type='none'><b><u>Incident Start Date:</u></b> {{ event.start_date }}</li>
+      <li type='none'><b><u>Incident End Date:</u></b> {{ event.end_date }}</li>
+      <li type='none'><b><u>Incident Declared On:</u></b> {{ event.declared_on }}</li>
+      <li type='none'><b><u>Incident Close Out Date:</u></b> {{ event.close_out_date }}</li>
+      <li type='none'><b><u>Disaster Type:</u></b> {{ event.disaster_type }}</li>
+      <li type='none'><b><u>Damaged Property:</u></b> {{ event.damaged_property }} </li>
+    </ul> 
+    <h4>Grants:</h4>
+      <ul>
+        {% for grant in event.grants  %}
+          <li type='none'><b><u>{{ grant.grant }}:</u></b> {{grant.total}} </li>
+        {% endfor %}  
+        {% if event.grants == [] %}
+          <li type='none'>No known grants awarded</li>
+        {% endif %}
+      </ul>
+    
+    {% if counties[0].county %}
+    
+      <h4>{{ counties_affected }} Counties Affected:</h4>
+      <ul>
+        {% for i in counties %}
 
-	<ul>
-	{% for i in counties %}
-
-			<li>{{i.county}}</li>
+          <li>{{i.county}}</li>
+        
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div> 
 	
-	{% endfor %}
-	</ul>
+
+	
 {% endblock %}

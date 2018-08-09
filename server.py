@@ -172,13 +172,17 @@ def show_user_events_info(fema_id):
     event = Event.query.filter_by(fema_id=fema_id).first()
     counties = Event.query.filter_by(fema_id=fema_id
                                      ).order_by(Event.county).all()
-    # import pdb; pdb.set_trace()   
+    counties_affected = Event.query.filter_by(fema_id=fema_id
+                                     ).order_by(Event.county).count()
+  
+    print(counties)
     if not event:
         flash('This event does not exist or this datebase is incomplete.')
         return redirect('/')
 
     return render_template('event-info.html',
                            counties=counties,
+                           counties_affected=counties_affected,
                            event=event,
                            fema_id=fema_id)
 
@@ -186,7 +190,7 @@ def show_user_events_info(fema_id):
 @app.route('/search')
 def show_search_options():
     """Show user the filter options available to look up an event"""
-
+    # import pdb; pdb.set_trace() 
     return render_template('user-search.html')
     # Try to add this one with the google places search
     # Try to add more search options with google places
