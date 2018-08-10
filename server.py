@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 from sqlalchemy import distinct
 import os
+import math
 # import pdb; pdb.set_trace()
 app = Flask(__name__)
 
@@ -221,29 +222,16 @@ def show_search_results():
     user_choice = Event.query.distinct('fema_id')
     
     if state_id != 'all':
-        user_choice = Event.query.filter_by(state_id=state_id)
+        user_choice = user_choice.filter_by(state_id=state_id)
     if disaster_type != 'all':
-        user_choice = Event.query.filter_by(disaster_type=disaster_type)
+        user_choice = user_choice.filter_by(disaster_type=disaster_type)
     if declaration_id != 'all':
-        user_choice = Event.query.filter_by(declaration_id=declaration_id)
-    if state_id != 'all' and disaster_type != 'all':
-        user_choice = Event.query.filter_by(state_id=state_id,
-                                            disaster_type=disaster_type)
-    if state_id != 'all' and declaration_id != 'all':
-        user_choice = Event.query.filter_by(state_id=state_id,
-                                            declaration_id=declaration_id)
-    if disaster_type != 'all' and declaration_id != 'all':
-        user_choice = Event.query.filter_by(disaster_type=disaster_type,
-                                            declaration_id=declaration_id)
-    if state_id != 'all' and disaster_type != 'all' and declaration_id != 'all':
-        user_choice = Event.query.filter_by(state_id=state_id,
-                                            disaster_type=disaster_type,
-                                            declaration_id=declaration_id)
-       
+        user_choice = user_choice.filter_by(declaration_id=declaration_id)
+    
     num_choices = user_choice.distinct('fema_id'
                                        ).count()                                      
     page_size = 50
-    pages = int(num_choices / page_size)
+    pages = math.ceil(num_choices / page_size)
     page = request.args.get('page')  # returns args['page'] if exists, default to None
     if page is None:
         page = 0

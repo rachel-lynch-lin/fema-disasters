@@ -25,7 +25,7 @@
       </ul>
       <h3>Pages:</h3>
         {% for page in range(pages) %}
-          <a href="/search/results?page={{ page }}">
+          <a href="/search/results?page={{ page }}&state={{ state_id }}&disaster-type={{ disaster_type }}&declaration-id={{ declaration_id }}&month= {{ month }}&year={{ year }}">
             {{ page }}
           </a>
         {% endfor %}    
