@@ -1,20 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title %} Search {% endblock %}
+{% block title %} Search Page{% endblock %}
 
-{% block content %} 
+{% block content %}
+  <div class="header">
+    <header>
+      <h2>Search for a Disaster Declaration</h2>
+      <p>Select from any combination of the menus below to filter the disaster declarations.</p>
+      <p>Total number of declared disasters: <b>{{ disaster }}</b></p>
+    </header>
+  </div>
 
-Total number of declared disasters:
     <div class="form-filters">
     
-        <form action="/events" method="GET" id="disaster-form">
+        <form action="/search/results" method="GET" id="disaster-form">
           
-          State/Tribal Government
+          <h6>State/Tribal Government</h6>
 
         <div class="state">
             <select class="form-select" id="state" name="state">
 
-                <option value="All" selected="selected">- Any -</option>
+                <option value="all" selected="selected">All</option>
                 <option value="AK">Alaska</option>
                 <option value="AL">Alabama</option>
                 <option value="AR">Arkansas</option>
@@ -90,48 +96,48 @@ Total number of declared disasters:
 
         </div>
 
-            Disaster Type
+            <h6>Disaster Type</h6>
 
         <div class="disaster-type"> 
 
             <select class="form-select" id="disaster-type" name="disaster-type">
 
-                <option value="all" selected="selected">ANY</option>
-                <option value="chemical">Chemical</option>
-                <option value="coastal_storm">Coastal Storm</option>
-                <option value="dam_levee_break">Dam/Levee Break</option>
-                <option value="drought">Drought</option>
-                <option value="earthquake">Earthquake</option>
-                <option value="fire">Fire</option>
-                <option value="fishing_losses">Fishing Losses</option>
-                <option value="flood">Flood</option>
-                <option value="freezing">Freezing</option>
-                <option value="human_cause">Human Cause</option>
-                <option value="hurricane">Hurricane</option>
-                <option value="mud_landslide">Mud/Landslide</option>
-                <option value="other">Other</option>
-                <option value="severe_ice_storm">Severe Ice Storm</option>
-                <option value="severe_storm">Severe Storm(s)</option>
-                <option value="snow">Snow</option>
-                <option value="terrorist">Terrorist</option>
-                <option value="tornado">Tornado</option>
-                <option value="toxic_substance">Toxic Substances</option>
-                <option value="tsunami">Tsunami</option>
-                <option value="typhoon">Typhoon</option>
-                <option value="volcano">Volcano</option>
-                <option value="wildfire">Wildfire</option>
+                <option value="all" selected="selected">All</option>
+                <option value="Chemical">Chemical</option>
+                <option value="Coastal Storm">Coastal Storm</option>
+                <option value="Dam/Levee Break">Dam/Levee Break</option>
+                <option value="Drought">Drought</option>
+                <option value="Earthquake">Earthquake</option>
+                <option value="Fire">Fire</option>
+                <option value="Fishing Losses">Fishing Losses</option>
+                <option value="Flood">Flood</option>
+                <option value="Freezing">Freezing</option>
+                <option value="Human Cause">Human Cause</option>
+                <option value="Hurricane">Hurricane</option>
+                <option value="Mud/Landslide">Mud/Landslide</option>
+                <option value="Other">Other</option>
+                <option value="Severe Ice Storm">Severe Ice Storm</option>
+                <option value="Severe Storm(s)">Severe Storm(s)</option>
+                <option value="Snow">Snow</option>
+                <option value="Terrorist">Terrorist</option>
+                <option value="Tornado">Tornado</option>
+                <option value="Toxic Substance">Toxic Substances</option>
+                <option value="Tsunami">Tsunami</option>
+                <option value="Typhoon">Typhoon</option>
+                <option value="Volcano">Volcano</option>
+                <option value="Wildfire">Wildfire</option>
               
             </select>
 
         </div>
 
-            Declaration Type
+            <h6>Declaration Type</h6>
 
         <div class="declaration-type">
 
-            <select class="form-select" id="declaration-type" name="declaration-type">
+            <select class="form-select" id="declaration-id" name="declaration-id">
 
-                <option value="All" selected="selected">ANY</option>
+                <option value="all" selected="selected">All</option>
                 <option value="DR">Major Disaster Declaration</option>
                 <option value="EM">Emergency Declaration</option>
                 <option value="FM">Fire Management Assistance Declaration</option>
@@ -140,12 +146,12 @@ Total number of declared disasters:
             </select>
 
         </div>
+        
+        <br>
 
-            Month and Year Declared
-
-        <div id="month-year-decalred" class="month-year-decalred">
+        <div id="month-year-declared" class="month-year-declared">
           
-            Month 
+            <h6>Month Declared<h6> 
             <div class="month">
                 <select class="form-select" id="month" name="month">
                     <option value="" selected="selected">Month</option>
@@ -164,7 +170,7 @@ Total number of declared disasters:
                 </select>
             </div>
 
-            Year
+            <h6>Year Declared<h6>
             <div class="year">
                 <select class="form-select" id="year" name="year">
                     <option value="" selected="selected">Year</option>

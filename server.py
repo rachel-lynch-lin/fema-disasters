@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 from sqlalchemy import distinct
 import os
-
+# import pdb; pdb.set_trace()
 app = Flask(__name__)
 
 app.secret_key = os.environ["SERVER_APP_SECRET_KEY"]
@@ -143,21 +143,25 @@ def process_logout():
 @app.route('/events')
 def events_list():
     """Show events list ordered by date"""
-    
+
     disasters = set()
-    for row in open("seed_data/event.txt"):
-        row = row.rstrip().replace("\t", "").split("|")
+    for row in open('seed_data/event.txt'):
+        row = row.rstrip().replace('\t', '').split('|')
         incident = row[1]
         disasters.add(incident)    
     disaster = len(disasters)
     
     page_size = 50
     pages = int(disaster / page_size)
-    page = request.args.get("page")  # returns args['page'] if exists, default to None
+    page = request.args.get('page')  # returns args['page'] if exists, default to None
     if page is None:
         page = 0
 
-    events = Event.query.order_by('fema_id').limit(page_size).offset(int(page)*page_size).distinct('fema_id').all()
+    events = Event.query.order_by('fema_id'
+                                  ).limit(page_size
+                                  ).offset(int(page)*page_size
+                                  ).distinct('fema_id'
+                                  ).all()
     
     return render_template('event-list.html',
                            events=events,
@@ -174,7 +178,7 @@ def show_user_events_info(fema_id):
                                      ).order_by(Event.county).all()
     counties_affected = Event.query.filter_by(fema_id=fema_id
                                      ).order_by(Event.county).count()
-  
+
     print(counties)
     if not event:
         flash('This event does not exist or this datebase is incomplete.')
@@ -190,25 +194,79 @@ def show_user_events_info(fema_id):
 @app.route('/search')
 def show_search_options():
     """Show user the filter options available to look up an event"""
-    # import pdb; pdb.set_trace() 
-    return render_template('user-search.html')
+    
+    disasters = set()
+    for row in open('seed_data/event.txt'):
+        row = row.rstrip().replace('\t', '').split('|')
+        incident = row[1]
+        disasters.add(incident)    
+    disaster = len(disasters)
+    
+    return render_template('user-search.html',
+                           disaster=disaster)
     # Try to add this one with the google places search
     # Try to add more search options with google places
 
 
-@app.route('/search/<selection>')
-def show_search_results(selection):
+@app.route('/search/results')
+def show_search_results():
     """Show user query filtered by options selected"""
 
-    user_choice = Event.query.get(selection)
-    # Need a join to combine all the tables somehow in a giant query
-    # Maybe use join tables
+    state_id = request.args.get('state')
+    disaster_type = request.args.get('disaster-type')
+    declaration_id = request.args.get('declaration-id')
+    month = request.args.get('month')
+    year = request.args.get('year')                               
 
+    user_choice = Event.query.distinct('fema_id')
+    
+    if state_id != 'all':
+        user_choice = Event.query.filter_by(state_id=state_id)
+    if disaster_type != 'all':
+        user_choice = Event.query.filter_by(disaster_type=disaster_type)
+    if declaration_id != 'all':
+        user_choice = Event.query.filter_by(declaration_id=declaration_id)
+    if state_id != 'all' and disaster_type != 'all':
+        user_choice = Event.query.filter_by(state_id=state_id,
+                                            disaster_type=disaster_type)
+    if state_id != 'all' and declaration_id != 'all':
+        user_choice = Event.query.filter_by(state_id=state_id,
+                                            declaration_id=declaration_id)
+    if disaster_type != 'all' and declaration_id != 'all':
+        user_choice = Event.query.filter_by(disaster_type=disaster_type,
+                                            declaration_id=declaration_id)
+    if state_id != 'all' and disaster_type != 'all' and declaration_id != 'all':
+        user_choice = Event.query.filter_by(state_id=state_id,
+                                            disaster_type=disaster_type,
+                                            declaration_id=declaration_id)
+       
+    num_choices = user_choice.distinct('fema_id'
+                                       ).count()                                      
+    page_size = 50
+    pages = int(num_choices / page_size)
+    page = request.args.get('page')  # returns args['page'] if exists, default to None
+    if page is None:
+        page = 0
+
+    user_choice = user_choice.order_by('fema_id'
+                                       ).limit(page_size
+                                       ).offset(int(page)*page_size
+                                       ).distinct('fema_id'
+                                       ).all()
+    
     if not user_choice:
         flash('There are no events of this type that are in this datebase.')
         return redirect('/search')
 
-    return render_template('user-search.html')
+    return render_template('user-results.html',
+                           state_id=state_id,
+                           disaster_type=disaster_type,
+                           declaration_id=declaration_id,
+                           month=month,
+                           year=year,
+                           user_choice=user_choice,
+                           num_choices=num_choices,
+                           pages=pages)
 
 
 @app.route('/about')

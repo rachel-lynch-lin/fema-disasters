@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %} Disaster Declarations {% endblock %}
+
+{% block content %} 
+    
+    <div class="header">
+        <header>
+            <h2>Disaster Declaration List Page</h2>
+            {{num_choices}}
+        </header>
+    </div>
+
+    <div class="main-content">
+      <ul>
+        {% for event in user_choice %}
+            
+          <li>
+            <a href="/events/{{ event.fema_id }}">
+              {{ event.name }} ({{ event.fema_id }})
+            </a>
+          </li>
+           
+        {% endfor %}
+      </ul>
+      <h3>Pages:</h3>
+        {% for page in range(pages) %}
+          <a href="/search/results?page={{ page }}">
+            {{ page }}
+          </a>
+        {% endfor %}    
+    </div>
+
+{% endblock %}
