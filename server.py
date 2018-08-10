@@ -153,7 +153,7 @@ def events_list():
     disaster = len(disasters)
     
     page_size = 50
-    pages = int(disaster / page_size)
+    pages = math.ceil(disaster / page_size)
     page = request.args.get('page')  # returns args['page'] if exists, default to None
     if page is None:
         page = 0
