@@ -8,11 +8,14 @@ from model import Event, Grant, User, UserSearch
 from model import connect_to_db, db
 
 from bs4 import BeautifulSoup
-# import request
 from urllib.request import Request, urlopen
-from sqlalchemy import distinct
+
+from sqlalchemy import distinct, extract
+
 import os
 import math
+
+from datetime import datetime
 # import pdb; pdb.set_trace()
 app = Flask(__name__)
 
@@ -217,8 +220,8 @@ def show_search_results():
     disaster_type = request.args.get('disaster-type')
     declaration_id = request.args.get('declaration-id')
     month = request.args.get('month')
-    year = request.args.get('year')                               
-
+    year = request.args.get('year')
+    
     user_choice = Event.query.distinct('fema_id')
     
     if state_id != 'all':
@@ -227,12 +230,20 @@ def show_search_results():
         user_choice = user_choice.filter_by(disaster_type=disaster_type)
     if declaration_id != 'all':
         user_choice = user_choice.filter_by(declaration_id=declaration_id)
+    if year:
+        user_choice = user_choice.filter(Event.declared_on >= f'{year}-1-1' ,
+                                         Event.declared_on <= f'{year}-12-31')
+    if month:
+        user_choice = user_choice.filter(extract('month',
+                                                 Event.declared_on
+                                                 ) == int(f'{month}'))
     
     num_choices = user_choice.distinct('fema_id'
                                        ).count()                                      
     page_size = 50
     pages = math.ceil(num_choices / page_size)
-    page = request.args.get('page')  # returns args['page'] if exists, default to None
+    # returns args['page'] if exists, default to None
+    page = request.args.get('page')  
     if page is None:
         page = 0
 
