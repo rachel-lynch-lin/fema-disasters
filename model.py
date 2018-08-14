@@ -38,6 +38,8 @@ class Event(db.Model):
 
     grants = db.relationship('Grant', backref='event')
 
+    user_id = db.Column(db.ForeignKey('users.id'))
+
     damaged_property = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -91,6 +93,8 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
 
     occupation = db.Column(db.String)
+
+    searches = db.relationship('UserSearch', backref='user')
 
     def __repr__(self):
         """Display information about the user"""

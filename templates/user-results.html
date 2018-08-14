@@ -3,32 +3,64 @@
 {% block title %} Disaster Declarations {% endblock %}
 
 {% block content %} 
-    
-    <div class="header">
-        <header>
-            <h2>Disaster Declaration List Page</h2>
-            {{num_choices}}
-        </header>
-    </div>
+  
+  <div class="header">
+    <header>
+      <h2>Disaster Declaration List Page</h2>
+      <p>There are <b>{{num_choices}}</b> disaster declarations for this selection.</p>
+    </header>
+  </div>
 
-    <div class="main-content">
-      <ul>
-        {% for event in user_choice %}
-            
-          <li>
-            <a href="/events/{{ event.fema_id }}">
-              {{ event.name }} ({{ event.fema_id }})
-            </a>
-          </li>
-           
-        {% endfor %}
-      </ul>
-      <h3>Pages:</h3>
-        {% for page in range(pages) %}
-          <a href="/search/results?page={{ page }}&state={{ state_id }}&disaster-type={{ disaster_type }}&declaration-id={{ declaration_id }}&month= {{ month }}&year={{ year }}">
-            {{ page }}
-          </a>
-        {% endfor %}    
-    </div>
+  <div class="main-content">
+
+    {% for event in user_choice %}
+      <div class="accordion" id="accordionList">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                {{event.name}} ({{event.declaration_id}} {{event.fema_id}})
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionList">
+            <div class="card-body">
+
+              <h5>Incident Information</h5>
+              <ul>
+                <li type='none'><b><u>Incident Start Date:</u></b> {{ event.start_date }}</li>
+                <li type='none'><b><u>Incident End Date:</u></b> {{ event.end_date }}</li>
+                <li type='none'><b><u>Incident Declared On:</u></b> {{ event.declared_on }}</li>
+                <li type='none'><b><u>Incident Close Out Date:</u></b> {{ event.close_out_date }}</li>
+                <li type='none'><b><u>Disaster Type:</u></b> {{ event.disaster_type }}</li>
+                <li type='none'><b><u>Damaged Property:</u></b> {{ event.damaged_property }} </li>
+              </ul>
+
+              <h5>Grants:</h5> 
+                {% for grant in event.grants  %}
+                  <li type='none'><b><u>{{ grant.grant }}:</u></b> {{grant.total}} </li>
+                {% endfor %}  
+                {% if event.grants == [] %}
+                  <li type='none'>No known grants awarded</li>
+                {% endif %}
+              <br>
+              To view the counties affected click <a href="/events/{{event.fema_id}}">here.</a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  
+  <div class="footer">
+    <h3>Pages:</h3>:
+      {% for page in range(pages) %}
+        <a href="/search/results?page={{ page }}&state={{ state_id }}&disaster-type={{ disaster_type }}&declaration-id={{ declaration_id }}&month= {{ month }}&year={{ year }}">
+          {{ page }}
+        </a>
+      {% endfor %}
+  </div>
 
 {% endblock %}

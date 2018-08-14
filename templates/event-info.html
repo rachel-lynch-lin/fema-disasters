@@ -10,6 +10,25 @@
   </div>
 
   <div class="main-content">
+    {% if session.get("user_id") %}
+      <form action="/events/{{ event.fema_id }}" method="POST">
+        Save this event?
+        <select type="form-select" id="search-form" name="events_id">
+          <option value="{{ event.fema_id }}" name ="{{ event.fema_id}} ">Yes</option>
+          <option value="no">No</option>
+          <input type="submit" name="Submit">
+        </select>
+          
+      </form>
+    {% endif %}
+
+    {% for items in user_saved_searches %}
+      {% if items.events_id == event.fema_id %}
+      <p>This event has been saved under your account</p>
+      
+      {% endif %}
+    {% endfor %}
+
     <ul>
       <li type='none'><b><u>Incident Start Date:</u></b> {{ event.start_date }}</li>
       <li type='none'><b><u>Incident End Date:</u></b> {{ event.end_date }}</li>
@@ -38,6 +57,9 @@
         
         {% endfor %}
       </ul>
+    {% else %}
+    <br>
+    <h5>No counties found for this disaster.</h5>
     {% endif %}
   </div> 
 	

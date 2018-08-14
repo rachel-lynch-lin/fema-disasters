@@ -13,8 +13,8 @@
 
 {% if user_saved_searches %}
 	<ul>
-	{% for users_id, events_id  in user_searches %}
-		<li>{{users_id}}: {{events_id}}</li>
+	{% for searches in user_saved_searches %}
+		<li><a href="/events/{{ searches.events_id }}">FEMA ID: {{searches.events_id}}</a></li>
 	{% endfor %}
 	</ul>
 {% else %}

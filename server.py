@@ -54,15 +54,8 @@ def show_user_page(user_id):
         flash('User does not exist')
         return redirect('/login')
 
-    user_saved_searches = db.session.query(UserSearch.id,
-                                           UserSearch.users_id,
-                                           UserSearch.events_id
-                                           ).join(
-                                                Event
-                                           ).filter_by(
-                                                user_id=user_id
-                                           ).all()
-
+    user_saved_searches = UserSearch.query.filter_by(users_id=user.id).all()
+    print(user_saved_searches)
     return render_template('user-info.html',
                            user=user,
                            user_saved_searches=user_saved_searches)
@@ -166,7 +159,9 @@ def events_list():
                                   ).offset(int(page)*page_size
                                   ).distinct('fema_id'
                                   ).all()
-    
+    # counties = []
+    # for event in events:
+    #     counties.append(event.county)
     return render_template('event-list.html',
                            events=events,
                            disaster=disaster,
@@ -175,7 +170,7 @@ def events_list():
 
 @app.route('/events/<fema_id>')
 def show_user_events_info(fema_id):
-    """Find an event"""
+    """Display event information"""
 
     event = Event.query.filter_by(fema_id=fema_id).first()
     counties = Event.query.filter_by(fema_id=fema_id
@@ -183,16 +178,52 @@ def show_user_events_info(fema_id):
     counties_affected = Event.query.filter_by(fema_id=fema_id
                                      ).order_by(Event.county).count()
 
-    print(counties)
     if not event:
         flash('This event does not exist or this datebase is incomplete.')
         return redirect('/')
+
+    user = session.get('user_id')
+
+    user_saved_searches = db.session.query(UserSearch.id,
+                                           UserSearch.users_id,
+                                           UserSearch.events_id
+                                           ).join(
+                                                User
+                                           ).filter_by(
+                                                id=user
+                                           ).all()
 
     return render_template('event-info.html',
                            counties=counties,
                            counties_affected=counties_affected,
                            event=event,
-                           fema_id=fema_id)
+                           fema_id=fema_id,
+                           user_saved_searches=user_saved_searches)
+
+
+@app.route('/events/<fema_id>', methods=['POST'])
+def save_events_info(fema_id):
+    """Save an event"""
+
+    users_id = session.get('user_id')
+    
+    print(users_id)
+
+    user_search = UserSearch.query.filter_by(users_id=users_id,
+                                             events_id=fema_id
+                                             ).first()
+    print(user_search)
+    if user_search:
+        flash('You have already saved this event.')
+    else:
+        user_search = UserSearch(users_id=users_id,
+                                 events_id=fema_id)
+    db.session.add(user_search)
+
+    db.session.commit()
+    
+
+    return redirect(f'/events/{fema_id}')
 
 
 @app.route('/search')
@@ -242,7 +273,6 @@ def show_search_results():
                                        ).count()                                      
     page_size = 50
     pages = math.ceil(num_choices / page_size)
-    # returns args['page'] if exists, default to None
     page = request.args.get('page')  
     if page is None:
         page = 0
