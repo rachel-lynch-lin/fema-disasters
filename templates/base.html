@@ -8,60 +8,102 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	
 	<title>{% block title %} Put the title here! {% endblock %}</title>
-	
-
 </head>
 
 <body>
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="/">National Disasters</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
 
-	<div id="nav-bar">
-		<a href="/">Homepage</a>
-		<a href="/about">About</a>
-		<a href="/contact">Contact</a>
-		
-		{% set user_id = session.get("user_id") %}
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="/">	Homepage <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/about">About</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/contact">Contact</a>
+	      </li>
+	      {% set user_id = session.get("user_id") %}
 
-		{% if user_id %}
-			<a href="/users/{{user_id}}">User Page</a> 
-			<a href="/logout">Logout</a>
+	      {% if user_id %}
+	      <li class="nav-item">
+	        <a class="nav-link" href="/users/{{user_id}}">User Page</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/logout"">Logout</a>
+	      </li>
+	      {% else %}
+	      <li class="nav-item">
+	        <a class="nav-link" href="/registration">Registration</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/login"">Login</a>
+	      </li>
+	      {% endif %}
 
-		{% else %}
-			<a href="/registration">Registration</a>
-			<a href="/login">Login</a>
-			
-		{% endif %}
-
-		<hr> <hr>
-	</div>
-
-	<ul>
-		{% for message in get_flashed_messages() %}
-		<li>{{message}}</li>
-		{% endfor %}
-	</ul>
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Beta Features
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	          <a class="dropdown-item" href="/us-map">US Map</a>
+	          <a class="dropdown-item" href="/geolocate">Geolocate</a>
+	          <div class="dropdown-divider"></div>
+	          <a class="dropdown-item" href="/places_locate">Find a Place</a>
+	        </div>
+      	</li>
+	    </ul>
+	  </div>
+</nav>
+					
+		<ul>
+			{% for message in get_flashed_messages() %}
+			<li>{{message}}</li>
+			{% endfor %}
+		</ul>
 
   	{% block content %} Content Goes Here
-	  	<div class="header">
-			<header>
-				<h2>Page Title</h2>
-				<h4>Subheading/Description</h4>
-			</header>
-		</div>
+	  	<div class="row">
+		  	<div class="header">
+					<header>
+						<h2>Page Title</h2>
+						<h4>Subheading/Description</h4>
+					</header>
+				</div>
 
-		<div class="side-nav-bar">
-			<header>
-				<h4>Side Nav Bar Heading</h4>
-			</header>
+				<div class="side-nav-header">
+					<header>
+						<h4>Side Nav Bar Heading</h4>
+					</header>
+				</div>
 
-		</div>
+				<div class="side-nav-content">
+					<form class="form-inline my-2 my-lg-0">
+			      <input class="form-control mr-sm-2" type="search" placeholder="Search for a FEMA ID" aria-label="Search" name="fema-id">
+			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			    </form>
+				</div>
 
-		<div class="main-content">
-			<p>Content goes here</p>
-		</div> 
-	{% endblock %}
+				<div class="main-content">
+					<p>Content goes here</p>
+				</div>
+			</div>
+		{% endblock %}
+  </div>	
   	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+	{% block scripts %} Place scripts here {% endblock %}
 </body>
 </html>

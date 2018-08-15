@@ -3,66 +3,116 @@
 {% block title %} Event {% endblock %}
 
 {% block content %} 
-  <div class="header">
-    <header>
-      <h2>{{event.name}} ({{event.declaration_id}} {{event.fema_id}})</h2>
-    </header>
-  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2">
+        <div class="side-nav-bar">
+          <div class="side-nav-header">
+            <header>
+              <h4>Site Navigation</h4>
+            </header>
+          </div>
 
-  <div class="main-content">
-    {% if session.get("user_id") %}
-      <form action="/events/{{ event.fema_id }}" method="POST">
-        Save this event?
-        <select type="form-select" id="search-form" name="events_id">
-          <option value="{{ event.fema_id }}" name ="{{ event.fema_id}} ">Yes</option>
-          <option value="no">No</option>
-          <input type="submit" name="Submit">
-        </select>
-          
-      </form>
-    {% endif %}
-
-    {% for items in user_saved_searches %}
-      {% if items.events_id == event.fema_id %}
-      <p>This event has been saved under your account</p>
+          <div class="side-nav-content">
+            <ul>
+              <li><a href="/events">Disaster Declarations</a></li>
+              <li><a href="/search">Search for a Event</a></li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="/events" >
+              <input class="form-control mr-sm-2" type="search" placeholder="Search for a FEMA ID" aria-label="Search" name="fema-id">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
       
+      <div class="col">
+        <div class="header">
+          <header>
+            <h2>{{event.name}} ({{event.declaration_id}} {{event.fema_id}})</h2>
+          </header>
+        </div>
+
+        <div class="main-content">
+          {% if session.get("user_id") %}
+            <form id="save-event-form" method="POST">
+              Save this event?
+              <select type="form-select" id="event-id" name="events_id">
+                <option value="{{ event.fema_id }}" name ="{{ event.fema_id}} ">Yes</option>
+                <option value="no">No</option>
+                <input type="submit" name="Submit">
+              </select>
+                
+            </form>
+          {% endif %}
+
+          {% for items in user_saved_searches %}
+            {% if items.events_id == event.fema_id %}
+            <p>This event has been saved under your account</p>
+            
+            {% endif %}
+          {% endfor %}
+
+          <ul>
+            <li type='none'><b><u>Incident Start Date:</u></b> {{ event.start_date }}</li>
+            <li type='none'><b><u>Incident End Date:</u></b> {{ event.end_date }}</li>
+            <li type='none'><b><u>Incident Declared On:</u></b> {{ event.declared_on }}</li>
+            <li type='none'><b><u>Incident Close Out Date:</u></b> {{ event.close_out_date }}</li>
+            <li type='none'><b><u>Disaster Type:</u></b> {{ event.disaster_type }}</li>
+            <li type='none'><b><u>Damaged Property:</u></b> {{ event.damaged_property }} </li>
+          </ul> 
+          <h4>Grants:</h4>
+            <ul>
+              {% for grant in event.grants  %}
+                <li type='none'><b><u>{{ grant.grant }}:</u></b> {{grant.total}} </li>
+              {% endfor %}  
+              {% if event.grants == [] %}
+                <li type='none'>No known grants awarded</li>
+              {% endif %}
+            </ul>
+          
+          {% if counties[0].county %}
+          
+            <h4>{{ counties_affected }} Counties Affected:</h4>
+            <ul>
+              {% for i in counties %}
+
+                <li>{{i.county}}</li>
+              
+              {% endfor %}
+            </ul>
+          {% else %}
+          <br>
+          <h5>No counties found for this disaster.</h5>
+          {% endif %}
+        </div> 
+      </div>
+      {% if session.get("user_id") %}
+        <div class="col-2">
+          <div class="side-nav-bar">
+            <div class="side-nav-header">
+              <header>
+                <h4><a href="/users/{{ user.id }}">{{ user.username }}'s Saved Events</a></h4>
+              </header>
+            </div>
+
+            <div class="side-nav-content">
+              {% if user_saved_searches %}
+                <ul id="saved-events">
+                {% for searches in user_saved_searches %}
+                    <li><a href="/events/{{ searches.events_id }}">FEMA ID: {{searches.events_id}}</a></li>
+                {% endfor %}
+                </ul>
+              {% else %}
+                <p>No searches saved. </p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
       {% endif %}
-    {% endfor %}
-
-    <ul>
-      <li type='none'><b><u>Incident Start Date:</u></b> {{ event.start_date }}</li>
-      <li type='none'><b><u>Incident End Date:</u></b> {{ event.end_date }}</li>
-      <li type='none'><b><u>Incident Declared On:</u></b> {{ event.declared_on }}</li>
-      <li type='none'><b><u>Incident Close Out Date:</u></b> {{ event.close_out_date }}</li>
-      <li type='none'><b><u>Disaster Type:</u></b> {{ event.disaster_type }}</li>
-      <li type='none'><b><u>Damaged Property:</u></b> {{ event.damaged_property }} </li>
-    </ul> 
-    <h4>Grants:</h4>
-      <ul>
-        {% for grant in event.grants  %}
-          <li type='none'><b><u>{{ grant.grant }}:</u></b> {{grant.total}} </li>
-        {% endfor %}  
-        {% if event.grants == [] %}
-          <li type='none'>No known grants awarded</li>
-        {% endif %}
-      </ul>
-    
-    {% if counties[0].county %}
-    
-      <h4>{{ counties_affected }} Counties Affected:</h4>
-      <ul>
-        {% for i in counties %}
-
-          <li>{{i.county}}</li>
-        
-        {% endfor %}
-      </ul>
-    {% else %}
-    <br>
-    <h5>No counties found for this disaster.</h5>
-    {% endif %}
-  </div> 
-	
-
-	
+    </div>
+  </div> 	
+{% endblock %}
+{% block scripts %}
+  <script type="text/javascript" src="/static/js/user-save-evt.js"></script>
 {% endblock %}

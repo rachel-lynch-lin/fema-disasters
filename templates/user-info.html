@@ -3,22 +3,22 @@
 {% block title %} User Info {% endblock %}
 
 {% block content %}
+	<div class="container-fluid">
+		<h2> {{user.username}}'s Info </h2>
+		<hr>
+			<p>Email: {{user.email}}</p>
+			<p>Password: {{user.password}}</p>
+			<p>Occupation: {{user.occupation}}</p>
+		<hr>
 
-	<h2> {{user.username}}'s Info </h2>
-	<hr>
-		<p>Email: {{user.email}}</p>
-		<p>Password: {{user.password}}</p>
-		<p>Occupation: {{user.occupation}}</p>
-	<hr>
-
-{% if user_saved_searches %}
-	<ul>
-	{% for searches in user_saved_searches %}
-		<li><a href="/events/{{ searches.events_id }}">FEMA ID: {{searches.events_id}}</a></li>
-	{% endfor %}
-	</ul>
-{% else %}
-	<p>No searches saved. </p>
-{% endif %}
-
+		{% if user_saved_searches %}
+			<ul>
+			{% for searches in user_saved_searches %}
+				<li><a href="/events/{{ searches.events_id }}">FEMA ID: {{searches.events_id}}</a></li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>No searches saved. </p>
+		{% endif %}
+	</div>
 {% endblock %}

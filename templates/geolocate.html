@@ -3,80 +3,80 @@
 {% block title %} Geolocation {% endblock %}
 
 {% block content %}
+  
+    <title>Geolocation</title>
+    <style>
+        html, body, #map-canvas {
+            height: 100%;
+            margin: 0;
+        }
 
-  <title>Geolocation</title>
-  <style>
-      html, body, #map-canvas {
-          height: 100%;
-          margin: 0;
-      }
+        .gm-style-iw {
+            color: #04162b;;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{google_api_key}}&callback=initMap"></script>
+    <script>
+        // Note: This example requires that you consent to location sharing when
+        // prompted by your browser. If you see a blank space instead of the map, this
+        // is probably because you have denied permission for location sharing.
 
-      .gm-style-iw {
-          color: #04162b;;
-      }
-  </style>
-  <script src="https://maps.googleapis.com/maps/api/js?key={{google_api_key}}&callback=initMap"></script>
-  <script>
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see a blank space instead of the map, this
-      // is probably because you have denied permission for location sharing.
+        let map;
 
-      let map;
+        function initialize() {
+            let mapOptions = {
+                zoom: 12
+            };
+            map = new google.maps.Map(
+                    document.getElementById('map-canvas'),
+                    mapOptions);
 
-      function initialize() {
-          let mapOptions = {
-              zoom: 12
-          };
-          map = new google.maps.Map(
-                  document.getElementById('map-canvas'),
-                  mapOptions);
+            // Try HTML5 geolocation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    let pos = new google.maps.LatLng(
+                            position.coords.latitude,
+                            position.coords.longitude);
 
-          // Try HTML5 geolocation
-          if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(function (position) {
-                  let pos = new google.maps.LatLng(
-                          position.coords.latitude,
-                          position.coords.longitude);
+                    let infowindow = new google.maps.InfoWindow({
+                        map: map,
+                        position: pos,
+                        content: 'Here you are!'
+                    });
 
-                  let infowindow = new google.maps.InfoWindow({
-                      map: map,
-                      position: pos,
-                      content: 'Here you are!'
-                  });
+                    map.setCenter(pos);
+                }, function () {
+                    handleNoGeolocation(true);
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
+        }
 
-                  map.setCenter(pos);
-              }, function () {
-                  handleNoGeolocation(true);
-              });
-          } else {
-              // Browser doesn't support Geolocation
-              handleNoGeolocation(false);
-          }
-      }
+        function handleNoGeolocation(errorFlag) {
+            let content;
 
-      function handleNoGeolocation(errorFlag) {
-          let content;
+            if (errorFlag) {
+                content = "Error: The Geolocation service failed.";
+            } else {
+                content = "Error: Your browser doesn't support geolocation.";
+            }
 
-          if (errorFlag) {
-              content = "Error: The Geolocation service failed.";
-          } else {
-              content = "Error: Your browser doesn't support geolocation.";
-          }
+            let options = {
+                map: map,
+                position: new google.maps.LatLng(60, 105),
+                content: content
+            };
 
-          let options = {
-              map: map,
-              position: new google.maps.LatLng(60, 105),
-              content: content
-          };
+            let infowindow = new google.maps.InfoWindow(options);
+            map.setCenter(options.position);
+        }
 
-          let infowindow = new google.maps.InfoWindow(options);
-          map.setCenter(options.position);
-      }
+        google.maps.event.addDomListener(window, 'load', initialize);
 
-      google.maps.event.addDomListener(window, 'load', initialize);
-
-  </script>
-<div id="map-canvas"></div>
+    </script>
+  <div id="map-canvas"></div>
 
 {% endblock %}
 

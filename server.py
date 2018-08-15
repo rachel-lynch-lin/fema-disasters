@@ -2,7 +2,7 @@ from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, redirect, request, flash, session
 from flask import jsonify
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 
 from model import Event, Grant, User, UserSearch
 from model import connect_to_db, db
@@ -30,8 +30,30 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def index():
     """Homepage"""
+    import pdb; pdb.set_trace()
+    fema_id = request.args.get('fema-id')
+    if fema_id:
+        return redirect(f'/events/{fema_id}')
 
-    return render_template('homepage.html', google_api_key=google_api_key)
+    user_id = session.get('user_id')
+    user = None
+    user_saved_searches = None
+
+    if user_id is not None:
+      user = User.query.filter_by(id=user_id).one()
+
+      user_saved_searches = db.session.query(UserSearch.id,
+                                             UserSearch.users_id,
+                                             UserSearch.events_id
+                                             ).join(
+                                                  User
+                                             ).filter_by(
+                                                  id=user.id
+                                             ).all()
+
+    return render_template('homepage.html',
+                           user=user,
+                           user_saved_searches=user_saved_searches)
 
 
 @app.route('/users')  # Need to remove eventually
@@ -159,13 +181,29 @@ def events_list():
                                   ).offset(int(page)*page_size
                                   ).distinct('fema_id'
                                   ).all()
-    # counties = []
-    # for event in events:
-    #     counties.append(event.county)
+    
+    fema_id = request.args.get('fema-id')
+    if fema_id:
+        return redirect(f'/events/{fema_id}')
+
+    user_id = session.get('user_id')
+    user = User.query.get(user_id)
+
+    user_saved_searches = db.session.query(UserSearch.id,
+                                           UserSearch.users_id,
+                                           UserSearch.events_id
+                                           ).join(
+                                                User
+                                           ).filter_by(
+                                                id=user.id
+                                           ).all()
+
     return render_template('event-list.html',
                            events=events,
                            disaster=disaster,
-                           pages=pages)
+                           pages=pages,
+                           user=user,
+                           user_saved_searches=user_saved_searches)
 
 
 @app.route('/events/<fema_id>')
@@ -182,7 +220,8 @@ def show_user_events_info(fema_id):
         flash('This event does not exist or this datebase is incomplete.')
         return redirect('/')
 
-    user = session.get('user_id')
+    user_id = session.get('user_id')
+    user = User.query.get(user_id)
 
     user_saved_searches = db.session.query(UserSearch.id,
                                            UserSearch.users_id,
@@ -190,7 +229,7 @@ def show_user_events_info(fema_id):
                                            ).join(
                                                 User
                                            ).filter_by(
-                                                id=user
+                                                id=user.id
                                            ).all()
 
     return render_template('event-info.html',
@@ -198,11 +237,12 @@ def show_user_events_info(fema_id):
                            counties_affected=counties_affected,
                            event=event,
                            fema_id=fema_id,
+                           user=user,
                            user_saved_searches=user_saved_searches)
 
 
-@app.route('/events/<fema_id>', methods=['POST'])
-def save_events_info(fema_id):
+@app.route('/save/event/<fema_id>', methods=['POST'])
+def save_event_info(fema_id):
     """Save an event"""
 
     users_id = session.get('user_id')
@@ -222,8 +262,13 @@ def save_events_info(fema_id):
 
     db.session.commit()
     
+    event = Event.query.filter_by(fema_id=fema_id).first()
 
-    return redirect(f'/events/{fema_id}')
+    event_info = {
+        "name": event.name,
+        "fema_id": event.fema_id,
+        }
+    return jsonify(event_info)
 
 
 @app.route('/search')
@@ -237,8 +282,26 @@ def show_search_options():
         disasters.add(incident)    
     disaster = len(disasters)
     
+    fema_id = request.args.get('fema-id')
+    if fema_id:
+        return redirect(f'/events/{fema_id}')
+
+    user_id = session.get('user_id')
+    user = User.query.get(user_id)
+
+    user_saved_searches = db.session.query(UserSearch.id,
+                                           UserSearch.users_id,
+                                           UserSearch.events_id
+                                           ).join(
+                                                User
+                                           ).filter_by(
+                                                id=user.id
+                                           ).all()
+
     return render_template('user-search.html',
-                           disaster=disaster)
+                           disaster=disaster,
+                           user=user,
+                           user_saved_searches=user_saved_searches)
     # Try to add this one with the google places search
     # Try to add more search options with google places
 
@@ -246,6 +309,10 @@ def show_search_options():
 @app.route('/search/results')
 def show_search_results():
     """Show user query filtered by options selected"""
+
+    fema_id = request.args.get('fema-id')
+    if fema_id:
+        return redirect(f'/events/{fema_id}')
 
     state_id = request.args.get('state')
     disaster_type = request.args.get('disaster-type')
@@ -287,6 +354,18 @@ def show_search_results():
         flash('There are no events of this type that are in this datebase.')
         return redirect('/search')
 
+    user_id = session.get('user_id')
+    user = User.query.get(user_id)
+
+    user_saved_searches = db.session.query(UserSearch.id,
+                                           UserSearch.users_id,
+                                           UserSearch.events_id
+                                           ).join(
+                                                User
+                                           ).filter_by(
+                                                id=user.id
+                                           ).all()
+
     return render_template('user-results.html',
                            state_id=state_id,
                            disaster_type=disaster_type,
@@ -295,7 +374,9 @@ def show_search_results():
                            year=year,
                            user_choice=user_choice,
                            num_choices=num_choices,
-                           pages=pages)
+                           pages=pages,
+                           user=user,
+                           user_saved_searches=user_saved_searches)
 
 
 @app.route('/about')
@@ -337,9 +418,9 @@ def places_locate():
 ###############################################################################
 
 
-if __name__ == "__main__":
-    app.debug = True
-    connect_to_db(app)
-    DebugToolbarExtension(app)
+# if __name__ == "__main__":
+#     app.debug = True
+#     connect_to_db(app)
+#     DebugToolbarExtension(app)
 
-    app.run(host="0.0.0.0")
+#     app.run(host="0.0.0.0")

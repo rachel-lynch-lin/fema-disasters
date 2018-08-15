@@ -3,23 +3,63 @@
 {% block title %} Homepage {% endblock %}
 
 {% block content %} 
+	<div class="row"> 
+    <div class="col-2">
+  		<div id="side-nav-bar">
+  			<div class="side-nav-header">
+            <header>
+              <h4>Site Navigation</h4>
+            </header>
+        </div>
 
-	Welcome to the Homepage! 
-	<div id="side-nav-bar">
-		<ul>
-			<li><a href="/events">Disaster Declarations</a></li>
-			<!-- <li><a href="/types">Disaster Types</a></li> -->
-			<li><a href="/search">Search for a Event</a></li>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		</ul>
-	</div>
-	<div id="side-nav-bar-2">
-		<ul>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<li><a href="/us-map">US Map</a></li>
-			<li><a href="/geolocate">Geolocate</a></li>
-			<li><a href="/places_locate">Find a Place</a></li>
-		</ul>
+        <div class="side-nav-content">
+              <ul>
+                <li><a href="/events">Disaster Declarations</a></li>
+                <li><a href="/search">Search for a Event</a></li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search for a FEMA ID" aria-label="Search" name="fema-id">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+  		</div>
+    </div>
+
+    <div class="col">
+        <div class="header">
+          <header>
+            <h1>Welcome to the Homepage!</h>
+          </header>
+        </div>
+
+        <div class="main-content">
+          <p>Need to add some content here or instructions for this app</p>
+        </div>
+    </div>
+
+    {% if session.get("user_id") %}
+        <div class="col-2">
+          <div class="side-nav-bar">
+            <div class="side-nav-header">
+              <header>
+                <h4><a href="/users/{{ user.id }}">{{ user.username }}'s Saved Events</a></h4>
+              </header>
+            </div>
+
+            <div class="side-nav-content">
+              {% if user_saved_searches %}
+                <ul>
+                {% for searches in user_saved_searches %}
+                  <li><a href="/events/{{ searches.events_id }}">FEMA ID: {{searches.events_id}}</a></li>
+                {% endfor %}
+                </ul>
+              {% else %}
+                <p>No searches saved. </p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+    {% endif %}
 	</div>
 {% endblock %}
 
