@@ -94,7 +94,7 @@ class User(db.Model):
 
     occupation = db.Column(db.String)
 
-    searches = db.relationship('UserSearch', backref='user')
+    searches = db.relationship('Event', secondary='user_searches', backref='users')
 
     def __repr__(self):
         """Display information about the user"""
@@ -113,9 +113,9 @@ class UserSearch(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    users_id = db.Column(db.ForeignKey('users.id'))
+    users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    events_id = db.Column(db.ForeignKey('events.id'))
+    events_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
     def __repr__(self):
         """Display information about the user's saved searches"""
