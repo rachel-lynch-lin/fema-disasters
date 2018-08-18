@@ -60,3 +60,66 @@ def example_data():
 
 if __name__ == '__main__':
     unittest.main()
+
+
+
+# >>> from flask import Flask, url_for
+# >>> app = Flask(__name__)
+# >>> @app.route('/')
+# ... def index(): pass
+# ...
+# >>> @app.route('/login')
+# ... def login(): pass
+# ...
+# >>> @app.route('/user/<username>')
+# ... def profile(username): pass
+# ...
+# >>> with app.test_request_context():
+# ...  print url_for('index')
+# ...  print url_for('login')
+# ...  print url_for('login', next='/')
+# ...  print url_for('profile', username='John Doe')
+# ...
+# /
+# /login
+# /login?next=/
+# /user/John%20Doe
+
+########################
+#### helper methods ####
+########################
+ 
+# def register(self, email, password, confirm):
+#     return self.app.post(
+#         '/register',
+#         data=dict(email=email, password=password, confirm=confirm),
+#         follow_redirects=True
+#     )
+ 
+# def login(self, email, password):
+#     return self.app.post(
+#         '/login',
+#         data=dict(email=email, password=password),
+#         follow_redirects=True
+#     )
+ 
+# def logout(self):
+#     return self.app.get(
+#         '/logout',
+#         follow_redirects=True
+#     )
+
+# def test_valid_user_registration(self):
+#     response = self.register('patkennedy79@gmail.com', 'FlaskIsAwesome', 'FlaskIsAwesome')
+#     self.assertEqual(response.status_code, 200)
+#     self.assertIn(b'Thanks for registering!', response.data)
+
+# def test_invalid_user_registration_different_passwords(self):
+#     response = self.register('patkennedy79@gmail.com', 'FlaskIsAwesome', 'FlaskIsNotAwesome')
+#     self.assertIn(b'Field must be equal to password.', response.data)
+
+# def test_invalid_user_registration_duplicate_email(self):
+#      response = self.register('patkennedy79@gmail.com', 'FlaskIsAwesome', 'FlaskIsAwesome')
+#      self.assertEqual(response.status_code, 200)
+#      response = self.register('patkennedy79@gmail.com', 'FlaskIsReallyAwesome', 'FlaskIsReallyAwesome')
+#      self.assertIn(b'ERROR! Email (patkennedy79@gmail.com) already exists.', response.data)

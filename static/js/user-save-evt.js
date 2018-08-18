@@ -1,6 +1,9 @@
+"use strict";
+
 function showEventResults(result) {
-   $("#saved-events").append(" The End!");
-   console.log(result);
+
+    $("#saved-events").append(`<li><a href="/events/${result.fema_id}"> ${result.event_name} (${result.fema_id})</a></li>`);
+    console.log(result);
 }
 
 function saveEvent(evt) {
@@ -14,9 +17,3 @@ function saveEvent(evt) {
 }
 
 $("#save-event-form").on('submit', saveEvent);
-
-
-
-// $.get("/save/event/{", function (results) {
-//       alert(": " + results);
-// });

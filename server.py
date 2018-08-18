@@ -2,7 +2,7 @@ from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, redirect, request, flash, session
 from flask import jsonify
-# from flask_debugtoolbar import DebugToolbarExtension
+from flask_debugtoolbar import DebugToolbarExtension
 
 from model import Event, Grant, User, UserSearch
 from model import connect_to_db, db
@@ -30,7 +30,7 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def index():
     """Homepage"""
-    import pdb; pdb.set_trace()
+
     fema_id = request.args.get('fema-id')
     if fema_id:
         return redirect(f'/events/{fema_id}')
@@ -42,14 +42,7 @@ def index():
     if user_id is not None:
       user = User.query.filter_by(id=user_id).one()
 
-      user_saved_searches = db.session.query(UserSearch.id,
-                                             UserSearch.users_id,
-                                             UserSearch.events_id
-                                             ).join(
-                                                  User
-                                             ).filter_by(
-                                                  id=user.id
-                                             ).all()
+      user_saved_searches = user.searches
 
     return render_template('homepage.html',
                            user=user,
@@ -77,7 +70,9 @@ def show_user_page(user_id):
         return redirect('/login')
 
     user_saved_searches = UserSearch.query.filter_by(users_id=user.id).all()
+    
     print(user_saved_searches)
+    
     return render_template('user-info.html',
                            user=user,
                            user_saved_searches=user_saved_searches)
@@ -94,7 +89,6 @@ def show_registration_form():
 def register_user():
     """Register a new user after checking db to make sure it does not exist"""
 
-    print(request.form)
     username = request.form.get('username')
     email = request.form.get('email')
     password = request.form.get('password')
@@ -114,6 +108,7 @@ def register_user():
                     email=email,
                     password=password,
                     occupation=occupation)
+    
     db.session.add(new_user)
     db.session.commit()
 
@@ -189,14 +184,7 @@ def events_list():
     user_id = session.get('user_id')
     user = User.query.get(user_id)
 
-    user_saved_searches = db.session.query(UserSearch.id,
-                                           UserSearch.users_id,
-                                           UserSearch.events_id
-                                           ).join(
-                                                User
-                                           ).filter_by(
-                                                id=user.id
-                                           ).all()
+    user_saved_searches = user.searches
 
     return render_template('event-list.html',
                            events=events,
@@ -221,16 +209,15 @@ def show_user_events_info(fema_id):
         return redirect('/')
 
     user_id = session.get('user_id')
-    user = User.query.get(user_id)
+    user = None
+    user_saved_searches = None
 
-    user_saved_searches = db.session.query(UserSearch.id,
-                                           UserSearch.users_id,
-                                           UserSearch.events_id
-                                           ).join(
-                                                User
-                                           ).filter_by(
-                                                id=user.id
-                                           ).all()
+    user_saved_searches = user.searches
+    
+    if user_id is not None:
+        user = User.query.filter_by(id=user_id).one()
+
+        user_saved_searches = user.searches
 
     return render_template('event-info.html',
                            counties=counties,
@@ -287,23 +274,18 @@ def show_search_options():
         return redirect(f'/events/{fema_id}')
 
     user_id = session.get('user_id')
-    user = User.query.get(user_id)
+    user = None
+    user_saved_searches = None
 
-    user_saved_searches = db.session.query(UserSearch.id,
-                                           UserSearch.users_id,
-                                           UserSearch.events_id
-                                           ).join(
-                                                User
-                                           ).filter_by(
-                                                id=user.id
-                                           ).all()
+    if user_id is not None:
+        user = User.query.filter_by(id=user_id).one()
+
+        user_saved_searches = user.searches
 
     return render_template('user-search.html',
                            disaster=disaster,
                            user=user,
                            user_saved_searches=user_saved_searches)
-    # Try to add this one with the google places search
-    # Try to add more search options with google places
 
 
 @app.route('/search/results')
@@ -355,16 +337,13 @@ def show_search_results():
         return redirect('/search')
 
     user_id = session.get('user_id')
-    user = User.query.get(user_id)
+    user = None
+    user_saved_searches = None
 
-    user_saved_searches = db.session.query(UserSearch.id,
-                                           UserSearch.users_id,
-                                           UserSearch.events_id
-                                           ).join(
-                                                User
-                                           ).filter_by(
-                                                id=user.id
-                                           ).all()
+    if user_id is not None:
+        user = User.query.filter_by(id=user_id).one()
+
+        user_saved_searches = user.searches
 
     return render_template('user-results.html',
                            state_id=state_id,

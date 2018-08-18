@@ -275,9 +275,9 @@
             <div class="side-nav-content">
               {% if user_saved_searches %}
                 <ul>
-                {% for searches in user_saved_searches %}
-                  <li><a href="/events/{{ searches.events_id }}">FEMA ID: {{searches.events_id}}</a></li>
-                {% endfor %}
+                  {% for searches in user_saved_searches %}
+                    <li><a href="/events/{{ searches.events_id }}"> {{event.name}} ({{event.declaration_id}} {{event.fema_id}})</a></li>
+                  {% endfor %}
                 </ul>
               {% else %}
                 <p>No searches saved. </p>
@@ -289,4 +289,7 @@
   </div>
 
 
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}
