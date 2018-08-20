@@ -46,7 +46,7 @@
         {% endif %}
 
         {% for items in user_saved_searches %}
-          {% if items.events_id == event.fema_id %}
+          {% if items.fema_id == event.fema_id %}
           <p>This event has been saved under your account</p>
           
           {% endif %}
@@ -97,15 +97,15 @@
           </div>
 
           <div class="side-nav-content">
-            {% if user_saved_searches %}
+           {% if user_saved_searches %}
               <ul id="saved-events">
                 {% for searches in user_saved_searches %}
-                  <li><a href="/events/{{ searches.events_id }}"> ({{searches.events_id}})</a></li>
+                  <li><a href="/events/{{ searches.fema_id }}"> {{searches.name}} ({{searches.declaration_id}} {{searches.fema_id}})</a></li>
                 {% endfor %}
               </ul>
             {% else %}
               <p>No searches saved. </p>
-            {% endif %}
+            {% endif %} 
           </div>
         </div>
       </div>

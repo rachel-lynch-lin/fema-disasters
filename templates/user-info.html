@@ -35,8 +35,8 @@
 
 			{% if user_saved_searches %}
 				<ul>
-				  {% for search in user_saved_searches %}
-            <li><a href="/events/{{ search[1] }}"> {{search[2]}} ({{search[3]}} {{search[1]}})</a></li>
+				  {% for searches in user_saved_searches %}
+            <li><a href="/events/{{ searches.fema_id }}"> {{searches.name}} ({{searches.declaration_id}} {{searches.fema_id}})</a></li>
           {% endfor %}
 				</ul>
 			{% else %}

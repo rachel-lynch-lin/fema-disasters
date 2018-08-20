@@ -2,7 +2,9 @@
 
 function showEventResults(result) {
 
-    $("#saved-events").append(`<li><a href="/events/${result.fema_id}"> ${result.event_name} (${result.fema_id})</a></li>`);
+    $("#saved-events").append(
+        `<li><a href="/events/${result.fema_id}"> ${result.event_name} (${result.fema_id})</a></li>`
+        );
     console.log(result);
 }
 

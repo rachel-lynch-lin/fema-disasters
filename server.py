@@ -69,7 +69,7 @@ def show_user_page(user_id):
         flash('User does not exist')
         return redirect('/login')
 
-    user_saved_searches = UserSearch.query.filter_by(users_id=user.id).all()
+    user_saved_searches = user.searches
     
     print(user_saved_searches)
     
@@ -211,8 +211,6 @@ def show_user_events_info(fema_id):
     user_id = session.get('user_id')
     user = None
     user_saved_searches = None
-
-    user_saved_searches = user.searches
     
     if user_id is not None:
         user = User.query.filter_by(id=user_id).one()
@@ -235,24 +233,26 @@ def save_event_info(fema_id):
     users_id = session.get('user_id')
     
     print(users_id)
+    event = Event.query.filter_by(fema_id=fema_id).first()
 
     user_search = UserSearch.query.filter_by(users_id=users_id,
-                                             events_id=fema_id
+                                             events_id=event.id
                                              ).first()
     print(user_search)
     if user_search:
         flash('You have already saved this event.')
     else:
-        user_search = UserSearch(users_id=users_id,
-                                 events_id=fema_id)
-    db.session.add(user_search)
+        user = User.query.get(users_id)
+        user.searches.append(event)
+
+    db.session.add(user)
 
     db.session.commit()
     
-    event = Event.query.filter_by(fema_id=fema_id).first()
+    
 
     event_info = {
-        "name": event.name,
+        "event_name": event.name,
         "fema_id": event.fema_id,
         }
     return jsonify(event_info)
@@ -397,9 +397,9 @@ def places_locate():
 ###############################################################################
 
 
-# if __name__ == "__main__":
-#     app.debug = True
-#     connect_to_db(app)
-#     DebugToolbarExtension(app)
+if __name__ == "__main__":
+    app.debug = True
+    connect_to_db(app)
+    DebugToolbarExtension(app)
 
-#     app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0")

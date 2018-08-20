@@ -15,7 +15,7 @@
 
       <div class="search-form">
         <h6>Search by a specific FEMA ID:</h6>
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0" action="/events" >
           <input class="form-control mr-sm-2" type="search" placeholder="FEMA ID" aria-label="Search" name="fema-id">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
@@ -276,7 +276,7 @@
               {% if user_saved_searches %}
                 <ul>
                   {% for searches in user_saved_searches %}
-                    <li><a href="/events/{{ searches.events_id }}"> {{event.name}} ({{event.declaration_id}} {{event.fema_id}})</a></li>
+                    <li><a href="/events/{{ searches.fema_id }}"> {{searches.name}} ({{searches.declaration_id}} {{searches.fema_id}})</a></li>
                   {% endfor %}
                 </ul>
               {% else %}
