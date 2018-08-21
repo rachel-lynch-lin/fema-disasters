@@ -1,16 +1,28 @@
 {% extends 'base.html' %}
 
+{% block css_scripts %}
+  <link rel="stylesheet" href="/static/css/login.css">
+{% endblock %}
+
 {% block title %} Login {% endblock %}
 
 {% block content %} 
-  <div class="container-fluid">
-    <h2> Login Page </h2>
+  <div class="row">
+    <div class="fullscreen-bg">
+      <video loop muted autoplay poster="/static/css/coverr/forest/forest.jpg" class="fullscreen-bg__video">
+          <source src="/static/css/coverr/forest/forest.webm" type="video/webm">
+          <source src="/static/css/coverr/forest/forest.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="col">
+      <h2> Login Page </h2>
 
-    <form action="/login" method="POST" id="login-form">
-    	<input type="text" id="username" name="username" placeholder="Username"><br>
-    	<input type="text" id="password" name="password" placeholder="Password"><br>
-    	<input type="submit" name="Submit">
-    </form>
+      <form action="/login" method="POST" id="login-form">
+      	<input type="text" id="username" name="username" placeholder="Username"><br>
+      	<input type="text" id="password" name="password" placeholder="Password"><br>
+      	<input type="submit" name="Submit">
+      </form>
+    </div>
   </div>
  
 {% endblock %}

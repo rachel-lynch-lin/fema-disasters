@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 
+{% block css_scripts %}
+  <link rel="stylesheet" href="/static/css/about.css">
+{% endblock %}
+
 {% block title %} User Info {% endblock %}
 
 {% block content %}
 	<div class="row">
+    <div class="fullscreen-bg">
+      <video loop muted autoplay poster="/static/css/coverr/truck/truck.jpg" class="fullscreen-bg__video">
+          <source src="/static/css/coverr/truck/truck.webm" type="video/webm">
+          <source src="/static/css/coverr/truck/truck.mp4" type="video/mp4">
+      </video>
+    </div>
 		<div class="col-2">
       <div class="side-nav-bar">
         <div class="side-nav-header">

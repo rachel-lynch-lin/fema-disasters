@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 
+{% block css_scripts %}
+  <link rel="stylesheet" href="/static/css/contact.css">
+{% endblock %}
+
 {% block title %} Contact {% endblock %}
 
 {% block content %} 
   <div class="row">
+    <div class="fullscreen-bg">
+      <video loop muted autoplay poster="/static/css/coverr/geyser/geyser.jpg" class="fullscreen-bg__video">
+          <source src="/static/css/coverr/geyser/geyser.webm" type="video/webm">
+          <source src="/static/css/coverr/geyser/geyser.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="col">
       <div class="header">
           <header>

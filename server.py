@@ -176,22 +176,22 @@ def events_list():
                                   ).offset(int(page)*page_size
                                   ).distinct('fema_id'
                                   ).all()
-    
-    fema_id = request.args.get('fema-id')
-    if fema_id:
-        return redirect(f'/events/{fema_id}')
 
     user_id = session.get('user_id')
-    user = User.query.get(user_id)
-
-    user_saved_searches = user.searches
-
-    return render_template('event-list.html',
-                           events=events,
-                           disaster=disaster,
-                           pages=pages,
-                           user=user,
-                           user_saved_searches=user_saved_searches)
+    if user_id is not None:
+        user = User.query.get(user_id)
+        user_saved_searches = user.searches
+        return render_template('event-list.html',
+                               events=events,
+                               disaster=disaster,
+                               pages=pages,
+                               user=user,
+                               user_saved_searches=user_saved_searches)
+    else:
+        return render_template('event-list.html',
+                               events=events,
+                               disaster=disaster,
+                               pages=pages)
 
 
 @app.route('/events/<fema_id>')
