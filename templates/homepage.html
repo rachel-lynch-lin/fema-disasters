@@ -10,37 +10,17 @@
 {% block content %} 
 	
 
-  <div class="row"> 
+  <div class="row justify-content-md-center">
     <div class="fullscreen-bg">
-      <video loop muted autoplay poster="/static/css/coverr/breezy/breezy.jpg" class="fullscreen-bg__video">
-          <source src="/static/css/coverr/breezy/breezy.webm" type="video/webm">
-          <source src="/static/css/coverr/breezy/breezy.mp4" type="video/mp4">
-          <source src="/static/css/coverr/breezy/breezy.ogv" type="video/ogg">
+      <video loop muted autoplay poster="/static/css/coverr/truck/truck.jpg" class="fullscreen-bg__video">
+          <source src="/static/css/coverr/truck/truck.webm" type="video/webm">
+          <source src="/static/css/coverr/truck/truck.mp4" type="video/mp4">
+          <source src="/static/css/coverr/truck/truck.ogv" type="video/ogg">
       </video>
     </div>
 
-    <div class="col-2">
-  		<div id="side-nav-bar">
-  			<div class="side-nav-header">
-            <header>
-              <h4>Site Navigation</h4>
-            </header>
-        </div>
 
-        <div class="side-nav-content">
-              <ul>
-                <li><a href="/events">Disaster Declarations</a></li>
-                <li><a href="/search">Search for a Event</a></li>
-              </ul>
-              <form class="form-inline my-2 my-lg-0" action="/events" >
-                <input class="form-control mr-sm-2" type="search" placeholder="Search for a FEMA ID" aria-label="Search" name="fema-id">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
-            </div>
-  		</div>
-    </div>
-
-    <div class="col">
+    <div class="col-5">
         <div class="header">
           <header>
             <h1>Welcome to the Homepage!</h>
@@ -48,12 +28,26 @@
         </div>
 
         <div class="main-content">
-          <p>Need to add some content here or instructions for this app</p>
+          <h2><a href="/events">Disaster Declarations</a></h2>
+          <h2><a href="/search">Search for a Event</a></h2>
+
+          <div class="search-form">
+            <form action="/events" >
+              <div class="form-group">
+                 <label for="inputFemaID">Search by FEMA ID:</label>
+                <input class="form-control" type="search" id="inputFemaID" placeholder="Enter FEMA ID" aria-label="searchHelp" name="fema-id">
+                <small id="searchHelp" class="form-text text-muted">
+                The FEMA ID is the number associated with the event and ranges from one to four numbers.
+                </small>
+              </div>
+              <button type="submit" class="btn btn-outline-success my-2 my-sm-0" >Search</button>
+            </form>
+          </div>
         </div>
     </div>
 
     {% if session.get("user_id") %}
-        <div class="col-2">
+        <div class="col-3">
           <div class="side-nav-bar">
             <div class="side-nav-header">
               <header>

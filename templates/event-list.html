@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
-{% block css_scripts %} Put CSS Scripts here! {% endblock %}
+{% block css_scripts %}
+  <link rel="stylesheet" href="/static/css/event-list.css">
+{% endblock %}
+
 {% block title %} Disaster Declarations {% endblock %}
 
 {% block content %} 
-    <div class="row">
+    <div class="row justify-content-md-center">
       <div class="col-2">
         <div class="side-nav-bar">
           <div class="side-nav-header">
@@ -18,15 +21,23 @@
               <li><a href="/events">Disaster Declarations</a></li>
               <li><a href="/search">Search for a Event</a></li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" action="/events" >
-              <input class="form-control mr-sm-2" type="search" placeholder="Search for a FEMA ID" aria-label="Search" name="fema-id">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <div class="search-form">
+          <form action="/events" >
+            <div class="form-group">
+               <label for="inputFemaID">Search by FEMA ID:</label>
+              <input class="form-control" type="search" id="inputFemaID" placeholder="Enter FEMA ID" aria-label="searchHelp" name="fema-id">
+              <small id="searchHelp" class="form-text text-muted">
+              The FEMA ID is the number associated with the event and ranges from one to four numbers.
+              </small>
+            </div>
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0" >Search</button>
+          </form>
+      </div>
           </div>
         </div>
       </div>
       
-      <div class="col">
+      <div class="col-6">
 				<div class="header">
 					<header>
 						<h2>Disaster Declaration List Page</h2>

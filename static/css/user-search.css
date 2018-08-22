@@ -9,7 +9,6 @@ body {
 
 #brand {
     color: rgba(82, 101, 143);
-     font-family: 'Ubuntu', sans-serif !important;
 }
 
 .collapse {
@@ -18,28 +17,28 @@ body {
 
 #navbar-toggler { 
     background-color: rgba(82, 101, 143, .85);
-    font-family: 'Ubuntu', sans-serif !important;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 #nav-link {
     color: rgba(82, 101, 143);
-    font-family: 'Ubuntu', sans-serif !important;
+    font-family: 'Ubuntu', sans-serif;
 }
 
-.col-3 {
+.col-2 {
     background-color: rgba(232, 232, 232, .85);
     color: rgba(51, 58, 86);
     padding: 20px;
     margin: 50px;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: 'Roboto', sans-serif;
 }
 
-.col-5 {
+.col-6 {
     background-color: rgba(232, 232, 232, .85);
     color: rgba(51, 58, 86);
     padding: 20px;
     margin: 50px;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: 'Roboto', sans-serif;
 }
 
 .fullscreen-bg {

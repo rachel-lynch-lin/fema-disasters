@@ -1,12 +1,32 @@
 body {
   background-image: url("patterns/swirl.png");
+  background-color: white;
 }
 
 .navbar {
-    background-color: rgba(255, 255, 255, .85);
+    background-color: rgba(82, 101, 143, .85);
 }
-.col {
-    background-color: rgba(255, 255, 255, .65);
+
+#brand {
+    color: rgba(274, 245, 230);
+}
+
+.collapse {
+    color: rgba(82, 101, 143);
+}
+
+#navbar-toggler {
+    background-color: rgba(274, 245, 230);
+}
+
+#nav-link {
+    color: rgba(274, 245, 230);
+}
+.col-6 {
+    background-color: rgba(51, 58, 86, .85);
+    color: rgba(232, 232, 232);
+    padding: 20px;
+    margin: 50px;
 }
 
 .fullscreen-bg {

@@ -7,13 +7,14 @@
 {% block title %} User Info {% endblock %}
 
 {% block content %}
-  <div class="row">
+  <div class="row justify-content-md-center">
     <div class="fullscreen-bg">
       <video loop muted autoplay poster="/static/css/coverr/beach/beach.jpg" class="fullscreen-bg__video">
           <source src="/static/css/coverr/beach/beach.webm" type="video/webm">
           <source src="/static/css/coverr/beach/beach.mp4" type="video/mp4">
       </video>
     </div>
+    <div class="col-6">
     <h2>Users</h2>
 
       <ul>
@@ -25,5 +26,9 @@
           </li>
         {% endfor %}
       </ul>
+    </div>
   </div>
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}

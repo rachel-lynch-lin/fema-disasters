@@ -31,10 +31,6 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage"""
 
-    fema_id = request.args.get('fema-id')
-    if fema_id:
-        return redirect(f'/events/{fema_id}')
-
     user_id = session.get('user_id')
     user = None
     user_saved_searches = None
@@ -158,6 +154,10 @@ def process_logout():
 def events_list():
     """Show events list ordered by date"""
 
+    fema_id = request.args.get('fema-id')
+    if fema_id:
+        return redirect(f'/events/{fema_id}')
+    
     disasters = set()
     for row in open('seed_data/event.txt'):
         row = row.rstrip().replace('\t', '').split('|')
@@ -197,14 +197,16 @@ def events_list():
 @app.route('/events/<fema_id>')
 def show_user_events_info(fema_id):
     """Display event information"""
-
+    
     event = Event.query.filter_by(fema_id=fema_id).first()
+    print(event)
     counties = Event.query.filter_by(fema_id=fema_id
                                      ).order_by(Event.county).all()
     counties_affected = Event.query.filter_by(fema_id=fema_id
                                      ).order_by(Event.county).count()
 
     if not event:
+        print("Oh no!")
         flash('This event does not exist or this datebase is incomplete.')
         return redirect('/')
 
@@ -217,14 +219,19 @@ def show_user_events_info(fema_id):
 
         user_saved_searches = user.searches
 
-    return render_template('event-info.html',
-                           counties=counties,
-                           counties_affected=counties_affected,
-                           event=event,
-                           fema_id=fema_id,
-                           user=user,
-                           user_saved_searches=user_saved_searches)
-
+        return render_template('event-info.html',
+                               counties=counties,
+                               counties_affected=counties_affected,
+                               event=event,
+                               fema_id=fema_id,
+                               user=user,
+                               user_saved_searches=user_saved_searches)
+    else:
+        return render_template('event-info.html',
+                               counties=counties,
+                               counties_affected=counties_affected,
+                               event=event,
+                               fema_id=fema_id)
 
 @app.route('/save/event/<fema_id>', methods=['POST'])
 def save_event_info(fema_id):
@@ -268,10 +275,6 @@ def show_search_options():
         incident = row[1]
         disasters.add(incident)    
     disaster = len(disasters)
-    
-    fema_id = request.args.get('fema-id')
-    if fema_id:
-        return redirect(f'/events/{fema_id}')
 
     user_id = session.get('user_id')
     user = None
@@ -292,10 +295,6 @@ def show_search_options():
 def show_search_results():
     """Show user query filtered by options selected"""
 
-    fema_id = request.args.get('fema-id')
-    if fema_id:
-        return redirect(f'/events/{fema_id}')
-
     state_id = request.args.get('state')
     disaster_type = request.args.get('disaster-type')
     declaration_id = request.args.get('declaration-id')
@@ -303,7 +302,7 @@ def show_search_results():
     year = request.args.get('year')
     
     user_choice = Event.query.distinct('fema_id')
-    
+
     if state_id != 'all':
         user_choice = user_choice.filter_by(state_id=state_id)
     if disaster_type != 'all':
@@ -318,8 +317,8 @@ def show_search_results():
                                                  Event.declared_on
                                                  ) == int(f'{month}'))
     
-    num_choices = user_choice.distinct('fema_id'
-                                       ).count()                                      
+    num_choices = user_choice.count()      
+                                    
     page_size = 50
     pages = math.ceil(num_choices / page_size)
     page = request.args.get('page')  
@@ -329,7 +328,6 @@ def show_search_results():
     user_choice = user_choice.order_by('fema_id'
                                        ).limit(page_size
                                        ).offset(int(page)*page_size
-                                       ).distinct('fema_id'
                                        ).all()
     
     if not user_choice:

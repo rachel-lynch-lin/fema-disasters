@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block css_scripts %}
-  <link rel="stylesheet" href="/static/css/about.css">
+  <link rel="stylesheet" href="/static/css/user-info.css">
 {% endblock %}
 
 {% block title %} User Info {% endblock %}
 
 {% block content %}
-	<div class="row">
+  <div class="row justify-content-md-center">
     <div class="fullscreen-bg">
-      <video loop muted autoplay poster="/static/css/coverr/truck/truck.jpg" class="fullscreen-bg__video">
-          <source src="/static/css/coverr/truck/truck.webm" type="video/webm">
-          <source src="/static/css/coverr/truck/truck.mp4" type="video/mp4">
+      <video loop muted autoplay poster="/static/css/coverr/breezy/breezy.jpg" class="fullscreen-bg__video">
+          <source src="/static/css/coverr/breezy/breezy.webm" type="video/webm">
+          <source src="/static/css/coverr/breezy/breezy.mp4" type="video/mp4">
       </video>
     </div>
 		<div class="col-2">
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="col">
+    <div class="col-5">
 			<h2> {{user.username}}'s Info </h2>
 			<hr>
 				<p>Email: {{user.email}}</p>
