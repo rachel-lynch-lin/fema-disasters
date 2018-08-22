@@ -1,12 +1,28 @@
 body {
-  background-image: url("patterns/cork-wallet.png");
+    background-color: grey;
 }
 
 .navbar {
     background-color: rgba(82, 101, 143, .85);
     color: rgba(274, 245, 230);
+    font-size: 2em;
 }
 
 .collapse {
     color: rgba(82, 101, 143);
+}
+
+#brand {
+    color: rgba(82, 101, 143);
+    font-family: 'Ubuntu', sans-serif !important;
+}
+
+#navbar-toggler { 
+    background-color: rgba(82, 101, 143, .85);
+    font-family: 'Ubuntu', sans-serif !important;
+}
+
+#nav-link {
+    color: rgba(82, 101, 143);
+    font-family: 'Ubuntu', sans-serif !important;
 }

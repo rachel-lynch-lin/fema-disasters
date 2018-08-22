@@ -7,8 +7,9 @@
 {% block title %} Disaster Declarations {% endblock %}
 
 {% block content %} 
+
     <div class="row justify-content-md-center">
-      <div class="col-2">
+      <div class="col-sm">
         <div class="side-nav-bar">
           <div class="side-nav-header">
             <header>
@@ -22,17 +23,17 @@
               <li><a href="/search">Search for a Event</a></li>
             </ul>
             <div class="search-form">
-          <form action="/events" >
-            <div class="form-group">
-               <label for="inputFemaID">Search by FEMA ID:</label>
-              <input class="form-control" type="search" id="inputFemaID" placeholder="Enter FEMA ID" aria-label="searchHelp" name="fema-id">
-              <small id="searchHelp" class="form-text text-muted">
-              The FEMA ID is the number associated with the event and ranges from one to four numbers.
-              </small>
+              <form action="/events" >
+                <div class="form-group">
+                   <label for="inputFemaID">Search by FEMA ID:</label>
+                  <input class="form-control" type="search" id="inputFemaID" placeholder="Enter FEMA ID" aria-label="searchHelp" name="fema-id">
+                  <small id="searchHelp" class="form-text text-muted">
+                  The FEMA ID is the number associated with the event and ranges from one to four numbers.
+                  </small>
+                </div>
+                <button type="submit" class="btn btn-light my-2 my-sm-0" >Search</button>
+              </form>
             </div>
-            <button type="submit" class="btn btn-outline-success my-2 my-sm-0" >Search</button>
-          </form>
-      </div>
           </div>
         </div>
       </div>
@@ -52,7 +53,7 @@
 						  <div class="card">
 						    <div class="card-header" id="headingOne">
 						      <h5 class="mb-0">
-						        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+						        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 						          {{event.name}} ({{event.declaration_id}} {{event.fema_id}})
 						        </button>
 						      </h5>
@@ -93,7 +94,7 @@
 			</div>
 
 			{% if session.get("user_id") %}
-        <div class="col-2">
+        <div class="col-sm">
           <div class="side-nav-bar">
             <div class="side-nav-header">
               <header>
@@ -126,6 +127,13 @@
 					{% endfor %}
 			</div>
 	</div>
+
+    <div class="row justify-content-md-center" >
+        <div class="d-flex flex-col-6" id="footer">
+          <p>FEMA cannot verify the quality and/or timeliness of any data or any analysis derived therefrom after the data has been retrieved from FEMA.gov.</p>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block scripts %}

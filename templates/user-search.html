@@ -7,6 +7,7 @@
 {% block title %} Search Page{% endblock %}
 
 {% block content %}
+
   <div class="row justify-content-md-center">
     <div class="col-6">
       <div class="header">
@@ -26,7 +27,7 @@
             The FEMA ID is the number associated with the event and ranges from one to four numbers.
             </small>
           </div>
-          <button type="submit" class="btn btn-outline-success my-2 my-sm-0" >Search</button>
+          <button type="submit" class="btn btn-light my-2 my-sm-0" >Search</button>
         </form>
       </div>
       
@@ -250,14 +251,14 @@
           </div>
           
           <div class="submit">
-              <button type="submit" class="btn btn-outline-success my-2 my-sm-0" >Search</button>
+              <button type="submit" class="btn btn-light my-2 my-sm-0" >Search</button>
           </div>
 
           </form>
       </div>
     </div>
     {% if session.get("user_id") %}
-        <div class="col-2">
+        <div class="col-sm">
           <div class="side-nav-bar">
             <div class="side-nav-header">
               <header>
@@ -269,7 +270,7 @@
               {% if user_saved_searches %}
                 <ul>
                   {% for searches in user_saved_searches %}
-                    <li><a href="/events/{{ searches.fema_id }}"> {{searches.name}} ({{searches.declaration_id}} {{searches.fema_id}})</a></li>
+                    <li type="square"><a href="/events/{{ searches.fema_id }}"> {{searches.name}} ({{searches.declaration_id}} {{searches.fema_id}})</a></li>
                   {% endfor %}
                 </ul>
               {% else %}
@@ -281,6 +282,11 @@
     {% endif %}
   </div>
 
+  <div class="row justify-content-md-center" >
+    <div class="d-flex flex-col-6" id="footer">
+      <p>FEMA cannot verify the quality and/or timeliness of any data or any analysis derived therefrom after the data has been retrieved from FEMA.gov.</p>
+    </div>
+  </div>
 
 {% endblock %}
 
