@@ -9,6 +9,14 @@
 {% block content %} 
 
     <div class="row justify-content-md-center">
+      <div class="fullscreen-bg">
+        <video loop muted autoplay poster="/static/css/coverr/waves/waves.jpg" class="fullscreen-bg__video">
+            <source src="/static/css/coverr/waves/waves.webm" type="video/webm">
+            <source src="/static/css/coverr/waves/waves.mp4" type="video/mp4">
+            <source src="/static/css/coverr/waves/waves.ogv" type="video/ogg">
+        </video>
+      </div>
+
       <div class="col-sm">
         <div class="side-nav-bar">
           <div class="side-nav-header">
@@ -38,7 +46,7 @@
         </div>
       </div>
       
-      <div class="col-6">
+      <div class="col-lg">
 				<div class="header">
 					<header>
 						<h2>Disaster Declaration List Page</h2>
@@ -50,17 +58,17 @@
 
 					{% for event in events %}
 						<div class="accordion" id="accordionList">
-						  <div class="card">
-						    <div class="card-header" id="headingOne">
+						  <div class="card" id="card">
+						    <div class="card-header" id="card-header">
 						      <h5 class="mb-0">
-						        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+						        <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="card-button">
 						          {{event.name}} ({{event.declaration_id}} {{event.fema_id}})
 						        </button>
 						      </h5>
 						    </div>
 
 						    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionList">
-						      <div class="card-body">
+						      <div class="card-body" id="card-body">
 
 										<h5>Incident Information</h5>
 										<ul>
@@ -117,22 +125,22 @@
         </div>
       {% endif %}
       
-		<div class="row">
-			<div class="footer">
-				<h3>Pages:</h3>:
+		<div class="row justify-content-md-center" id="footer">
+			<div class="pages">
+				<h3>Pages:</h3>
 					{% for page in range(pages) %}
 						<a href="/events?page={{ page }}">
 							{{ page }}
 						</a>
 					{% endfor %}
-			</div>
-	</div>
-
-    <div class="row justify-content-md-center" >
-        <div class="d-flex flex-col-6" id="footer">
-          <p>FEMA cannot verify the quality and/or timeliness of any data or any analysis derived therefrom after the data has been retrieved from FEMA.gov.</p>
-        </div>
+  		</div>
+      <br>
+      <div class="d-flex flex-col-6">
+        <p>FEMA cannot verify the quality and/or timeliness of any data or any analysis derived therefrom after the data has been retrieved from FEMA.gov.</p>
+      </div>
     </div>
+      
+	</div>
 
 {% endblock %}
 

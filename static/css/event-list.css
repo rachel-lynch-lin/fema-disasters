@@ -1,6 +1,6 @@
 body {
-  background-image: url("patterns/swirl.png");
-  background-color: white;
+    background-image: url("photos/chemical/chemical.jpg");
+    background-color: white;
 }
 
 .navbar {
@@ -30,11 +30,35 @@ body {
     margin: 50px;
 }
 
-.col-6 {
+.col-lg {
     background-color: rgba(232, 232, 232, .85);
     color: rgba(51, 58, 86);
     padding: 20px;
     margin: 50px;
+}
+
+#footer {
+    background-color: rgba(232, 232, 232, .85);
+    color: rgba(51, 58, 86);
+    padding: 20px;
+    margin: 50px;
+}
+
+#card {
+    background-color: rgba(82, 101, 143, .2);
+    outline-color: rgba(82, 101, 143);
+    color: rgba(51, 58, 86);
+}
+
+#card-button {
+    background-color: rgba(232, 232, 232, .3);
+    outline-color: rgba(82, 101, 143);
+    color: rgba(51, 58, 86);
+}
+
+#card-body {
+    background-color: rgba(232, 232, 232, .3);
+    color: rgba(51, 58, 86);
 }
 
 .fullscreen-bg {

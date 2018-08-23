@@ -8,6 +8,15 @@
 
 {% block content %} 
   <div class="row justify-content-md-center">
+    <div class="fullscreen-bg">
+      {% if disaster_type == "Dam/Levee Break" or disaster_type == "Mud/Landslide" %}
+        <img src="/static/css/photos/{{ disaster_type[:3] }}/{{ disaster_type[:3] }}.jpg" class="img-fluid" alt="Responsive image">
+      {% elif disaster_type == "Human Cause" or disaster_type == "Terrorist" or disaster_type == "Earthquake" or disaster_type == "all"%}
+        <img src="/static/css/photos/other/rain.jpg" class="img-fluid" alt="Responsive image">
+      {% else %}
+        <img src="/static/css/photos/{{ disaster_type }}/{{ disaster_type }}.jpg" class="img-fluid" alt="Responsive image">
+      {% endif %}
+    </div>
       <div class="col-sm">
         <div class="side-nav-bar">
           <div class="side-nav-header">
@@ -112,21 +121,21 @@
         </div>
       {% endif %}
   </div>
-  <div class="row">  
-    <div class="footer">
-      <h3>Pages:</h3>:
-        {% for page in range(pages) %}
-          <a href="/search/results?page={{ page }}&state={{ state_id }}&disaster-type={{ disaster_type }}&declaration-id={{ declaration_id }}&month= {{ month }}&year={{ year }}">
-            {{ page }}
-          </a>
-        {% endfor %}
-    </div>
-  </div>
 
-  <div class="row justify-content-md-center" >
-    <div class="d-flex flex-col-6" id="footer">
-      <p>FEMA cannot verify the quality and/or timeliness of any data or any analysis derived therefrom after the data has been retrieved from FEMA.gov.</p>
-    </div>
+  <div class="row justify-content-md-center" id="footer">
+      <div class="pages">
+        <h3>Pages:</h3>
+          {% for page in range(pages) %}
+            <a href="/events?page={{ page }}">
+              {{ page }}
+            </a>
+          {% endfor %}
+      </div>
+      <br> 
   </div>
   
+  
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}

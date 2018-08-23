@@ -10,11 +10,13 @@
 
   <div class="row justify-content-md-center">
     <div class="fullscreen-bg">
-      <video loop muted autoplay poster="/static/css/coverr/field_day/field_day.jpg" class="fullscreen-bg__video">
-          <source src="/static/css/coverr/field_day/field_day.webm" type="video/webm">
-          <source src="/static/css/coverr/field_day/field_day.mp4" type="video/mp4">
-          <source src="/static/css/coverr/field_day/field_day.ogv" type="video/ogg">
-      </video>
+      {% if event.disaster_type == "Dam/Levee Break" or event.disaster_type == "Mud/Landslide" %}
+        <img src="/static/css/photos/{{ event.disaster_type[:3] }}/{{ event.disaster_type[:3] }}.jpg" class="img-fluid" alt="Responsive image">
+      {% elif event.disaster_type == "Human Cause" or event.disaster_type == "Terrorist" or event.disaster_type == "Earthquake"%}
+        <img src="/static/css/photos/other/rain.jpg" class="img-fluid" alt="Responsive image">
+      {% else %}
+        <img src="/static/css/photos/{{ event.disaster_type }}/{{ event.disaster_type }}.jpg" class="img-fluid" alt="Responsive image">
+      {% endif %}
     </div>
     <div class="col-sm">
       <div class="side-nav-bar">

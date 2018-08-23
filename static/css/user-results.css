@@ -37,6 +37,13 @@ body {
     margin: 50px;
 }
 
+#footer {
+    background-color: rgba(232, 232, 232, .85);
+    color: rgba(51, 58, 86);
+    padding: 10px;
+    margin: 25px;
+}
+
 .fullscreen-bg {
   position: fixed;
   top: 0;

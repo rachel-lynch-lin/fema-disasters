@@ -12,69 +12,91 @@
 
   <div class="row justify-content-md-center">
     <div class="fullscreen-bg">
-      <video loop muted autoplay poster="/static/css/coverr/truck/truck.jpg" class="fullscreen-bg__video">
-          <source src="/static/css/coverr/truck/truck.webm" type="video/webm">
-          <source src="/static/css/coverr/truck/truck.mp4" type="video/mp4">
-          <source src="/static/css/coverr/truck/truck.ogv" type="video/ogg">
+      <video loop muted autoplay poster="/static/css/coverr/breezy/breezy.jpg" class="fullscreen-bg__video">
+          <source src="/static/css/coverr/breezy/breezy.webm" type="video/webm">
+          <source src="/static/css/coverr/breezy/breezy.mp4" type="video/mp4">
+          <source src="/static/css/coverr/breezy/breezy.ogv" type="video/ogg">
       </video>
     </div>
 
 
-    <div class="col-5">
+    <div class="col-8">
         <div class="header">
           <header>
-            <h1 class="text-center">Welcome to the Homepage!</h>
+            {% if not session.get("user_id") %}
+              <h1>Welcome to the Homepage!</h>
+            {% else %}
+              <h1>Welcome back {{ user.username }}!</h>
+            {% endif %}
+           
           </header>
         </div>
 
         <div class="main-content">
           <br>
-          <!-- <div class="alert alert-light" role="alert"> -->
-            <h2 class="text-center"><a href="/events" class="alert-link">Disaster Declarations</a></h2>
-            <h2 class="text-center"><a href="/search" class="alert-link">Search for a Event</a></h2>
-          <!-- </div> -->
-          <br>
-
-          <div class="search-form">
-            <form action="/events" >
-              <div class="form-row justify-content-md-center">
-                <div class="col-4">
-                  <label for="inputFemaID"><h4 class="text-center">Search by FEMA ID:</h4></label>
-                  <input class="form-control form-control-lg" type="search" id="inputFemaID" placeholder="Enter a FEMA ID" aria-label="searchHelp" name="fema-id">
-                  <small id="searchHelp" class="form-text text-muted text-center">
-                  The FEMA ID is the number associated with the event and ranges from one to four numbers.
-                  </small>
-                  <br>
-                  <button type="submit" class="btn btn-light my-2 my-sm-0 btn-block" >Search</button>
+          
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">Disaster Declarations</h3>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="/events" class="btn btn-light my-2 my-sm-0">Go</a>
+                </div>
               </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">Search for a Event</h3>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="/search" class="btn btn-light my-2 my-sm-0">Go</a>
+                </div>
               </div>
-              
-            </form>
+            </div>
+            <br>
+            <div class="col-sm-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="form">
+                    <div class="search-form">
+                      <form action="/events" >
+                        <h4 class="card-title">Search by FEMA ID:</h4>
+                        <input class="form-control form-control" type="search" id="inputFemaID" placeholder="Enter a FEMA ID" aria-label="searchHelp" name="fema-id">
+                        <p class="card-text"><small id="searchHelp" class="form-text text-muted">The FEMA ID is the number associated with the event and ranges from one to four numbers.</small></p>
+                        <button type="submit" class="btn btn-light my-2 my-sm-0" >Search</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      {% if session.get("user_id") %}
-        <hr><hr>
-           
-        <div class="subheading">
-          <header>
-            <h4 class="text-center"><a href="/users/{{ user.id }}">{{ user.username }}'s Saved Events</a></h4>
-          </header>
-        </div>
 
-        <div class="content">
-          {% if user_saved_searches %}
+        {% if session.get("user_id") %}
+          <hr><hr>
+             
+          <div class="subheading">
+            <header>
+              <h4><a href="/users/{{ user.id }}">{{ user.username }}'s Saved Events</a></h4>
+            </header>
+          </div>
+        
 
-            <ul id="saved-events">
-              {% for searches in user_saved_searches %}
-                <li type="square"><a href="/events/{{ searches.fema_id }}"> {{searches.name}} ({{searches.declaration_id}} {{searches.fema_id}})</a></li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p>No searches saved. </p>
-          {% endif %}
+          <div class="content">
+            {% if user_saved_searches %}
+
+              <ul id="saved-events">
+                {% for searches in user_saved_searches %}
+                  <li type="square"><a href="/events/{{ searches.fema_id }}"> {{searches.name}} ({{searches.declaration_id}} {{searches.fema_id}})</a></li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p>No searches saved. </p>
+            {% endif %}
+          </div>
+        {% endif %}
         </div>
-      {% endif %}
-
     </div>
 
     
