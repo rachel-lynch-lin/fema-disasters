@@ -26,3 +26,7 @@ body {
     color: rgba(82, 101, 143);
     font-family: 'Ubuntu', sans-serif !important;
 }
+
+#alert {
+    background-color: rgba(82, 101, 143, .55);
+}

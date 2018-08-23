@@ -9,11 +9,17 @@
 {% block content %}
 
   <div class="row justify-content-md-center">
+    <div class="fullscreen-bg">
+      <video loop muted autoplay poster="/static/css/coverr/rain/rain.jpg" class="fullscreen-bg__video">
+          <source src="/static/css/coverr/rain/rain.webm" type="video/webm">
+          <source src="/static/css/coverr/rain/rain.mp4" type="video/mp4">
+          <source src="/static/css/coverr/rain/rain.ogv" type="video/ogg">
+      </video>
+    </div>
     <div class="col-6">
       <div class="header">
         <header>
           <h2>Search for a Disaster Declaration</h2>
-          <p>Select from any combination of the menus below to filter the disaster declarations.</p>
           <p>Total number of declared disasters: <b>{{ disaster }}</b></p>
         </header>
       </div>
@@ -31,10 +37,10 @@
         </form>
       </div>
       
-      <br><h2>Or</h2><br>
+      <hr><br><h3 class="text-center">Or</h3><br><hr>
       
       <div class="form-filters">
-      
+        <br><h5 class="text-center">Select from any combination of the menus below to filter the disaster declarations.</h5><br><hr>
           <form action="/search/results" method="GET" id="disaster-form">
             <div class="form-group">
               <label for="state">State/Tribal Government</label> 
@@ -156,7 +162,10 @@
                   <option value="FSA">Fire Suppression Authorization</option>
               </select>
             </div>
-            <br>
+            <hr><br>
+            <h5 class="text-center">Advanced Search Options!</h5>
+            <h6 class="text-center">Search by year/month if you already know when an event was declared!</h6>
+            <br><hr>
             <div class="form-group">
               <label for="month">Month Declared</label>
               <select class="form-control" id="month" name="month">
@@ -251,6 +260,7 @@
           </div>
           
           <div class="submit">
+            <hr><hr><br>
               <button type="submit" class="btn btn-light my-2 my-sm-0" >Search</button>
           </div>
 

@@ -30,7 +30,14 @@ body {
     margin: 50px;
 }
 
-.col-lg {
+.col-2 {
+    background-color: rgba(232, 232, 232, .85);
+    color: rgba(51, 58, 86);
+    padding: 20px;
+    margin: 50px;
+}
+
+.col-6 {
     background-color: rgba(232, 232, 232, .85);
     color: rgba(51, 58, 86);
     padding: 20px;

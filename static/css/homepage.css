@@ -33,6 +33,11 @@ h1 {
     /*font-size: 1.25em;*/
 }
 
+#button {
+    background-color: rgba(82, 101, 143, .2);
+    color: rgba(51, 58, 86);
+}
+
 .col-8 {
     background-color: rgba(232, 232, 232, .85);
     color: rgba(51, 58, 86);

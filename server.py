@@ -256,8 +256,6 @@ def save_event_info(fema_id):
 
     db.session.commit()
     
-    
-
     event_info = {
         "event_name": event.name,
         "fema_id": event.fema_id,

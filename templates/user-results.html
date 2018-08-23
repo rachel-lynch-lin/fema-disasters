@@ -17,7 +17,7 @@
         <img src="/static/css/photos/{{ disaster_type }}/{{ disaster_type }}.jpg" class="img-fluid" alt="Responsive image">
       {% endif %}
     </div>
-      <div class="col-sm">
+      <div class="col-2">
         <div class="side-nav-bar">
           <div class="side-nav-header">
             <header>
@@ -30,16 +30,18 @@
               <li><a href="/events">Disaster Declarations</a></li>
               <li><a href="/search">Search for a Event</a></li>
             </ul>
-          <form action="/events" >
-            <div class="form-group">
-              <label for="inputFemaID">Search by FEMA ID:</label>
-              <input class="form-control" type="search" id="inputFemaID" placeholder="Enter FEMA ID" aria-label="searchHelp" name="fema-id">
-              <small id="searchHelp" class="form-text text-muted">
-                The FEMA ID is the number associated with the event and ranges from one to four numbers.
-              </small>
+            <div class="search-form">
+              <form action="/events" >
+                <div class="form-group">
+                  <label for="inputFemaID">Search by FEMA ID:</label>
+                  <input class="form-control" type="search" id="inputFemaID" placeholder="Enter FEMA ID" aria-label="searchHelp" name="fema-id">
+                  <small id="searchHelp" class="form-text text-muted">
+                  The FEMA ID is the number associated with the event and ranges from one to four numbers.
+                  </small>
+                </div>
+                  <button type="submit" class="btn btn-light my-2 my-sm-0" >Search</button>
+              </form>
             </div>
-              <button type="submit" class="btn btn-light my-2 my-sm-0" >Search</button>
-          </form>
           </div>
         </div>
       </div>
@@ -57,17 +59,17 @@
 
         {% for event in user_choice %}
           <div class="accordion" id="accordionList">
-            <div class="card">
-              <div class="card-header" id="headingOne">
+            <div class="card" id="card">
+              <div class="card-header"  id="card-header">
                 <h5 class="mb-0">
-                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="card-button">
                     {{event.name}} ({{event.declaration_id}} {{event.fema_id}})
                   </button>
                 </h5>
               </div>
 
               <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionList">
-                <div class="card-body">
+                <div class="card-body" id="card-body">
 
                   <h5>Incident Information</h5>
                   <ul>

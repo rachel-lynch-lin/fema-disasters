@@ -35,27 +35,23 @@
         <div class="main-content">
           <br>
           
-          <div class="row">
-            <div class="col-sm-4">
+            <div class="card-deck">
               <div class="card">
                 <div class="card-body">
                   <h3 class="card-title">Disaster Declarations</h3>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="/events" class="btn btn-light my-2 my-sm-0">Go</a>
+                  <p class="card-text">Find an event from a list of all disaster declarations.</p>
+                  <a href="/events" class="btn btn-light my-2 my-sm-0" id="button">Go</a>
                 </div>
               </div>
-            </div>
-            <div class="col-sm-4">
+
               <div class="card">
                 <div class="card-body">
                   <h3 class="card-title">Search for a Event</h3>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="/search" class="btn btn-light my-2 my-sm-0">Go</a>
+                  <p class="card-text">Find an event with a filtered search.</p>
+                  <a href="/search" class="btn btn-light my-2 my-sm-0" id="button">Go</a>
                 </div>
               </div>
-            </div>
-            <br>
-            <div class="col-sm-4">
+
               <div class="card">
                 <div class="card-body">
                   <div class="form">
@@ -64,14 +60,15 @@
                         <h4 class="card-title">Search by FEMA ID:</h4>
                         <input class="form-control form-control" type="search" id="inputFemaID" placeholder="Enter a FEMA ID" aria-label="searchHelp" name="fema-id">
                         <p class="card-text"><small id="searchHelp" class="form-text text-muted">The FEMA ID is the number associated with the event and ranges from one to four numbers.</small></p>
-                        <button type="submit" class="btn btn-light my-2 my-sm-0" >Search</button>
+                        <button type="submit" class="btn btn-light my-2 my-sm-0" id="button">Search</button>
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
+
             </div>
-          </div>
+
 
         {% if session.get("user_id") %}
           <hr><hr>
