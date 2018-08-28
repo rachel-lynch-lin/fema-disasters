@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="/static/css/base.css">
 	{% endblock %}
 	<link href="https://fonts.googleapis.com/css?family=Roboto|Ubuntu" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 	<title>{% block title %} Put the title here! {% endblock %}</title>
 
 </head>
@@ -66,6 +67,10 @@
 		        </div>
 	      	</li> -->
 		    </ul>
+		    <form class="form-inline my-2 my-lg-0" action="/events">
+    			<input class="form-control mr-sm-2" type="search" placeholder="Search for a FEMA ID" aria-label="Search" name="fema-id">
+    			<button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
+    		</form>
 		  </div>
 		</nav>
 					
@@ -81,31 +86,8 @@
 		</ul>
 
   	{% block content %} Content Goes Here
-	  	<div class="row">
-		  	<div class="header">
-					<header>
-						<h2>Page Title</h2>
-						<h4>Subheading/Description</h4>
-					</header>
-				</div>
-
-				<div class="side-nav-header">
-					<header>
-						<h4>Side Nav Bar Heading</h4>
-					</header>
-				</div>
-
-				<div class="side-nav-content">
-					<form class="form-inline my-2 my-lg-0" action="/events" >
-			      <input class="form-control mr-sm-2" type="search" placeholder="Search for a FEMA ID" aria-label="Search" name="fema-id">
-			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			    </form>
-				</div>
-
-				<div class="main-content">
-					<p>Content goes here</p>
-				</div>
-			</div>
+	  	
+	  	
 		{% endblock %}
 		  
   </div>	

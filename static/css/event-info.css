@@ -3,6 +3,10 @@ body {
   background-color: white;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 .navbar {
     background-color: rgba(232, 232, 232, .85);
 }
@@ -23,21 +27,14 @@ body {
   color: rgba(82, 101, 143);
 }
 
-.col-sm {
+.col-3 {
     background-color: rgba(232, 232, 232, .85);
     color: rgba(51, 58, 86);
     padding: 20px;
     margin: 50px;
 }
 
-.col-2 {
-    background-color: rgba(232, 232, 232, .85);
-    color: rgba(51, 58, 86);
-    padding: 20px;
-    margin: 50px;
-}
-
-.col-6 {
+.col-7 {
     background-color: rgba(232, 232, 232, .85);
     color: rgba(51, 58, 86);
     padding: 20px;

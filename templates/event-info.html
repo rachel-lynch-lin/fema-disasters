@@ -18,36 +18,8 @@
         <img src="/static/css/photos/{{ event.disaster_type }}/{{ event.disaster_type }}.jpg" class="img-fluid" alt="Responsive image">
       {% endif %}
     </div>
-    <div class="col-2">
-      <div class="side-nav-bar">
-        <div class="side-nav-header">
-          <header>
-            <h4>Site Navigation</h4>
-          </header>
-        </div>
-
-        <div class="side-nav-content">
-          <ul>
-            <li><a href="/events">Disaster Declarations</a></li>
-            <li><a href="/search">Search for a Event</a></li>
-          </ul>
-          <div class="search-form">
-        <form action="/events" >
-          <div class="form-group">
-            <label for="inputFemaID">Search by FEMA ID:</label>
-            <input class="form-control" type="search" id="inputFemaID" placeholder="Enter FEMA ID" aria-label="searchHelp" name="fema-id">
-            <small id="searchHelp" class="form-text text-muted">
-            The FEMA ID is the number associated with the event and ranges from one to four numbers.
-            </small>
-          </div>
-          <button type="submit" class="btn btn-light my-2 my-sm-0" >Search</button>
-        </form>
-      </div>
-        </div>
-      </div>
-    </div>
     
-    <div class="col-6">
+    <div class="col-7">
       <div class="header">
         <header>
           <h2>{{event.name}} ({{event.declaration_id}} {{event.fema_id}})</h2>
@@ -59,41 +31,38 @@
 
           <form id="save-event-form" method="POST">
             <div class="form-group">
-              <label for="event-id">Save this event?</label>
+              <label for="event-id">Bookmark this event?</label> 
               {% for items in user_saved_searches %}
                 {% if items.fema_id == event.fema_id %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert">
-                  <strong>This event has been saved under your account</strong>
+                  <strong>This event has been bookmarked.</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 {% endif %}
               {% endfor %}
-              <select class="form-control" type="form-select" id="event-id" name="events_id" aria-label="saveHelp">
-                <option value="{{ event.fema_id }}" name ="{{ event.fema_id}} ">Yes</option>
-                <small id="saveHelp" class="form-text text-muted">
-                  If you want to quickly reference this event in the future please save the event to your user profile.
-                </small>
+              <select class="form-control" type="form-select" id="event-id" name="events_id" aria-label="saveHelp" hidden>
+                <option value="{{ event.fema_id }}" name ="{{ event.fema_id}} "></option>
               </select>
             </div>
-            <button type="submit" class="btn btn-light my-2 my-sm-0" >Submit</button>
+            <button type="submit" class="btn btn-light my-2 my-sm-0" >Bookmark</button>
           </form>
 
         {% endif %}
         <br>
+        <h4>Incident Information:</h4>
         <ul>
-          <li type='none'><b><u>Incident Start Date:</u></b> {{ event.start_date }}</li>
-          <li type='none'><b><u>Incident End Date:</u></b> {{ event.end_date }}</li>
-          <li type='none'><b><u>Incident Declared On:</u></b> {{ event.declared_on }}</li>
-          <li type='none'><b><u>Incident Close Out Date:</u></b> {{ event.close_out_date }}</li>
-          <li type='none'><b><u>Disaster Type:</u></b> {{ event.disaster_type }}</li>
-          <li type='none'><b><u>Damaged Property:</u></b> {{ event.damaged_property }} </li>
+          <li type='none'><b>Start Date:</b> {{ event.start_date }}</li>
+          <li type='none'><b>End Date:</b> {{ event.end_date }}</li>
+          <li type='none'><b>Declared On:</b> {{ event.declared_on }}</li>
+          <li type='none'><b>Close Out Date:</b> {{ event.close_out_date }}</li>
+          <li type='none'><b>Disaster Type:</b> {{ event.disaster_type }}</li>
         </ul> 
         <h4>Grants:</h4>
           <ul>
             {% for grant in event.grants  %}
-              <li type='none'><b><u>{{ grant.grant }}:</u></b> {{grant.total}} </li>
+              <li type='none'><b>{{ grant.grant }}:</b> $ {{grant.total}} </li>
             {% endfor %}  
             {% if event.grants == [] %}
               <li type='none'>No known grants awarded</li>
@@ -118,7 +87,7 @@
     </div>
     {% if session.get("user_id") %}
       
-      <div class="col-sm">
+      <div class="col-3">
         <div class="side-nav-bar">
           <div class="side-nav-header">
             <header>

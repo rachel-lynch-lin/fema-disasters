@@ -17,46 +17,20 @@
         <img src="/static/css/photos/{{ disaster_type }}/{{ disaster_type }}.jpg" class="img-fluid" alt="Responsive image">
       {% endif %}
     </div>
-      <div class="col-2">
-        <div class="side-nav-bar">
-          <div class="side-nav-header">
-            <header>
-              <h4>Site Navigation</h4>
-            </header>
-          </div>
-
-          <div class="side-nav-content">
-            <ul>
-              <li><a href="/events">Disaster Declarations</a></li>
-              <li><a href="/search">Search for a Event</a></li>
-            </ul>
-            <div class="search-form">
-              <form action="/events" >
-                <div class="form-group">
-                  <label for="inputFemaID">Search by FEMA ID:</label>
-                  <input class="form-control" type="search" id="inputFemaID" placeholder="Enter FEMA ID" aria-label="searchHelp" name="fema-id">
-                  <small id="searchHelp" class="form-text text-muted">
-                  The FEMA ID is the number associated with the event and ranges from one to four numbers.
-                  </small>
-                </div>
-                  <button type="submit" class="btn btn-light my-2 my-sm-0" >Search</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
       
-      <div class="col-6">
+      <div class="col-7">
         <div class="header">
           <header>
-            <h2>Disaster Declaration List Page</h2>
+            <h2>List of Disaster Declarations</h2>
             <p>There are <b>{{num_choices}}</b> disaster declarations for this selection.</p>
           </header>
         </div>
       
 
         <div class="main-content">
-
+          <div class="search-again">
+           <h6><a href="/search">If you did not find what you were looking for click here to search again.</a></h6>
+          </div>
         {% for event in user_choice %}
           <div class="accordion" id="accordionList">
             <div class="card" id="card">
@@ -71,19 +45,18 @@
               <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionList">
                 <div class="card-body" id="card-body">
 
-                  <h5>Incident Information</h5>
+                  <h5>Incident Information:</h5>
                   <ul>
-                    <li type='none'><b><u>Incident Start Date:</u></b> {{ event.start_date }}</li>
-                    <li type='none'><b><u>Incident End Date:</u></b> {{ event.end_date }}</li>
-                    <li type='none'><b><u>Incident Declared On:</u></b> {{ event.declared_on }}</li>
-                    <li type='none'><b><u>Incident Close Out Date:</u></b> {{ event.close_out_date }}</li>
-                    <li type='none'><b><u>Disaster Type:</u></b> {{ event.disaster_type }}</li>
-                    <li type='none'><b><u>Damaged Property:</u></b> {{ event.damaged_property }} </li>
+                    <li type='none'><b>Start Date:</b> {{ event.start_date }}</li>
+                    <li type='none'><b>End Date:</b> {{ event.end_date }}</li>
+                    <li type='none'><b>Declared On:</b> {{ event.declared_on }}</li>
+                    <li type='none'><b>Close Out Date:</b> {{ event.close_out_date }}</li>
+                    <li type='none'><b>Disaster Type:</b> {{ event.disaster_type }}</li>
                   </ul>
 
                   <h5>Grants:</h5> 
                     {% for grant in event.grants  %}
-                      <li type='none'><b><u>{{ grant.grant }}:</u></b> {{grant.total}} </li>
+                      <li type='none'><b>{{ grant.grant }}:</b> $ {{grant.total}} </li>
                     {% endfor %}  
                     {% if event.grants == [] %}
                       <li type='none'>No known grants awarded</li>
@@ -100,7 +73,7 @@
       </div>
 
       {% if session.get("user_id") %}
-        <div class="col-sm">
+        <div class="col-3">
           <div class="side-nav-bar">
             <div class="side-nav-header">
               <header>

@@ -25,7 +25,7 @@ body {
     font-family: 'Ubuntu', sans-serif;
 }
 
-.col-sm {
+.col-3 {
     background-color: rgba(232, 232, 232, .85);
     color: rgba(51, 58, 86);
     padding: 20px;
@@ -40,7 +40,7 @@ body {
     margin: 25px;
 }
 
-.col-6 {
+.col-7 {
     background-color: rgba(232, 232, 232, .85);
     color: rgba(51, 58, 86);
     padding: 20px;
