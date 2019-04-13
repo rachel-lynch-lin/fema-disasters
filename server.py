@@ -19,8 +19,8 @@ from datetime import datetime
 # import pdb; pdb.set_trace()
 app = Flask(__name__)
 
-app.secret_key = os.environ["SERVER_APP_SECRET_KEY"]
-google_api_key = os.environ["GOOGLE_API_KEY"]
+app.secret_key = os.environ.get("SERVER_APP_SECRET_KEY")
+google_api_key = os.environ.get("GOOGLE_API_KEY")
 
 app.jinja_env.undefined = StrictUndefined
 
@@ -394,7 +394,6 @@ def places_locate():
 
 
 if __name__ == "__main__":
-    app.debug = True
     connect_to_db(app)
     # DebugToolbarExtension(app)
 
